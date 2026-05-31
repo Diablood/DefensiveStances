@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <DS_ModeCommand_Label>Defensive stance</DS_ModeCommand_Label>
+  <DS_ModeCommand_Desc>Current doctrine: {0}. Click to select the next doctrine.</DS_ModeCommand_Desc>
+  <DS_Mode_Vanilla>Vanilla response</DS_Mode_Vanilla>
+  <DS_Mode_FleeToSafeArea>Flee to safe area</DS_Mode_FleeToSafeArea>
+  <DS_Mode_SelfDefenseOnly>Self-defense only</DS_Mode_SelfDefenseOnly>
+  <DS_SafeAreaCommand_Label>Safe area</DS_SafeAreaCommand_Label>
+  <DS_SafeAreaCommand_Desc>Safe allowed area for this map: {0}. Click to configure it.</DS_SafeAreaCommand_Desc>
+  <DS_SafeArea_None>None</DS_SafeArea_None>
+  <DS_SafeArea_Clear>Clear safe area</DS_SafeArea_Clear>
+  <DS_SafeArea_NoAssignableAreas>No assignable allowed area exists on this map.</DS_SafeArea_NoAssignableAreas>
+</LanguageData>
