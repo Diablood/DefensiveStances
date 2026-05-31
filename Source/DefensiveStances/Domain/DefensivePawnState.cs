@@ -1,3 +1,4 @@
+using RimWorld;
 using Verse;
 
 namespace DefensiveStances.Domain
@@ -54,7 +55,7 @@ namespace DefensiveStances.Domain
                 return false;
             }
 
-            if (!aggressor.HostileTo(defender))
+            if (!GenHostility.HostileTo(aggressor, defender))
             {
                 ClearAggression();
                 return false;

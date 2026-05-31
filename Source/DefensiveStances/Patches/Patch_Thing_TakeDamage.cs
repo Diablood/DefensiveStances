@@ -1,6 +1,7 @@
 using DefensiveStances.Components;
 using DefensiveStances.Domain;
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
 namespace DefensiveStances.Patches
@@ -12,7 +13,7 @@ namespace DefensiveStances.Patches
         {
             Pawn pawn = __instance as Pawn;
             Thing aggressor = dinfo.Instigator;
-            if (pawn == null || aggressor == null || aggressor == pawn || !aggressor.HostileTo(pawn))
+            if (pawn == null || aggressor == null || aggressor == pawn || !GenHostility.HostileTo(aggressor, pawn))
             {
                 return;
             }

@@ -15,9 +15,10 @@ namespace DefensiveStances.Utilities
                 return false;
             }
 
+            StartOrRefreshEvacuation(pawn, state, safeArea);
+
             if (safeArea[pawn.Position])
             {
-                StartOrRefreshEvacuation(pawn, state, safeArea);
                 return true;
             }
 
@@ -27,7 +28,6 @@ namespace DefensiveStances.Utilities
                 return false;
             }
 
-            StartOrRefreshEvacuation(pawn, state, safeArea);
             job = JobMaker.MakeJob(JobDefOf.Goto, destination);
             job.expiryInterval = 600;
             return true;

@@ -2,6 +2,16 @@
 
 A RimWorld 1.6 mod prototype that adds defensive doctrines alongside the vanilla hostility response.
 
+## Naming
+
+- Workshop display name: **Defensive Stances**
+- Local mod folder: `DefensiveStances`
+- Suggested GitHub repository: `RimWorld-DefensiveStances`
+- C# solution, project, assembly and root namespace: `DefensiveStances`
+- Temporary package ID: `todoauthor.defensivestances`
+
+Replace `todoauthor` once with your final author or GitHub handle before publishing. Do not change the package ID after a public release because it identifies the mod in load orders and saves.
+
 ## Prototype scope
 
 The current scaffold is intentionally small but already contains the complete extension points for the first iteration:
