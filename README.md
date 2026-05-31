@@ -6,9 +6,9 @@ A RimWorld 1.6 mod prototype that adds defensive doctrines alongside the vanilla
 
 - Workshop display name: **Defensive Stances**
 - Local mod folder: `DefensiveStances`
-- Suggested GitHub repository: `RimWorld-DefensiveStances`
+- Suggested GitHub repository: `DefensiveStances`
 - C# solution, project, assembly and root namespace: `DefensiveStances`
-- Temporary package ID: `todoauthor.defensivestances`
+- Temporary package ID: `diablood.defensivestances`
 
 Replace `todoauthor` once with your final author or GitHub handle before publishing. Do not change the package ID after a public release because it identifies the mod in load orders and saves.
 
@@ -94,3 +94,4 @@ LoadFolders.xml                RimWorld version folder routing
 - Self-defense currently starts after a damage event with a hostile instigator. Missed shots are not tracked yet.
 - A short grace period is used before restoring the previous allowed area after evacuation.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
+
