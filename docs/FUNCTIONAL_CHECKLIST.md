@@ -1,4 +1,4 @@
-# Functional checklist for 0.2.0-dev
+# Functional checklist for 0.2.1-dev
 
 ## Load and save
 
@@ -31,6 +31,7 @@
 ## Flee to safe area
 
 - [ ] A pawn in danger moves toward a reachable cell inside the global safe area.
+- [ ] While moving toward shelter, the pawn activity report explicitly says that the pawn is fleeing to a safe area.
 - [ ] A pawn chooses a reachable shelter when another painted shelter is inaccessible.
 - [ ] The pawn's previous allowed area is restored after the grace period.
 - [ ] A manual allowed-area change made during evacuation is not overwritten later.
@@ -41,6 +42,7 @@
 
 - [ ] A pawn ignores nearby hostiles before being damaged.
 - [ ] A pawn retaliates against the direct hostile instigator after damage.
+- [ ] An unarmed pawn retaliates in melee without repeatedly starting a static shooting job.
 - [ ] A pawn does not choose an arbitrary nearby enemy.
 - [ ] A pawn incapable of violence does not retaliate.
 - [ ] Retaliation expires after the aggressor is gone, non-hostile or stale.

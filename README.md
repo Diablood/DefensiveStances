@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.2 engineering scaffold contains:
+The current 0.2.1 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -23,7 +23,9 @@ The current 0.2 engineering scaffold contains:
 - Architect tools to expand or clear safe-area cells;
 - support for several disconnected shelters on the same map;
 - temporary restriction to the global safe area during evacuation, with restoration after the danger has passed;
+- an explicit pawn activity report while a colonist is moving toward shelter;
 - direct aggressor recording when damage reaches a pawn in self-defense-only mode;
+- correct melee retaliation for unarmed pawns in self-defense-only mode;
 - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
 - a migration path from the 0.1.x configured allowed-area prototype;
 - English and French keyed translations.
@@ -66,7 +68,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.2
+## First in-game test for 0.2.1
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.

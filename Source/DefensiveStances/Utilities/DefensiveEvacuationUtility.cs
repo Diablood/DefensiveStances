@@ -29,6 +29,7 @@ namespace DefensiveStances.Utilities
             }
 
             job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+            job.reportStringOverride = "DS_Job_FleeToSafeArea_Report".Translate();
             job.expiryInterval = 600;
             return true;
         }

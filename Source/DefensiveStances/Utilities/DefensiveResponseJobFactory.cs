@@ -20,13 +20,18 @@ namespace DefensiveStances.Utilities
                 return null;
             }
 
-            if (pawn.CanReachImmediate(aggressor, PathEndMode.Touch))
+            Verb verb = pawn.TryGetAttackVerb(aggressor, !pawn.IsColonist);
+            if (verb == null)
+            {
+                return null;
+            }
+
+            if (verb.IsMeleeAttack || pawn.CanReachImmediate(aggressor, PathEndMode.Touch))
             {
                 return JobMaker.MakeJob(JobDefOf.AttackMelee, aggressor);
             }
 
-            Verb verb = pawn.TryGetAttackVerb(aggressor, !pawn.IsColonist);
-            if (verb == null || verb.ApparelPreventsShooting())
+            if (verb.ApparelPreventsShooting())
             {
                 return null;
             }

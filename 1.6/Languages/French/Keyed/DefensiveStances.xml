@@ -3,6 +3,7 @@
     <DS_Mode_Vanilla>Réaction vanilla</DS_Mode_Vanilla>
     <DS_Mode_FleeToSafeArea>Fuir vers une zone sûre</DS_Mode_FleeToSafeArea>
     <DS_Mode_SelfDefenseOnly>Légitime défense uniquement</DS_Mode_SelfDefenseOnly>
+    <DS_Job_FleeToSafeArea_Report>Fuit vers une zone sûre.</DS_Job_FleeToSafeArea_Report>
     <DS_SafeArea_Label>Zone sûre</DS_SafeArea_Label>
     <DS_DesignatorSafeAreaExpand_Label>Étendre la zone sûre</DS_DesignatorSafeAreaExpand_Label>
     <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
