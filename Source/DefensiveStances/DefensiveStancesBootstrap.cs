@@ -6,7 +6,7 @@ namespace DefensiveStances
     [StaticConstructorOnStartup]
     internal static class DefensiveStancesBootstrap
     {
-        internal const string HarmonyId = "todoauthor.defensivestances";
+        internal const string HarmonyId = "diablood.defensivestances";
 
         static DefensiveStancesBootstrap()
         {

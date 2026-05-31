@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefensiveStances.Areas;
 using DefensiveStances.Domain;
 using DefensiveStances.Utilities;
 using RimWorld;
@@ -73,24 +74,36 @@ namespace DefensiveStances.Components
 
         internal Area GetSafeArea(Map map)
         {
-            return mapStates.Find(candidate => candidate.map == map)?.safeArea;
+            Area_Safe safeArea = DefensiveSafeAreaUtility.GetOrCreate(map);
+            MigrateLegacySafeArea(map, safeArea);
+            return safeArea;
         }
 
-        internal void SetSafeArea(Map map, Area safeArea)
+        private void MigrateLegacySafeArea(Map map, Area_Safe targetArea)
         {
-            if (map == null)
+            if (map == null || targetArea == null)
             {
                 return;
             }
 
-            DefensiveMapState state = mapStates.Find(candidate => candidate.map == map);
-            if (state == null)
+            for (int index = mapStates.Count - 1; index >= 0; index--)
             {
-                state = new DefensiveMapState { map = map };
-                mapStates.Add(state);
-            }
+                DefensiveMapState legacyState = mapStates[index];
+                if (legacyState?.map != map)
+                {
+                    continue;
+                }
 
-            state.safeArea = safeArea;
+                if (legacyState.safeArea != null && legacyState.safeArea != targetArea)
+                {
+                    foreach (IntVec3 cell in legacyState.safeArea.ActiveCells)
+                    {
+                        targetArea[cell] = true;
+                    }
+                }
+
+                mapStates.RemoveAt(index);
+            }
         }
 
         private static void MaintainEvacuation(DefensivePawnState state)

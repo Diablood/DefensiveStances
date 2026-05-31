@@ -24,17 +24,5 @@ namespace DefensiveStances.Domain
             }
         }
 
-        internal static DefensiveBehaviorMode Next(this DefensiveBehaviorMode mode)
-        {
-            switch (mode)
-            {
-                case DefensiveBehaviorMode.Vanilla:
-                    return DefensiveBehaviorMode.FleeToSafeArea;
-                case DefensiveBehaviorMode.FleeToSafeArea:
-                    return DefensiveBehaviorMode.SelfDefenseOnly;
-                default:
-                    return DefensiveBehaviorMode.Vanilla;
-            }
-        }
     }
 }

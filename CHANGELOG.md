@@ -1,9 +1,18 @@
 # Changelog
 
+## 0.2.0-dev
+
+- Replace the two per-pawn gizmos with two entries inside RimWorld's existing hostility-response dropdown.
+- Add a dedicated global safe-area layer for each map.
+- Add **Expand safe area** and **Clear safe area** tools to the Architect **Zone** category.
+- Allow safe-area cells to overlap stockpiles, growing zones and regular allowed areas.
+- Keep disconnected shelters inside the same global map-level layer.
+- Migrate cells from the legacy configured allowed area when a 0.1.x save first uses the new layer.
+- Finalize the public metadata: author `Diablood`, package ID `diablood.defensivestances` and repository `Diablood/DefensiveStances`.
+
 ## 0.1.2-dev
 
 - Fixed compilation against RimWorld 1.6: qualify `Verse.Current.Game` explicitly in the game-component accessor to avoid a collision with `DefensiveStancesGameComponent.Current`.
-
 
 ## 0.1.1-dev
 

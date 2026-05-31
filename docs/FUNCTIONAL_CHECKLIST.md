@@ -1,26 +1,41 @@
-# Functional checklist for 0.1.0-dev
+# Functional checklist for 0.2.0-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
 - [ ] A new game can be created.
-- [ ] An existing save can be loaded with the mod enabled.
+- [ ] An existing 0.1.x save can be loaded with the mod enabled.
 - [ ] Pawn doctrines persist after save and reload.
-- [ ] The configured safe area persists after save and reload.
+- [ ] Painted safe-area cells persist after save and reload.
+- [ ] A legacy configured allowed area is copied into the dedicated safe-area layer when first used.
 
-## Vanilla doctrine
+## Existing hostility-response dropdown
 
-- [ ] A pawn left on vanilla doctrine behaves exactly as before.
-- [ ] Existing vanilla hostility response controls remain usable.
+- [ ] No extra **Defensive stance** gizmo appears when selecting a pawn.
+- [ ] No extra per-pawn **Safe area** gizmo appears when selecting a pawn.
+- [ ] The existing hostility-response dropdown contains `Ignore`, `Attack`, `Flee`, `Flee to safe area` and `Self-defense only`.
+- [ ] `Attack` and `Self-defense only` are absent for pawns incapable of violence.
+- [ ] Dropdown painting across multiple pawn rows still works.
+- [ ] Returning to a vanilla choice clears the custom doctrine cleanly.
+
+## Dedicated global safe area
+
+- [ ] **Architect** → **Zone** contains **Expand safe area** and **Clear safe area**.
+- [ ] The safe-area overlay appears while either tool is active.
+- [ ] Safe cells can overlap a growing zone.
+- [ ] Safe cells can overlap a stockpile.
+- [ ] Safe cells can overlap an ordinary allowed area.
+- [ ] Several disconnected shelters can be painted on one map.
+- [ ] Multiple maps keep separate safe-area layers.
 
 ## Flee to safe area
 
-- [ ] The safe-area picker lists allowed areas only.
-- [ ] A pawn in danger moves toward a reachable cell inside the configured safe area.
+- [ ] A pawn in danger moves toward a reachable cell inside the global safe area.
+- [ ] A pawn chooses a reachable shelter when another painted shelter is inaccessible.
 - [ ] The pawn's previous allowed area is restored after the grace period.
 - [ ] A manual allowed-area change made during evacuation is not overwritten later.
-- [ ] If no safe area exists, vanilla flee behavior remains available as fallback.
-- [ ] An empty, deleted or unreachable safe area does not cause an exception.
+- [ ] If no safe cell exists, vanilla flee behavior remains available as fallback.
+- [ ] An empty or unreachable safe layer does not cause an exception.
 
 ## Self-defense only
 
@@ -32,7 +47,6 @@
 
 ## Regression passes
 
+- [ ] Vanilla hostility responses still behave exactly as before.
 - [ ] Drafted pawns remain under player control.
 - [ ] Forced jobs are not replaced.
-- [ ] Pawns without configurable hostility responses receive no extra gizmos.
-- [ ] Multiple maps keep separate safe-area settings.

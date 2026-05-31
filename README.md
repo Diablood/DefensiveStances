@@ -6,26 +6,27 @@ A RimWorld 1.6 mod prototype that adds defensive doctrines alongside the vanilla
 
 - Workshop display name: **Defensive Stances**
 - Local mod folder: `DefensiveStances`
-- Suggested GitHub repository: `DefensiveStances`
+- GitHub repository: `Diablood/DefensiveStances`
 - C# solution, project, assembly and root namespace: `DefensiveStances`
-- Temporary package ID: `diablood.defensivestances`
+- Stable package ID: `diablood.defensivestances`
 
-Replace `todoauthor` once with your final author or GitHub handle before publishing. Do not change the package ID after a public release because it identifies the mod in load orders and saves.
+Do not change the package ID after a public release because it identifies the mod in load orders and saves.
 
 ## Prototype scope
 
-The current scaffold is intentionally small but already contains the complete extension points for the first iteration:
+The current 0.2 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
-- a saveable `GameComponent` with per-pawn and per-map state;
-- a pawn gizmo that cycles between vanilla behavior, flee-to-safe-area and self-defense-only;
-- a pawn gizmo to select a safe allowed area for the current map;
-- temporary allowed-area restriction during evacuation, with restoration after the danger has passed;
+- a saveable `GameComponent` with per-pawn doctrine state;
+- two additional doctrines inside RimWorld's existing hostility-response dropdown;
+- a dedicated map-level safe-area layer, independent from ordinary allowed areas;
+- Architect tools to expand or clear safe-area cells;
+- support for several disconnected shelters on the same map;
+- temporary restriction to the global safe area during evacuation, with restoration after the danger has passed;
 - direct aggressor recording when damage reaches a pawn in self-defense-only mode;
 - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
+- a migration path from the 0.1.x configured allowed-area prototype;
 - English and French keyed translations.
-
-This is a first playable engineering scaffold. It still needs in-game validation and balancing against an installed RimWorld 1.6 build.
 
 ## Requirements
 
@@ -65,14 +66,14 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test
+## First in-game test for 0.2
 
 1. Create or load a colony on RimWorld 1.6.
-2. Paint an allowed area that represents a shelter.
-3. Select a colonist and use **Defensive stance** to choose **Flee to safe area**.
-4. Use **Safe area** to assign the shelter.
-5. Spawn a hostile threat in dev mode and verify that the colonist moves into the assigned area and remains restricted there temporarily.
-6. Switch another colonist to **Self-defense only**, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
+2. Open **Architect** → **Zone**.
+3. Paint one or more shelters with **Expand safe area**. These cells may overlap stockpiles, growing zones and ordinary allowed areas.
+4. Open the existing hostility-response dropdown for a colonist and choose **Flee to safe area**.
+5. Spawn a hostile threat in dev mode and verify that the colonist reaches one of the painted shelters and remains restricted there temporarily.
+6. Choose **Self-defense only** for another colonist, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 
@@ -82,16 +83,16 @@ See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 About/                         RimWorld metadata
 1.6/Assemblies/                compiled output
 1.6/Languages/                 keyed translations
+1.6/Patches/                   XML injection into Architect → Zone
 Source/DefensiveStances/       C# project
 Source/DefensiveStances.sln    Visual Studio solution
 LoadFolders.xml                RimWorld version folder routing
 ```
 
-## Known limitations of this scaffold
+## Known limitations
 
-- No custom icons yet: built-in placeholder textures are used.
-- The safe area is configured per map, not per colonist.
+- The custom dropdown entries currently reuse vanilla icons.
+- The map-level safe area is one global layer containing any number of disconnected shelters; named or prioritized shelter groups are not implemented yet.
 - Self-defense currently starts after a damage event with a hostile instigator. Missed shots are not tracked yet.
 - A short grace period is used before restoring the previous allowed area after evacuation.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
-

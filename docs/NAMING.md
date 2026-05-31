@@ -1,6 +1,6 @@
 # Naming decision
 
-## Recommended public name
+## Public name
 
 **Defensive Stances**
 
@@ -12,21 +12,14 @@ The name is intentionally broader than either of the first two doctrines. It lea
 | --- | --- |
 | Workshop name | `Defensive Stances` |
 | Mod directory | `DefensiveStances` |
-| GitHub repository | `RimWorld-DefensiveStances` |
+| GitHub repository | `Diablood/DefensiveStances` |
 | Solution | `DefensiveStances.sln` |
 | Project | `DefensiveStances.csproj` |
 | Assembly | `DefensiveStances.dll` |
 | Root namespace | `DefensiveStances` |
-| Package ID before author choice | `todoauthor.defensivestances` |
+| Stable package ID | `diablood.defensivestances` |
 
-## Package ID action before publication
-
-Replace `todoauthor` with the final author or GitHub handle in both:
-
-- `About/About.xml`
-- `Source/DefensiveStances/DefensiveStancesBootstrap.cs`
-
-Once published, keep that ID stable.
+Keep the package ID stable after publication. It identifies the mod in load orders and saves.
 
 ## Other names considered
 
