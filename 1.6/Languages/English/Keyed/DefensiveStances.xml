@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <DS_Mode_Vanilla>Vanilla response</DS_Mode_Vanilla>
-  <DS_Mode_FleeToSafeArea>Flee to safe area</DS_Mode_FleeToSafeArea>
-  <DS_Mode_SelfDefenseOnly>Self-defense only</DS_Mode_SelfDefenseOnly>
-  <DS_SafeArea_Label>Safe area</DS_SafeArea_Label>
-  <DS_DesignatorSafeAreaExpand_Label>Expand safe area</DS_DesignatorSafeAreaExpand_Label>
-  <DS_DesignatorSafeAreaExpand_Desc>Paint cells where colonists using Flee to safe area can take shelter. The global safe-area layer can overlap stockpiles, growing zones and regular allowed areas.</DS_DesignatorSafeAreaExpand_Desc>
-  <DS_DesignatorSafeAreaClear_Label>Clear safe area</DS_DesignatorSafeAreaClear_Label>
-  <DS_DesignatorSafeAreaClear_Desc>Remove cells from the global safe-area layer.</DS_DesignatorSafeAreaClear_Desc>
+    <DS_Mode_Vanilla>Vanilla response</DS_Mode_Vanilla>
+    <DS_Mode_FleeToSafeArea>Flee to safe area</DS_Mode_FleeToSafeArea>
+    <DS_Mode_SelfDefenseOnly>Self-defense only</DS_Mode_SelfDefenseOnly>
+    <DS_SafeArea_Label>Safe area</DS_SafeArea_Label>
+    <DS_DesignatorSafeAreaExpand_Label>Expand safe area</DS_DesignatorSafeAreaExpand_Label>
+    <DS_DesignatorSafeAreaExpand_Desc>Paint cells where colonists using Flee to safe area can take shelter. The global safe-area layer can overlap stockpiles, growing zones and regular allowed areas.</DS_DesignatorSafeAreaExpand_Desc>
+    <DS_DesignatorSafeAreaClear_Label>Clear safe area</DS_DesignatorSafeAreaClear_Label>
+    <DS_DesignatorSafeAreaClear_Desc>Remove cells from the global safe-area layer.</DS_DesignatorSafeAreaClear_Desc>
 </LanguageData>

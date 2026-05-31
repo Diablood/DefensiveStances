@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <DS_Mode_Vanilla>Réaction vanilla</DS_Mode_Vanilla>
-  <DS_Mode_FleeToSafeArea>Fuir vers une zone sûre</DS_Mode_FleeToSafeArea>
-  <DS_Mode_SelfDefenseOnly>Légitime défense uniquement</DS_Mode_SelfDefenseOnly>
-  <DS_SafeArea_Label>Zone sûre</DS_SafeArea_Label>
-  <DS_DesignatorSafeAreaExpand_Label>Étendre la zone sûre</DS_DesignatorSafeAreaExpand_Label>
-  <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
-  <DS_DesignatorSafeAreaClear_Label>Réduire la zone sûre</DS_DesignatorSafeAreaClear_Label>
-  <DS_DesignatorSafeAreaClear_Desc>Retirez des cellules de la couche globale de zone sûre.</DS_DesignatorSafeAreaClear_Desc>
+    <DS_Mode_Vanilla>Réaction vanilla</DS_Mode_Vanilla>
+    <DS_Mode_FleeToSafeArea>Fuir vers une zone sûre</DS_Mode_FleeToSafeArea>
+    <DS_Mode_SelfDefenseOnly>Légitime défense uniquement</DS_Mode_SelfDefenseOnly>
+    <DS_SafeArea_Label>Zone sûre</DS_SafeArea_Label>
+    <DS_DesignatorSafeAreaExpand_Label>Étendre la zone sûre</DS_DesignatorSafeAreaExpand_Label>
+    <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
+    <DS_DesignatorSafeAreaClear_Label>Réduire la zone sûre</DS_DesignatorSafeAreaClear_Label>
+    <DS_DesignatorSafeAreaClear_Desc>Retirez des cellules de la couche globale de zone sûre.</DS_DesignatorSafeAreaClear_Desc>
 </LanguageData>
