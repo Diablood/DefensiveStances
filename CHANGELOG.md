@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2-dev
+
+- Add the centralized `DS_Log` helper with `Message`, `Warning` and `Error` methods.
+- Prefix mod logs with a colored **[Defensive Stances]** label for easier identification in RimWorld diagnostics.
+- Route the Harmony bootstrap message through `DS_Log`.
+- Synchronize the mod metadata and assembly version to `0.2.2`.
+
 ## 0.2.1-dev
 
 - Display an explicit **Fleeing to a safe area** job report while a pawn is moving toward a painted shelter.

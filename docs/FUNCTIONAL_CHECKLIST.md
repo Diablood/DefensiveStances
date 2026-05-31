@@ -1,4 +1,4 @@
-# Functional checklist for 0.2.1-dev
+# Functional checklist for 0.2.2-dev
 
 ## Load and save
 
