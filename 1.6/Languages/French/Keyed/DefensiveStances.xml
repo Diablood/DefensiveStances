@@ -9,4 +9,8 @@
     <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
     <DS_DesignatorSafeAreaClear_Label>Réduire la zone sûre</DS_DesignatorSafeAreaClear_Label>
     <DS_DesignatorSafeAreaClear_Desc>Retirez des cellules de la couche globale de zone sûre.</DS_DesignatorSafeAreaClear_Desc>
+    <DS_Message_NoSafeAreaConfigured>Ne peut pas fuir vers une zone sûre : aucune cellule sûre n’a été peinte.</DS_Message_NoSafeAreaConfigured>
+    <DS_Message_NoReachableSafeCell>Ne peut pas fuir vers une zone sûre : aucune cellule sûre peinte n’est accessible.</DS_Message_NoReachableSafeCell>
+    <DS_Alert_NoSafeArea_Label>Aucune zone sûre configurée</DS_Alert_NoSafeArea_Label>
+    <DS_Alert_NoSafeArea_Explanation>Au moins un colon est configuré pour fuir vers une zone sûre, mais aucune cellule sûre n’a été peinte sur sa carte.&#10;&#10;Utilisez Architecte → Zone → Étendre la zone sûre pour peindre un ou plusieurs refuges.</DS_Alert_NoSafeArea_Explanation>
 </LanguageData>

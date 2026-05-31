@@ -15,6 +15,8 @@ namespace DefensiveStances.Domain
         internal Area previousAllowedArea;
         internal Area evacuationArea;
         internal int lastDangerTick = -1;
+        internal EvacuationFailureReason lastEvacuationFailureReason = EvacuationFailureReason.None;
+        internal int lastEvacuationFailureMessageTick = -1;
 
         public void ExposeData()
         {
@@ -68,6 +70,33 @@ namespace DefensiveStances.Domain
         {
             lastAggressor = null;
             lastAggressionTick = -1;
+        }
+
+        internal bool ShouldReportEvacuationFailure(EvacuationFailureReason reason, int cooldownTicks)
+        {
+            if (reason == EvacuationFailureReason.None)
+            {
+                return false;
+            }
+
+            int currentTick = GenTicks.TicksGame;
+            bool shouldReport = lastEvacuationFailureReason != reason
+                || lastEvacuationFailureMessageTick < 0
+                || currentTick - lastEvacuationFailureMessageTick >= cooldownTicks;
+
+            if (shouldReport)
+            {
+                lastEvacuationFailureReason = reason;
+                lastEvacuationFailureMessageTick = currentTick;
+            }
+
+            return shouldReport;
+        }
+
+        internal void ClearEvacuationFailure()
+        {
+            lastEvacuationFailureReason = EvacuationFailureReason.None;
+            lastEvacuationFailureMessageTick = -1;
         }
 
         internal void ClearEvacuationTracking()

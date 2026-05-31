@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.2.2 engineering scaffold contains:
+The current 0.3.0 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -29,7 +29,10 @@ The current 0.2.2 engineering scaffold contains:
 - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
 - a migration path from the 0.1.x configured allowed-area prototype;
 - English and French keyed translations;
-- a centralized `DS_Log` wrapper with a colored mod-name prefix for future diagnostics.
+- a centralized `DS_Log` wrapper with a colored mod-name prefix for diagnostics;
+- a persistent alert when at least one colonist expects a safe area but none has been painted on their map;
+- throttled in-game warnings and prefixed log entries when no safe cell is configured or reachable;
+- safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer.
 
 ## Requirements
 
@@ -69,7 +72,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.2.2
+## First in-game test for 0.3.0
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -77,6 +80,8 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 4. Open the existing hostility-response dropdown for a colonist and choose **Flee to safe area**.
 5. Spawn a hostile threat in dev mode and verify that the colonist reaches one of the painted shelters and remains restricted there temporarily.
 6. Choose **Self-defense only** for another colonist, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
+7. Clear every safe cell while a colonist still uses **Flee to safe area** and verify that the **No safe area configured** alert appears.
+8. Trigger danger with an empty or unreachable safe layer and verify the warning message, the prefixed log entry and the vanilla flee fallback.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 

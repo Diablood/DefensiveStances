@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0-dev
+
+- Add a persistent **No safe area configured** alert when a spawned free colonist uses **Flee to safe area** but their map has no painted safe cells.
+- Show a throttled in-game warning focused on the affected pawn when no safe cell is configured or reachable during an evacuation attempt.
+- Write the same evacuation failures through the colored `DS_Log.Warning` wrapper to simplify diagnostics.
+- Avoid restricting a pawn to an unusable safe-area layer: validate reachability before starting evacuation and restore the previous allowed area if an active evacuation loses every viable shelter.
+- Synchronize the mod metadata and assembly version to `0.3.0`.
+
 ## 0.2.2-dev
 
 - Add the centralized `DS_Log` helper with `Message`, `Warning` and `Error` methods.

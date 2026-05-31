@@ -10,23 +10,35 @@ namespace DefensiveStances.Utilities
         internal static bool TryCreateEvacuationJob(Pawn pawn, DefensivePawnState state, Area safeArea, out Job job)
         {
             job = null;
-            if (pawn?.playerSettings == null || safeArea == null || safeArea.Map != pawn.Map || safeArea.TrueCount <= 0)
+            if (pawn?.playerSettings == null || state == null || safeArea == null || safeArea.Map != pawn.Map)
             {
                 return false;
             }
 
-            StartOrRefreshEvacuation(pawn, state, safeArea);
+            if (safeArea.TrueCount <= 0)
+            {
+                RestorePreviousAreaIfNecessary(state);
+                DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoSafeArea);
+                return false;
+            }
 
             if (safeArea[pawn.Position])
             {
+                StartOrRefreshEvacuation(pawn, state, safeArea);
+                state.ClearEvacuationFailure();
                 return true;
             }
 
             IntVec3 destination;
             if (!TryFindReachableSafeCell(pawn, safeArea, out destination))
             {
+                RestorePreviousAreaIfNecessary(state);
+                DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoReachableSafeCell);
                 return false;
             }
+
+            StartOrRefreshEvacuation(pawn, state, safeArea);
+            state.ClearEvacuationFailure();
 
             job = JobMaker.MakeJob(JobDefOf.Goto, destination);
             job.reportStringOverride = "DS_Job_FleeToSafeArea_Report".Translate();
@@ -43,6 +55,14 @@ namespace DefensiveStances.Utilities
             }
 
             state?.ClearEvacuationTracking();
+        }
+
+        private static void RestorePreviousAreaIfNecessary(DefensivePawnState state)
+        {
+            if (state?.evacuationActive == true)
+            {
+                RestorePreviousArea(state);
+            }
         }
 
         private static void StartOrRefreshEvacuation(Pawn pawn, DefensivePawnState state, Area safeArea)

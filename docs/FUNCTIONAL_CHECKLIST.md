@@ -1,4 +1,4 @@
-# Functional checklist for 0.2.2-dev
+# Functional checklist for 0.3.0-dev
 
 ## Load and save
 
@@ -37,6 +37,19 @@
 - [ ] A manual allowed-area change made during evacuation is not overwritten later.
 - [ ] If no safe cell exists, vanilla flee behavior remains available as fallback.
 - [ ] An empty or unreachable safe layer does not cause an exception.
+- [ ] A pawn facing an empty safe layer receives a focused in-game warning and falls back to vanilla fleeing.
+- [ ] A pawn facing an unreachable safe layer receives a focused in-game warning and falls back to vanilla fleeing.
+- [ ] Failure warnings use the colored `[Defensive Stances]` prefix in the RimWorld log.
+- [ ] Repeated evacuation failures are throttled instead of flooding messages every think cycle.
+- [ ] A failed evacuation attempt does not leave the pawn restricted to an empty or unreachable safe-area layer.
+
+## Alerts
+
+- [ ] **No safe area configured** appears when at least one spawned free colonist uses **Flee to safe area** and their map contains no safe cells.
+- [ ] Clicking the alert jumps to one of the affected colonists.
+- [ ] The alert disappears after painting at least one safe cell on the affected map.
+- [ ] The alert does not appear when no colonist uses **Flee to safe area**.
+- [ ] Multiple maps evaluate their safe-area layers independently.
 
 ## Self-defense only
 

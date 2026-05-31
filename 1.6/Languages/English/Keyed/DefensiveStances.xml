@@ -9,4 +9,8 @@
     <DS_DesignatorSafeAreaExpand_Desc>Paint cells where colonists using Flee to safe area can take shelter. The global safe-area layer can overlap stockpiles, growing zones and regular allowed areas.</DS_DesignatorSafeAreaExpand_Desc>
     <DS_DesignatorSafeAreaClear_Label>Clear safe area</DS_DesignatorSafeAreaClear_Label>
     <DS_DesignatorSafeAreaClear_Desc>Remove cells from the global safe-area layer.</DS_DesignatorSafeAreaClear_Desc>
+    <DS_Message_NoSafeAreaConfigured>Cannot flee to a safe area: no safe cells have been painted.</DS_Message_NoSafeAreaConfigured>
+    <DS_Message_NoReachableSafeCell>Cannot flee to a safe area: no painted safe cell is reachable.</DS_Message_NoReachableSafeCell>
+    <DS_Alert_NoSafeArea_Label>No safe area configured</DS_Alert_NoSafeArea_Label>
+    <DS_Alert_NoSafeArea_Explanation>At least one colonist is configured to flee to a safe area, but no safe cells have been painted on their map.&#10;&#10;Use Architect → Zone → Expand safe area to paint one or more shelters.</DS_Alert_NoSafeArea_Explanation>
 </LanguageData>
