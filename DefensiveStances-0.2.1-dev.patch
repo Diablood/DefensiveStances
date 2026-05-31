@@ -1,0 +1,162 @@
+diff --git a/1.6/Languages/English/Keyed/DefensiveStances.xml b/1.6/Languages/English/Keyed/DefensiveStances.xml
+index 9c6d590..e12c5e9 100644
+--- a/1.6/Languages/English/Keyed/DefensiveStances.xml
++++ b/1.6/Languages/English/Keyed/DefensiveStances.xml
+@@ -3,6 +3,7 @@
+     <DS_Mode_Vanilla>Vanilla response</DS_Mode_Vanilla>
+     <DS_Mode_FleeToSafeArea>Flee to safe area</DS_Mode_FleeToSafeArea>
+     <DS_Mode_SelfDefenseOnly>Self-defense only</DS_Mode_SelfDefenseOnly>
++    <DS_Job_FleeToSafeArea_Report>Fleeing to a safe area.</DS_Job_FleeToSafeArea_Report>
+     <DS_SafeArea_Label>Safe area</DS_SafeArea_Label>
+     <DS_DesignatorSafeAreaExpand_Label>Expand safe area</DS_DesignatorSafeAreaExpand_Label>
+     <DS_DesignatorSafeAreaExpand_Desc>Paint cells where colonists using Flee to safe area can take shelter. The global safe-area layer can overlap stockpiles, growing zones and regular allowed areas.</DS_DesignatorSafeAreaExpand_Desc>
+diff --git a/1.6/Languages/French/Keyed/DefensiveStances.xml b/1.6/Languages/French/Keyed/DefensiveStances.xml
+index 7873411..bb99a3e 100644
+--- a/1.6/Languages/French/Keyed/DefensiveStances.xml
++++ b/1.6/Languages/French/Keyed/DefensiveStances.xml
+@@ -3,6 +3,7 @@
+     <DS_Mode_Vanilla>Réaction vanilla</DS_Mode_Vanilla>
+     <DS_Mode_FleeToSafeArea>Fuir vers une zone sûre</DS_Mode_FleeToSafeArea>
+     <DS_Mode_SelfDefenseOnly>Légitime défense uniquement</DS_Mode_SelfDefenseOnly>
++    <DS_Job_FleeToSafeArea_Report>Fuit vers une zone sûre.</DS_Job_FleeToSafeArea_Report>
+     <DS_SafeArea_Label>Zone sûre</DS_SafeArea_Label>
+     <DS_DesignatorSafeAreaExpand_Label>Étendre la zone sûre</DS_DesignatorSafeAreaExpand_Label>
+     <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
+diff --git a/About/About.xml b/About/About.xml
+index 959db97..5b5bcdc 100644
+--- a/About/About.xml
++++ b/About/About.xml
+@@ -3,7 +3,7 @@
+     <name>Defensive Stances</name>
+     <author>Diablood</author>
+     <packageId>diablood.defensivestances</packageId>
+-    <modVersion IgnoreIfNoMatchingField="True">0.2.0</modVersion>
++    <modVersion IgnoreIfNoMatchingField="True">0.2.1</modVersion>
+     <supportedVersions>
+         <li>1.6</li>
+     </supportedVersions>
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 441740a..2368bd0 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,12 @@
+ # Changelog
+ 
++## 0.2.1-dev
++
++- Display an explicit **Fleeing to a safe area** job report while a pawn is moving toward a painted shelter.
++- Route melee-capable self-defense responses, including unarmed pawns, to `AttackMelee` instead of repeatedly creating an invalid static shooting job.
++- Synchronize the mod metadata and assembly version to `0.2.1`.
++- Keep the repository formatting convention at four spaces through `.editorconfig`.
++
+ ## 0.2.0-dev
+ 
+ - Replace the two per-pawn gizmos with two entries inside RimWorld's existing hostility-response dropdown.
+diff --git a/README.md b/README.md
+index b7bf819..c0cd1eb 100644
+--- a/README.md
++++ b/README.md
+@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
+ 
+ ## Prototype scope
+ 
+-The current 0.2 engineering scaffold contains:
++The current 0.2.1 engineering scaffold contains:
+ 
+ - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
+ - a saveable `GameComponent` with per-pawn doctrine state;
+@@ -23,7 +23,9 @@ The current 0.2 engineering scaffold contains:
+ - Architect tools to expand or clear safe-area cells;
+ - support for several disconnected shelters on the same map;
+ - temporary restriction to the global safe area during evacuation, with restoration after the danger has passed;
++- an explicit pawn activity report while a colonist is moving toward shelter;
+ - direct aggressor recording when damage reaches a pawn in self-defense-only mode;
++- correct melee retaliation for unarmed pawns in self-defense-only mode;
+ - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
+ - a migration path from the 0.1.x configured allowed-area prototype;
+ - English and French keyed translations.
+@@ -66,7 +68,7 @@ The resulting assembly is written directly to:
+ 
+ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
+ 
+-## First in-game test for 0.2
++## First in-game test for 0.2.1
+ 
+ 1. Create or load a colony on RimWorld 1.6.
+ 2. Open **Architect** → **Zone**.
+diff --git a/Source/DefensiveStances/Properties/AssemblyInfo.cs b/Source/DefensiveStances/Properties/AssemblyInfo.cs
+index a0861c4..8d4f4fc 100644
+--- a/Source/DefensiveStances/Properties/AssemblyInfo.cs
++++ b/Source/DefensiveStances/Properties/AssemblyInfo.cs
+@@ -8,5 +8,5 @@ using System.Runtime.InteropServices;
+ [assembly: AssemblyCopyright("Copyright © 2026")]
+ [assembly: ComVisible(false)]
+ [assembly: Guid("689b4515-e87f-4a23-aab5-f40744771f54")]
+-[assembly: AssemblyVersion("0.2.0.0")]
+-[assembly: AssemblyFileVersion("0.2.0.0")]
++[assembly: AssemblyVersion("0.2.1.0")]
++[assembly: AssemblyFileVersion("0.2.1.0")]
+diff --git a/Source/DefensiveStances/Utilities/DefensiveEvacuationUtility.cs b/Source/DefensiveStances/Utilities/DefensiveEvacuationUtility.cs
+index 5815542..a9d199e 100644
+--- a/Source/DefensiveStances/Utilities/DefensiveEvacuationUtility.cs
++++ b/Source/DefensiveStances/Utilities/DefensiveEvacuationUtility.cs
+@@ -29,6 +29,7 @@ namespace DefensiveStances.Utilities
+             }
+ 
+             job = JobMaker.MakeJob(JobDefOf.Goto, destination);
++            job.reportStringOverride = "DS_Job_FleeToSafeArea_Report".Translate();
+             job.expiryInterval = 600;
+             return true;
+         }
+diff --git a/Source/DefensiveStances/Utilities/DefensiveResponseJobFactory.cs b/Source/DefensiveStances/Utilities/DefensiveResponseJobFactory.cs
+index 1f32117..d25f468 100644
+--- a/Source/DefensiveStances/Utilities/DefensiveResponseJobFactory.cs
++++ b/Source/DefensiveStances/Utilities/DefensiveResponseJobFactory.cs
+@@ -20,13 +20,18 @@ namespace DefensiveStances.Utilities
+                 return null;
+             }
+ 
+-            if (pawn.CanReachImmediate(aggressor, PathEndMode.Touch))
++            Verb verb = pawn.TryGetAttackVerb(aggressor, !pawn.IsColonist);
++            if (verb == null)
++            {
++                return null;
++            }
++
++            if (verb.IsMeleeAttack || pawn.CanReachImmediate(aggressor, PathEndMode.Touch))
+             {
+                 return JobMaker.MakeJob(JobDefOf.AttackMelee, aggressor);
+             }
+ 
+-            Verb verb = pawn.TryGetAttackVerb(aggressor, !pawn.IsColonist);
+-            if (verb == null || verb.ApparelPreventsShooting())
++            if (verb.ApparelPreventsShooting())
+             {
+                 return null;
+             }
+diff --git a/docs/FUNCTIONAL_CHECKLIST.md b/docs/FUNCTIONAL_CHECKLIST.md
+index ac32e69..a7e76c1 100644
+--- a/docs/FUNCTIONAL_CHECKLIST.md
++++ b/docs/FUNCTIONAL_CHECKLIST.md
+@@ -1,4 +1,4 @@
+-# Functional checklist for 0.2.0-dev
++# Functional checklist for 0.2.1-dev
+ 
+ ## Load and save
+ 
+@@ -31,6 +31,7 @@
+ ## Flee to safe area
+ 
+ - [ ] A pawn in danger moves toward a reachable cell inside the global safe area.
++- [ ] While moving toward shelter, the pawn activity report explicitly says that the pawn is fleeing to a safe area.
+ - [ ] A pawn chooses a reachable shelter when another painted shelter is inaccessible.
+ - [ ] The pawn's previous allowed area is restored after the grace period.
+ - [ ] A manual allowed-area change made during evacuation is not overwritten later.
+@@ -41,6 +42,7 @@
+ 
+ - [ ] A pawn ignores nearby hostiles before being damaged.
+ - [ ] A pawn retaliates against the direct hostile instigator after damage.
++- [ ] An unarmed pawn retaliates in melee without repeatedly starting a static shooting job.
+ - [ ] A pawn does not choose an arbitrary nearby enemy.
+ - [ ] A pawn incapable of violence does not retaliate.
+ - [ ] Retaliation expires after the aggressor is gone, non-hostile or stale.

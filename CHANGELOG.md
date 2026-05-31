@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1-dev
+
+- Display an explicit **Fleeing to a safe area** job report while a pawn is moving toward a painted shelter.
+- Route melee-capable self-defense responses, including unarmed pawns, to `AttackMelee` instead of repeatedly creating an invalid static shooting job.
+- Synchronize the mod metadata and assembly version to `0.2.1`.
+- Keep the repository formatting convention at four spaces through `.editorconfig`.
+
 ## 0.2.0-dev
 
 - Replace the two per-pawn gizmos with two entries inside RimWorld's existing hostility-response dropdown.
