@@ -12,7 +12,7 @@ Expose a small set of gameplay settings without changing the validated default b
 
 | Setting | Default | Range | Effect |
 | --- | ---: | ---: | --- |
-| Restore previous allowed area after danger clears | 10 s | 0–60 s | Controls the evacuation grace period. |
+| Restore previous allowed area after danger clears | 10 s | 0–60 s | Controls the evacuation grace period after every active hostile threat has cleared. |
 | Safe-area containment check interval | 1 s | 0.25–5 s | Controls how frequently active evacuations are rechecked. |
 | Show in-game safe-area warning messages | Enabled | — | Controls transient focused messages. Persistent alerts and logs remain active. |
 | Allow vanilla fleeing when no safe cell is usable | Enabled | — | Keeps the previously validated vanilla fallback optional. |

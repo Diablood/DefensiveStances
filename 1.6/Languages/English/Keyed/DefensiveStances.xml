@@ -19,7 +19,7 @@
     <DS_Settings_Category>Defensive Stances</DS_Settings_Category>
     <DS_Settings_Description>Configure how colonists using the additional defensive doctrines react to danger. The default values match the behavior used before settings were added.</DS_Settings_Description>
     <DS_Settings_RestoreGrace_Label>Restore the previous allowed area after danger clears: {0} s</DS_Settings_RestoreGrace_Label>
-    <DS_Settings_RestoreGrace_Tooltip>How long an evacuated pawn remains restricted to the safe-area layer after the immediate danger has disappeared.</DS_Settings_RestoreGrace_Tooltip>
+    <DS_Settings_RestoreGrace_Tooltip>How long an evacuated pawn remains restricted to the safe-area layer after no active hostile threat remains on the map.</DS_Settings_RestoreGrace_Tooltip>
     <DS_Settings_CheckInterval_Label>Safe-area containment check interval: {0} s</DS_Settings_CheckInterval_Label>
     <DS_Settings_CheckInterval_Tooltip>How often the mod checks whether evacuated pawns remain inside their safe area. Lower values react faster but perform checks more frequently.</DS_Settings_CheckInterval_Tooltip>
     <DS_Settings_ShowWarningMessages_Label>Show in-game safe-area warning messages</DS_Settings_ShowWarningMessages_Label>

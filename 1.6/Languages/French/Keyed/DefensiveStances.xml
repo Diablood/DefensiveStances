@@ -19,7 +19,7 @@
     <DS_Settings_Category>Defensive Stances</DS_Settings_Category>
     <DS_Settings_Description>Configurez la réaction au danger des colons utilisant les doctrines défensives supplémentaires. Les valeurs par défaut correspondent au comportement appliqué avant l’ajout des réglages.</DS_Settings_Description>
     <DS_Settings_RestoreGrace_Label>Restaurer l’ancienne zone autorisée après la disparition du danger : {0} s</DS_Settings_RestoreGrace_Label>
-    <DS_Settings_RestoreGrace_Tooltip>Durée pendant laquelle un pawn évacué reste limité à la zone sûre après la disparition du danger immédiat.</DS_Settings_RestoreGrace_Tooltip>
+    <DS_Settings_RestoreGrace_Tooltip>Durée pendant laquelle un pawn évacué reste limité à la zone sûre après la disparition de toute menace hostile active sur la carte.</DS_Settings_RestoreGrace_Tooltip>
     <DS_Settings_CheckInterval_Label>Intervalle de vérification du maintien en zone sûre : {0} s</DS_Settings_CheckInterval_Label>
     <DS_Settings_CheckInterval_Tooltip>Fréquence à laquelle le mod vérifie que les pawns évacués restent dans leur zone sûre. Une valeur faible réagit plus rapidement mais effectue davantage de vérifications.</DS_Settings_CheckInterval_Tooltip>
     <DS_Settings_ShowWarningMessages_Label>Afficher les messages d’avertissement liés aux zones sûres</DS_Settings_ShowWarningMessages_Label>

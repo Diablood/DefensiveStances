@@ -144,7 +144,7 @@ namespace DefensiveStances.Components
                 return;
             }
 
-            if (SelfDefenseUtility.ShouldStartFleeing(pawn))
+            if (DefensiveThreatUtility.ShouldKeepEvacuationActive(pawn))
             {
                 state.lastDangerTick = GenTicks.TicksGame;
             }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1-dev
+
+- Keep an active evacuation running while RimWorld still reports any active hostile threat on the pawn's map.
+- Start the restoration grace period only after both the pawn-local flee condition and map-level hostile-threat check have cleared.
+- Preserve the existing behavior where evacuation starts only for pawns that locally need to flee; a distant raid does not automatically send every configured colonist to shelter.
+- Add a dedicated threat-lifetime utility, update the settings tooltip and extend the regression checklist.
+- Synchronize the mod metadata and assembly version to `0.7.1`.
+
 ## 0.7.0-dev
 
 - Add a standard RimWorld mod-settings screen through `DefensiveStancesMod` and `DefensiveStancesSettings`.

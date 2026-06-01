@@ -1,9 +1,9 @@
-# Functional checklist for 0.7.0-dev
+# Functional checklist for 0.7.1-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.7.0.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.7.1.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -48,6 +48,8 @@
 - [ ] Repeated evacuation failures are throttled instead of flooding messages every think cycle.
 - [ ] A failed evacuation attempt does not leave the pawn restricted to an empty or unreachable safe-area layer.
 - [ ] After reaching shelter, a pawn remains restricted to the safe-area layer while danger persists.
+- [ ] After reaching shelter, a pawn remains restricted beyond the grace period while any active hostile threat still exists on the map.
+- [ ] A distant active pirate does not trigger evacuation for a pawn who never had a local reason to flee.
 - [ ] After danger clears, the previous allowed area is restored only after the grace period.
 - [ ] If a non-forced automatic job carries an evacuated pawn outside shelter, the pawn is redirected to a reachable safe cell.
 - [ ] If an automatic movement job would leave shelter, it is interrupted while evacuation remains active.
