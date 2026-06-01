@@ -5,8 +5,7 @@
     <DS_Mode_SelfDefenseOnly>Légitime défense uniquement</DS_Mode_SelfDefenseOnly>
     <DS_Job_FleeToSafeArea_Report>Fuit vers une zone sûre.</DS_Job_FleeToSafeArea_Report>
     <DS_SafeArea_Label>Zone sûre</DS_SafeArea_Label>
-    <DS_DesignatorSafeAreaView_Label>Afficher la zone sûre</DS_DesignatorSafeAreaView_Label>
-    <DS_DesignatorSafeAreaView_Desc>Affichez la couche globale de zone sûre sans modifier les cellules peintes.</DS_DesignatorSafeAreaView_Desc>
+    <DS_SafeAreaVisibilityToggleButton>Activer ou désactiver la visibilité des zones sûres.</DS_SafeAreaVisibilityToggleButton>
     <DS_DesignatorSafeAreaExpand_Label>Étendre la zone sûre</DS_DesignatorSafeAreaExpand_Label>
     <DS_DesignatorSafeAreaExpand_Desc>Peignez les cellules où les colons utilisant « Fuir vers une zone sûre » peuvent se mettre à l’abri. Cette couche globale peut chevaucher les stockages, les cultures et les zones autorisées classiques.</DS_DesignatorSafeAreaExpand_Desc>
     <DS_DesignatorSafeAreaClear_Label>Réduire la zone sûre</DS_DesignatorSafeAreaClear_Label>

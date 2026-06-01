@@ -3,7 +3,6 @@
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/DesignationCategoryDef[defName="Zone"]/specialDesignatorClasses</xpath>
         <value>
-            <li>DefensiveStances.Designators.Designator_AreaSafeView</li>
             <li>DefensiveStances.Designators.Designator_AreaSafeExpand</li>
             <li>DefensiveStances.Designators.Designator_AreaSafeClear</li>
         </value>

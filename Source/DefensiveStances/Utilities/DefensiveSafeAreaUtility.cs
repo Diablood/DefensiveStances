@@ -6,6 +6,11 @@ namespace DefensiveStances.Utilities
 {
     internal static class DefensiveSafeAreaUtility
     {
+        internal static Area_Safe Get(Map map)
+        {
+            return map?.areaManager?.Get<Area_Safe>();
+        }
+
         internal static Area_Safe GetOrCreate(Map map)
         {
             if (map?.areaManager == null)

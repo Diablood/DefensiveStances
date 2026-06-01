@@ -4,9 +4,11 @@
 
 Make the dedicated safe-area layer easier to inspect before a threat appears and report unusable shelter layouts before evacuation is needed.
 
-## View-only designator
+## Persistent visibility toggle
 
-`Designator_AreaSafeView` is injected into **Architect** → **Zone** alongside the existing expand and clear tools. While selected, it draws the global safe-area layer but never changes cells. This provides a safe inspection mode without requiring the player to paint or erase tiles.
+The initial 0.5.0 prototype added a view-only designator to **Architect** → **Zone**. That technically displayed the layer, but it also exposed RimWorld's designator-side drawing controls and made inspection feel like an editing action.
+
+Starting in 0.5.1, safe-area inspection is handled by a bottom-right toggle added next to RimWorld's map overlay controls. While enabled, the dedicated layer is marked for drawing every map-interface update. The Architect category now contains only the two editing tools: expand and clear.
 
 ## Reachability alert
 

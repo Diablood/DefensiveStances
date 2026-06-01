@@ -5,8 +5,7 @@
     <DS_Mode_SelfDefenseOnly>Self-defense only</DS_Mode_SelfDefenseOnly>
     <DS_Job_FleeToSafeArea_Report>Fleeing to a safe area.</DS_Job_FleeToSafeArea_Report>
     <DS_SafeArea_Label>Safe area</DS_SafeArea_Label>
-    <DS_DesignatorSafeAreaView_Label>View safe area</DS_DesignatorSafeAreaView_Label>
-    <DS_DesignatorSafeAreaView_Desc>Display the global safe-area layer without changing its painted cells.</DS_DesignatorSafeAreaView_Desc>
+    <DS_SafeAreaVisibilityToggleButton>Toggle safe-area visibility.</DS_SafeAreaVisibilityToggleButton>
     <DS_DesignatorSafeAreaExpand_Label>Expand safe area</DS_DesignatorSafeAreaExpand_Label>
     <DS_DesignatorSafeAreaExpand_Desc>Paint cells where colonists using Flee to safe area can take shelter. The global safe-area layer can overlap stockpiles, growing zones and regular allowed areas.</DS_DesignatorSafeAreaExpand_Desc>
     <DS_DesignatorSafeAreaClear_Label>Clear safe area</DS_DesignatorSafeAreaClear_Label>

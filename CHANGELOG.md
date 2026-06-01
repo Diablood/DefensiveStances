@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1-dev
+
+- Remove the view-only **View safe area** designator from **Architect** → **Zone**.
+- Add a bottom-right safe-area visibility toggle alongside RimWorld's existing map overlay controls.
+- Keep the shelter layer visible while the toggle is enabled without opening Architect or exposing designator drawing modes.
+- Retain only **Expand safe area** and **Clear safe area** as shelter editing tools.
+- Synchronize the mod metadata and assembly version to `0.5.1`.
+
 ## 0.5.0-dev
 
 - Add **View safe area** to **Architect** → **Zone** so the shelter overlay can be inspected without painting or clearing cells.
