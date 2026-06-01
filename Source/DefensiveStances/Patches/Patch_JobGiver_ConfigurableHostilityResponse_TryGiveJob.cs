@@ -1,6 +1,7 @@
 using System.Reflection;
 using DefensiveStances.Components;
 using DefensiveStances.Domain;
+using DefensiveStances.Settings;
 using DefensiveStances.Utilities;
 using HarmonyLib;
 using RimWorld;
@@ -51,8 +52,14 @@ namespace DefensiveStances.Patches
                 return false;
             }
 
-            // No valid configured area: preserve vanilla flee behavior as a safe fallback.
-            return true;
+            if (DefensiveStancesSettings.Current.allowVanillaFleeFallback)
+            {
+                // No valid configured area: preserve vanilla flee behavior as an optional safe fallback.
+                return true;
+            }
+
+            __result = null;
+            return false;
         }
     }
 }

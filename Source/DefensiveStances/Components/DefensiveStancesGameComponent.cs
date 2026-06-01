@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DefensiveStances.Areas;
 using DefensiveStances.Domain;
+using DefensiveStances.Settings;
 using DefensiveStances.Utilities;
 using RimWorld;
 using Verse;
@@ -9,9 +10,6 @@ namespace DefensiveStances.Components
 {
     internal sealed class DefensiveStancesGameComponent : GameComponent
     {
-        private const int EvacuationCheckIntervalTicks = 60;
-        private const int EvacuationRestoreGraceTicks = 600;
-
         private List<DefensivePawnState> pawnStates = new List<DefensivePawnState>();
         private List<DefensiveMapState> mapStates = new List<DefensiveMapState>();
 
@@ -37,7 +35,7 @@ namespace DefensiveStances.Components
 
         public override void GameComponentTick()
         {
-            if (!GenTicks.IsTickInterval(EvacuationCheckIntervalTicks))
+            if (!GenTicks.IsTickInterval(DefensiveStancesSettings.Current.containmentCheckIntervalTicks))
             {
                 return;
             }
@@ -150,7 +148,7 @@ namespace DefensiveStances.Components
             {
                 state.lastDangerTick = GenTicks.TicksGame;
             }
-            else if (GenTicks.TicksGame - state.lastDangerTick >= EvacuationRestoreGraceTicks)
+            else if (GenTicks.TicksGame - state.lastDangerTick >= DefensiveStancesSettings.Current.evacuationRestoreGraceTicks)
             {
                 DefensiveEvacuationUtility.RestorePreviousArea(state);
                 return;

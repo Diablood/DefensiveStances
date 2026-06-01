@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.6.1 engineering scaffold contains:
+The current 0.7.0 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -41,7 +41,8 @@ The current 0.6.1 engineering scaffold contains:
 - a second persistent alert when painted shelter cells exist but none is reachable for a configured colonist;
 - throttled in-game warnings and prefixed log entries when no safe cell is configured or reachable;
 - safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer;
-- immediate interruption of an in-progress shelter move when safe-area editing removes the last viable refuge cell.
+- immediate interruption of an in-progress shelter move when safe-area editing removes the last viable refuge cell;
+- a standard RimWorld settings screen for grace period, containment frequency, transient warning visibility and optional vanilla fleeing fallback.
 
 ## Requirements
 
@@ -81,7 +82,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.6.1
+## First in-game test for 0.7.0
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -98,6 +99,9 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 13. While evacuation remains active, force a non-player automatic job to carry a sheltered colonist outside the safe layer and verify that the mod redirects them into shelter.
 14. Give the evacuated colonist a player-forced priority job outside the safe layer, such as prioritizing reachable work or hauling, and verify that direct player control wins temporarily; after the forced job ends, verify that containment resumes.
 15. Draft and undraft an evacuated colonist outside the refuge and verify that the mod does not override drafted control, then returns the undrafted pawn to shelter.
+16. Open **Options** → **Mod settings** → **Defensive Stances**, adjust the grace period and containment interval, then confirm that the changed behavior is visible in game.
+17. Disable transient safe-area warning messages and verify that persistent alerts and colored logs remain active.
+18. Disable vanilla fleeing fallback, trigger danger with an empty safe layer and verify that the pawn waits instead of starting the vanilla flee response.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 
@@ -136,7 +140,7 @@ docs/                          design notes, audit notes and test checklist
 - The custom dropdown entries and the safe-area visibility toggle currently reuse vanilla icons.
 - The map-level safe area is one global layer containing any number of disconnected shelters; named or prioritized shelter groups are not implemented yet.
 - Self-defense handles standard direct ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without a hostile instigator and attacks against nearby allies are not tracked yet.
-- A short grace period is used before restoring the previous allowed area after evacuation.
+- The default grace period is 10 seconds before restoring the previous allowed area after evacuation; it can be configured in the mod settings.
 - Automatic containment deliberately yields to drafted control and explicit player-forced orders, then resumes afterward.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
 - The mod-owned keyed translations pass the repository validator. RimWorld's remaining French translation-report warnings were attributed to Core language data in the no-DLC test configuration.

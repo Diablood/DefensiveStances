@@ -1,4 +1,5 @@
 using DefensiveStances.Domain;
+using DefensiveStances.Settings;
 using RimWorld;
 using Verse;
 
@@ -32,11 +33,14 @@ namespace DefensiveStances.Utilities
                     return;
             }
 
-            Messages.Message(
-                pawn.LabelShortCap + ": " + playerMessage,
-                new LookTargets(pawn),
-                MessageTypeDefOf.CautionInput,
-                historical: false);
+            if (DefensiveStancesSettings.Current.showWarningMessages)
+            {
+                Messages.Message(
+                    pawn.LabelShortCap + ": " + playerMessage,
+                    new LookTargets(pawn),
+                    MessageTypeDefOf.CautionInput,
+                    historical: false);
+            }
 
             DS_Log.Warning(pawn.LabelShortCap + " " + logMessage);
         }

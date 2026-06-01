@@ -16,4 +16,15 @@
     <DS_Alert_NoReachableSafeArea_Explanation>Au moins un colon est configuré pour fuir vers une zone sûre, mais aucune cellule sûre peinte ne peut être atteinte depuis sa position actuelle.&#10;&#10;Vérifiez les portes, les murs, les passages interdits et l’emplacement des cellules de refuge.</DS_Alert_NoReachableSafeArea_Explanation>
     <DS_Alert_NoSafeArea_Label>Aucune zone sûre configurée</DS_Alert_NoSafeArea_Label>
     <DS_Alert_NoSafeArea_Explanation>Au moins un colon est configuré pour fuir vers une zone sûre, mais aucune cellule sûre n’a été peinte sur sa carte.&#10;&#10;Utilisez Architecte → Zone → Étendre la zone sûre pour peindre un ou plusieurs refuges.</DS_Alert_NoSafeArea_Explanation>
+    <DS_Settings_Category>Defensive Stances</DS_Settings_Category>
+    <DS_Settings_Description>Configurez la réaction au danger des colons utilisant les doctrines défensives supplémentaires. Les valeurs par défaut correspondent au comportement appliqué avant l’ajout des réglages.</DS_Settings_Description>
+    <DS_Settings_RestoreGrace_Label>Restaurer l’ancienne zone autorisée après la disparition du danger : {0} s</DS_Settings_RestoreGrace_Label>
+    <DS_Settings_RestoreGrace_Tooltip>Durée pendant laquelle un pawn évacué reste limité à la zone sûre après la disparition du danger immédiat.</DS_Settings_RestoreGrace_Tooltip>
+    <DS_Settings_CheckInterval_Label>Intervalle de vérification du maintien en zone sûre : {0} s</DS_Settings_CheckInterval_Label>
+    <DS_Settings_CheckInterval_Tooltip>Fréquence à laquelle le mod vérifie que les pawns évacués restent dans leur zone sûre. Une valeur faible réagit plus rapidement mais effectue davantage de vérifications.</DS_Settings_CheckInterval_Tooltip>
+    <DS_Settings_ShowWarningMessages_Label>Afficher les messages d’avertissement liés aux zones sûres</DS_Settings_ShowWarningMessages_Label>
+    <DS_Settings_ShowWarningMessages_Tooltip>Affiche un message ciblé en jeu lorsqu’aucune cellule sûre configurée ne peut être utilisée. Les alertes persistantes et les logs de diagnostic restent actifs.</DS_Settings_ShowWarningMessages_Tooltip>
+    <DS_Settings_AllowVanillaFallback_Label>Autoriser la fuite vanilla si aucune cellule sûre n’est utilisable</DS_Settings_AllowVanillaFallback_Label>
+    <DS_Settings_AllowVanillaFallback_Tooltip>Lorsque cette option est activée, un pawn utilise la fuite normale de RimWorld si la zone sûre est vide ou inaccessible. Lorsqu’elle est désactivée, il attend qu’une zone sûre utilisable soit disponible.</DS_Settings_AllowVanillaFallback_Tooltip>
+    <DS_Settings_ResetDefaults>Réinitialiser les réglages</DS_Settings_ResetDefaults>
 </LanguageData>

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.0-dev
+
+- Add a standard RimWorld mod-settings screen through `DefensiveStancesMod` and `DefensiveStancesSettings`.
+- Make the post-danger restoration grace period configurable from 0 to 60 seconds while preserving the previous 10-second default.
+- Make the active containment check interval configurable from 0.25 to 5 seconds while preserving the previous 1-second default.
+- Allow players to hide transient safe-area warning messages while keeping persistent alerts and colored diagnostic logs active.
+- Make vanilla fleeing fallback optional when the configured safe-area layer is empty or unreachable.
+- Add a reset-to-defaults action and English/French labels for every setting.
+- Add the 0.7 design note and extend the validation checklist.
+- Synchronize the mod metadata and assembly version to `0.7.0`.
+
 ## 0.6.1-dev
 
 - Notify active evacuations immediately whenever safe-area editing adds or removes a shelter cell.

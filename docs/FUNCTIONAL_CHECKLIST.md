@@ -1,9 +1,9 @@
-# Functional checklist for 0.6.1-dev
+# Functional checklist for 0.7.0-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.6.1.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.7.0.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -86,6 +86,19 @@
 - [ ] Vanilla hostility responses still behave exactly as before.
 - [ ] Drafted pawns remain under player control.
 - [ ] Forced jobs are not replaced.
+
+## Mod settings
+
+- [ ] **Options** → **Mod settings** contains a **Defensive Stances** entry.
+- [ ] The default restoration grace period is 10 seconds.
+- [ ] The default containment check interval is 1 second.
+- [ ] Changing the restoration grace period changes how long an evacuated pawn remains restricted after danger clears.
+- [ ] Changing the containment interval changes how quickly an undrafted pawn outside shelter is redirected back into the safe area.
+- [ ] Disabling transient safe-area warning messages hides focused in-game messages while persistent alerts and colored log warnings remain active.
+- [ ] Disabling vanilla fleeing fallback prevents the vanilla flee job when the safe-area layer is empty or unreachable.
+- [ ] Re-enabling vanilla fleeing fallback restores the previously validated fallback behavior.
+- [ ] **Reset to defaults** restores 10 seconds, 1 second and both enabled checkboxes.
+- [ ] Settings survive a full RimWorld restart.
 
 ## Translation audit
 
