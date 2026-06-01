@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.0-dev
+
+- Prepare the repository for a first public alpha without changing gameplay behavior.
+- Add the GitHub repository URL and a concise release-facing description to `About/About.xml`.
+- Add `About/Preview.png` and `About/ModIcon.png` for mod-manager and Workshop presentation.
+- Add `tools/package-release.ps1` and `tools/package-release.sh` to create a clean runtime-only distribution ZIP after a successful local build.
+- Validate the compiled DLL file version against `About.xml` before Windows packaging to avoid stale release archives.
+- Add a release checklist, a Workshop description draft and the 0.9 packaging design note.
+- Ignore generated `dist/` archives in Git and synchronize metadata and assembly versions to `0.9.0`.
+
 ## 0.8.1-dev
 
 - Replace the vanilla home-area textures used by **Expand safe area** and **Clear safe area** with dedicated cyan shield-and-grid icons.

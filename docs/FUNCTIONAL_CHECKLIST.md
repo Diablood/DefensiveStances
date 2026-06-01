@@ -134,3 +134,13 @@
 - [ ] Confirm that `build.ps1` runs the same validator before compilation.
 - [x] Generate RimWorld's French `TranslationReport.txt` and attribute the warning observed during development to Core language data in the no-DLC test configuration.
 - [ ] Use `./tools/find-translation-report.ps1` to locate the generated report before the stable release.
+
+## Release packaging
+
+- [ ] `About/About.xml` contains the intended `modVersion`, GitHub `url`, supported RimWorld version and Harmony dependency.
+- [ ] `About/Preview.png` renders correctly in the RimWorld mod manager.
+- [ ] `About/ModIcon.png` renders correctly where RimWorld displays the compact mod icon.
+- [ ] `./tools/package-release.ps1 -SkipBuild` creates `dist/DefensiveStances-<version>.zip` after a successful local build.
+- [ ] The distribution ZIP contains `About/`, `1.6/`, `LoadFolders.xml`, `LICENSE` and `README.md` under one top-level `DefensiveStances/` folder.
+- [ ] The distribution ZIP excludes `Source/`, `tools/`, `docs/`, `.git/`, PDB files and intermediate build folders.
+- [ ] Extracting the distribution ZIP into a temporary local `Mods` folder passes a final startup smoke test.
