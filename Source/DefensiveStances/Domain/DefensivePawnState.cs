@@ -17,6 +17,7 @@ namespace DefensiveStances.Domain
         internal int lastDangerTick = -1;
         internal EvacuationFailureReason lastEvacuationFailureReason = EvacuationFailureReason.None;
         internal int lastEvacuationFailureMessageTick = -1;
+        internal int lastContainmentRecoveryLogTick = -1;
 
         public void ExposeData()
         {
@@ -28,6 +29,7 @@ namespace DefensiveStances.Domain
             Scribe_References.Look(ref previousAllowedArea, "previousAllowedArea");
             Scribe_References.Look(ref evacuationArea, "evacuationArea");
             Scribe_Values.Look(ref lastDangerTick, "lastDangerTick", -1);
+            Scribe_Values.Look(ref lastContainmentRecoveryLogTick, "lastContainmentRecoveryLogTick", -1);
         }
 
         internal void RecordAggression(Thing aggressor)
@@ -99,12 +101,26 @@ namespace DefensiveStances.Domain
             lastEvacuationFailureMessageTick = -1;
         }
 
+        internal bool ShouldLogContainmentRecovery(int cooldownTicks)
+        {
+            int currentTick = GenTicks.TicksGame;
+            if (lastContainmentRecoveryLogTick >= 0
+                && currentTick - lastContainmentRecoveryLogTick < cooldownTicks)
+            {
+                return false;
+            }
+
+            lastContainmentRecoveryLogTick = currentTick;
+            return true;
+        }
+
         internal void ClearEvacuationTracking()
         {
             evacuationActive = false;
             previousAllowedArea = null;
             evacuationArea = null;
             lastDangerTick = -1;
+            lastContainmentRecoveryLogTick = -1;
         }
     }
 }

@@ -130,13 +130,14 @@ namespace DefensiveStances.Components
             if (SelfDefenseUtility.ShouldStartFleeing(pawn))
             {
                 state.lastDangerTick = GenTicks.TicksGame;
+            }
+            else if (GenTicks.TicksGame - state.lastDangerTick >= EvacuationRestoreGraceTicks)
+            {
+                DefensiveEvacuationUtility.RestorePreviousArea(state);
                 return;
             }
 
-            if (GenTicks.TicksGame - state.lastDangerTick >= EvacuationRestoreGraceTicks)
-            {
-                DefensiveEvacuationUtility.RestorePreviousArea(state);
-            }
+            DefensiveEvacuationUtility.MaintainSafeAreaContainment(state);
         }
     }
 }

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.0-dev
+
+- Keep evacuated pawns restricted to the global safe-area layer until danger has remained absent for the existing grace period.
+- Recheck active evacuations every 60 ticks and redirect pawns back to a reachable shelter cell if an automatic job moves them outside the refuge.
+- Interrupt non-forced automatic movement that would carry a sheltered pawn out of the active safe-area layer.
+- Preserve direct player control: drafted pawns and player-forced orders temporarily bypass automatic containment, which resumes afterward.
+- Restore the previous allowed area and reuse the existing throttled warning when an active shelter layer becomes empty or unreachable.
+- Add throttled containment-recovery diagnostics through the colored `DS_Log` wrapper.
+- Add the 0.6 design note and extend the validation checklist.
+- Synchronize the mod metadata and assembly version to `0.6.0`.
+
 ## 0.5.1-dev
 
 - Remove the view-only **View safe area** designator from **Architect** → **Zone**.
