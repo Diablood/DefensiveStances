@@ -1,9 +1,9 @@
-# Functional checklist for 0.8.1-dev
+# Functional checklist for 1.0.1-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.8.1.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 1.0.1.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -29,6 +29,10 @@
 - [ ] The bottom-right controls contain a dedicated safe-area visibility toggle.
 - [ ] Enabling the toggle displays the shelter overlay without opening Architect or selecting a designator.
 - [ ] Disabling the toggle hides the shelter overlay when no safe-area editing tool is active.
+- [ ] With the safe-area toggle enabled, switching to the world view hides the shelter overlay completely.
+- [ ] Panning the world map does not leave a screen-fixed shelter overlay behind.
+- [ ] Returning from the world view to the local map displays the shelter overlay again when the toggle is still enabled.
+- [ ] Switching to the world view also hides the shelter overlay while the global emergency alarm is active.
 - [ ] The safe-area overlay still appears while either painting tool is active.
 - [ ] Safe cells can overlap a growing zone.
 - [ ] Safe cells can overlap a stockpile.

@@ -1,5 +1,6 @@
 using DefensiveStances.Components;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace DefensiveStances.Utilities
@@ -19,7 +20,17 @@ namespace DefensiveStances.Utilities
 
         internal static void DrawIfVisible()
         {
+            if (!WorldRendererUtility.DrawingMap)
+            {
+                return;
+            }
+
             Map map = Find.CurrentMap;
+            if (map == null)
+            {
+                return;
+            }
+
             if (!visible && DefensiveStancesGameComponent.Current?.IsGlobalEmergencyEvacuationActive(map) != true)
             {
                 return;

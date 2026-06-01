@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1-dev
+
+- Hide the dedicated safe-area overlay while RimWorld is displaying the world view.
+- Mirror RimWorld's `WorldRendererUtility.DrawingMap` guard before calling `Area.MarkForDraw()`.
+- Prevent a screen-fixed shelter overlay from remaining visible while panning the world map.
+- Keep the validated map overlay toggle and emergency-alarm behavior unchanged when returning to the local map view.
+
 ## 1.0.0-rc1
 
 - Prepare the first stable release candidate without changing gameplay behavior.

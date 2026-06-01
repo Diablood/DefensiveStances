@@ -4,7 +4,7 @@
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
-Current release candidate: `1.0.0-rc1`. Gameplay is unchanged from the validated `0.9.0` public-alpha build.
+Current development hotfix: `1.0.1-dev`, based on the validated `1.0.0` stable release.
 
 ## Features
 
