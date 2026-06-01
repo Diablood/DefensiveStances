@@ -1,9 +1,9 @@
-# Functional checklist for 0.7.2-dev
+# Functional checklist for 0.7.3-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.7.2.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.7.3.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.

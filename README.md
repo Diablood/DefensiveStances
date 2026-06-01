@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.7.2 engineering scaffold contains:
+The current 0.7.3 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -83,7 +83,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.7.2
+## First in-game test for 0.7.3
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.

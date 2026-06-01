@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.3-dev
+
+- Add the missing `DefensiveStances.Components` and `DefensiveStances.Settings` imports to `DefensiveEvacuationUtility`.
+- Restore compilation of the immediate-evacuation path introduced in `0.7.2-dev`.
+- Keep gameplay behavior unchanged while synchronizing the mod metadata and assembly version to `0.7.3`.
+
 ## 0.7.2-dev
 
 - Interrupt non-forced automatic jobs immediately when a pawn using **Flee to safe area** is directly targeted by a hostile ranged or melee attack.

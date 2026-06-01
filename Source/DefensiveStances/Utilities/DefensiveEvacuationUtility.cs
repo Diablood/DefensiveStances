@@ -1,4 +1,6 @@
+using DefensiveStances.Components;
 using DefensiveStances.Domain;
+using DefensiveStances.Settings;
 using RimWorld;
 using Verse;
 using Verse.AI;
