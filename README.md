@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.6.0 engineering scaffold contains:
+The current 0.6.1 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -40,7 +40,8 @@ The current 0.6.0 engineering scaffold contains:
 - a persistent alert when at least one colonist expects a safe area but none has been painted on their map;
 - a second persistent alert when painted shelter cells exist but none is reachable for a configured colonist;
 - throttled in-game warnings and prefixed log entries when no safe cell is configured or reachable;
-- safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer.
+- safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer;
+- immediate interruption of an in-progress shelter move when safe-area editing removes the last viable refuge cell.
 
 ## Requirements
 
@@ -80,7 +81,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.6.0
+## First in-game test for 0.6.1
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -95,7 +96,7 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 11. Put a colonist in **Self-defense only**, fire directly at them with a deliberately inaccurate ranged attacker and verify that the colonist retaliates even when the shot misses.
 12. Let a melee attacker miss or be dodged and verify that the colonist still retaliates against that attacker.
 13. While evacuation remains active, force a non-player automatic job to carry a sheltered colonist outside the safe layer and verify that the mod redirects them into shelter.
-14. Give the evacuated colonist a manual order outside the safe layer and verify that direct player control wins temporarily; after the forced order ends, verify that containment resumes.
+14. Give the evacuated colonist a player-forced priority job outside the safe layer, such as prioritizing reachable work or hauling, and verify that direct player control wins temporarily; after the forced job ends, verify that containment resumes.
 15. Draft and undraft an evacuated colonist outside the refuge and verify that the mod does not override drafted control, then returns the undrafted pawn to shelter.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.

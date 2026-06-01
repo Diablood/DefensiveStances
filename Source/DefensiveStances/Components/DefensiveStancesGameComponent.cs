@@ -79,6 +79,25 @@ namespace DefensiveStances.Components
             return safeArea;
         }
 
+        internal void NotifySafeAreaChanged(Map map, Area safeArea)
+        {
+            if (map == null || safeArea == null)
+            {
+                return;
+            }
+
+            for (int index = pawnStates.Count - 1; index >= 0; index--)
+            {
+                DefensivePawnState state = pawnStates[index];
+                if (state?.evacuationActive == true
+                    && state.pawn?.Map == map
+                    && state.evacuationArea == safeArea)
+                {
+                    DefensiveEvacuationUtility.MaintainSafeAreaContainment(state);
+                }
+            }
+        }
+
         private void MigrateLegacySafeArea(Map map, Area_Safe targetArea)
         {
             if (map == null || targetArea == null)

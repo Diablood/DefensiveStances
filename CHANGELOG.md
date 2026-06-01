@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1-dev
+
+- Notify active evacuations immediately whenever safe-area editing adds or removes a shelter cell.
+- Cancel an in-progress mod-issued shelter `Goto` as soon as the active refuge layer becomes empty or unreachable.
+- Restore the pawn's previous allowed area and reuse the existing throttled warning path without waiting for the periodic containment tick.
+- Clarify the player-precedence checklist: vanilla has no direct undrafted movement order, so use a forced-priority job or drafted movement for validation.
+- Synchronize the mod metadata and assembly version to `0.6.1`.
+
 ## 0.6.0-dev
 
 - Keep evacuated pawns restricted to the global safe-area layer until danger has remained absent for the existing grace period.

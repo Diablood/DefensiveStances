@@ -28,6 +28,8 @@ This preserves the existing regression requirement that forced orders and drafte
 
 ## Failure handling
 
-If the safe-area layer becomes empty or unreachable during an active evacuation, the previous allowed area is restored and the existing throttled warning path is reused.
+If the safe-area layer becomes empty or unreachable during an active evacuation, the previous allowed area is restored and the existing throttled warning path is reused. Safe-area painting tools notify the game component immediately after each edited cell, so a shelter `Goto` aimed at a deleted cell is cancelled without waiting for the periodic 60-tick containment pass.
 
 Containment-recovery log messages are also throttled to one entry per pawn every 600 ticks.
+
+Vanilla does not expose a direct undrafted move command. Player-precedence testing should therefore use a drafted movement order or an undrafted player-forced priority job outside shelter.

@@ -1,9 +1,9 @@
-# Functional checklist for 0.6.0-dev
+# Functional checklist for 0.6.1-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.6.0.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.6.1.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -52,10 +52,10 @@
 - [ ] If a non-forced automatic job carries an evacuated pawn outside shelter, the pawn is redirected to a reachable safe cell.
 - [ ] If an automatic movement job would leave shelter, it is interrupted while evacuation remains active.
 - [ ] Containment-recovery logs are throttled instead of flooding the RimWorld log.
-- [ ] A player-forced order temporarily wins over containment and is not cancelled.
-- [ ] After a player-forced order ends outside shelter, containment resumes and redirects the pawn.
+- [ ] A player-forced priority job outside shelter temporarily wins over containment and is not cancelled.
+- [ ] After a player-forced priority job ends outside shelter, containment resumes and redirects the pawn.
 - [ ] Drafting temporarily wins over containment; after undrafting outside shelter, the pawn is redirected into the safe area.
-- [ ] Clearing every safe cell during an active evacuation restores the pawn's previous allowed area and emits the existing throttled warning.
+- [ ] Clearing every safe cell during an active evacuation immediately interrupts an in-progress shelter `Goto`, restores the pawn's previous allowed area and emits the existing throttled warning.
 
 ## Alerts
 

@@ -57,6 +57,7 @@ namespace DefensiveStances.Utilities
 
             if (safeArea == null || safeArea.Map != pawn.Map || safeArea.TrueCount <= 0)
             {
+                StopEvacuationMovementIfNecessary(pawn);
                 RestorePreviousArea(state);
                 DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoSafeArea);
                 return;
@@ -83,6 +84,7 @@ namespace DefensiveStances.Utilities
             IntVec3 destination;
             if (!DefensiveSafeAreaUtility.TryFindReachableSafeCell(pawn, safeArea, out destination))
             {
+                StopEvacuationMovementIfNecessary(pawn);
                 RestorePreviousArea(state);
                 DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoReachableSafeCell);
                 return;
@@ -133,6 +135,20 @@ namespace DefensiveStances.Utilities
             LogContainmentRecovery(pawn, state, "interrupted an automatic job that would leave the active safe area.");
         }
 
+        private static void StopEvacuationMovementIfNecessary(Pawn pawn)
+        {
+            Job currentJob = pawn.jobs?.curJob;
+            if (currentJob == null
+                || currentJob.playerForced
+                || currentJob.def != JobDefOf.Goto
+                || currentJob.reportStringOverride != "DS_Job_FleeToSafeArea_Report".Translate())
+            {
+                return;
+            }
+
+            pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+        }
+
         private static bool IsSafeCell(Area safeArea, IntVec3 cell)
         {
             return cell.IsValid
@@ -152,6 +168,7 @@ namespace DefensiveStances.Utilities
         {
             if (state?.evacuationActive == true)
             {
+                StopEvacuationMovementIfNecessary(state.pawn);
                 RestorePreviousArea(state);
             }
         }

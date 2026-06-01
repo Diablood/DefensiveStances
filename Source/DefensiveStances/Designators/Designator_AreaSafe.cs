@@ -45,6 +45,7 @@ namespace DefensiveStances.Designators
             if (safeArea != null)
             {
                 safeArea[c] = mode == DesignateMode.Add;
+                DefensiveStances.Components.DefensiveStancesGameComponent.Current?.NotifySafeAreaChanged(Map, safeArea);
             }
         }
 
