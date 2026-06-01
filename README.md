@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.7.1 engineering scaffold contains:
+The current 0.7.2 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -42,6 +42,7 @@ The current 0.7.1 engineering scaffold contains:
 - throttled in-game warnings and prefixed log entries when no safe cell is configured or reachable;
 - safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer;
 - immediate interruption of an in-progress shelter move when safe-area editing removes the last viable refuge cell;
+- immediate interruption of ordinary automatic work when a direct hostile attack or a locally detected danger requires sheltering;
 - a standard RimWorld settings screen for grace period, containment frequency, transient warning visibility and optional vanilla fleeing fallback.
 
 ## Requirements
@@ -82,27 +83,28 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.7.1
+## First in-game test for 0.7.2
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
 3. Use the bottom-right safe-area visibility toggle and verify that the shelter overlay can be displayed or hidden without opening an editing tool.
 4. Paint one or more shelters with **Expand safe area**. These cells may overlap stockpiles, growing zones and ordinary allowed areas.
 5. Open the existing hostility-response dropdown for a colonist and choose **Flee to safe area**.
-6. Spawn a hostile threat in dev mode and verify that the colonist reaches one of the painted shelters and remains restricted there until the danger has cleared.
-7. Keep the hostile pirate alive after the colonist reaches shelter, wait longer than the restoration grace period and verify that the colonist remains restricted until the pirate is no longer an active threat.
-8. Choose **Self-defense only** for another colonist, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
-9. Clear every safe cell while a colonist still uses **Flee to safe area** and verify that the **No safe area configured** alert appears.
-10. Paint a shelter behind an inaccessible wall and verify that the **Safe area unreachable** alert appears for a configured colonist outside it.
-11. Trigger danger with an empty or unreachable safe layer and verify the warning message, the prefixed log entry and the vanilla flee fallback.
-12. Put a colonist in **Self-defense only**, fire directly at them with a deliberately inaccurate ranged attacker and verify that the colonist retaliates even when the shot misses.
-13. Let a melee attacker miss or be dodged and verify that the colonist still retaliates against that attacker.
-14. While evacuation remains active, force a non-player automatic job to carry a sheltered colonist outside the safe layer and verify that the mod redirects them into shelter.
-15. Give the evacuated colonist a player-forced priority job outside the safe layer, such as prioritizing reachable work or hauling, and verify that direct player control wins temporarily; after the forced job ends, verify that containment resumes.
-16. Draft and undraft an evacuated colonist outside the refuge and verify that the mod does not override drafted control, then returns the undrafted pawn to shelter.
-17. Open **Options** → **Mod settings** → **Defensive Stances**, adjust the grace period and containment interval, then confirm that the changed behavior is visible in game.
-18. Disable transient safe-area warning messages and verify that persistent alerts and colored logs remain active.
-19. Disable vanilla fleeing fallback, trigger danger with an empty safe layer and verify that the pawn waits instead of starting the vanilla flee response.
+6. Start an ordinary hauling task, spawn a nearby hostile threat in dev mode and verify that the automatic task is interrupted promptly so the colonist reaches one of the painted shelters.
+7. Let a hostile shooter directly target a working colonist and miss; verify that the colonist immediately abandons ordinary automatic work and heads toward shelter.
+8. Keep the hostile pirate alive after the colonist reaches shelter, wait longer than the restoration grace period and verify that the colonist remains restricted until the pirate is no longer an active threat.
+9. Choose **Self-defense only** for another colonist, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
+10. Clear every safe cell while a colonist still uses **Flee to safe area** and verify that the **No safe area configured** alert appears.
+11. Paint a shelter behind an inaccessible wall and verify that the **Safe area unreachable** alert appears for a configured colonist outside it.
+12. Trigger danger with an empty or unreachable safe layer and verify the warning message, the prefixed log entry and the vanilla flee fallback.
+13. Put a colonist in **Self-defense only**, fire directly at them with a deliberately inaccurate ranged attacker and verify that the colonist retaliates even when the shot misses.
+14. Let a melee attacker miss or be dodged and verify that the colonist still retaliates against that attacker.
+15. While evacuation remains active, force a non-player automatic job to carry a sheltered colonist outside the safe layer and verify that the mod redirects them into shelter.
+16. Give the evacuated colonist a player-forced priority job outside the safe layer, such as prioritizing reachable work or hauling, and verify that direct player control wins temporarily; after the forced job ends, verify that containment resumes.
+17. Draft and undraft an evacuated colonist outside the refuge and verify that the mod does not override drafted control, then returns the undrafted pawn to shelter.
+18. Open **Options** → **Mod settings** → **Defensive Stances**, adjust the grace period and containment interval, then confirm that the changed behavior is visible in game.
+19. Disable transient safe-area warning messages and verify that persistent alerts and colored logs remain active.
+20. Disable vanilla fleeing fallback, trigger danger with an empty safe layer and verify that the pawn waits instead of starting the vanilla flee response.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 

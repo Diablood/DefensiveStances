@@ -15,9 +15,20 @@ namespace DefensiveStances.Utilities
             }
 
             DefensivePawnState state = DefensiveStancesGameComponent.Current?.GetPawnState(defender, false);
-            if (state?.mode == DefensiveBehaviorMode.SelfDefenseOnly)
+            if (state == null)
+            {
+                return;
+            }
+
+            if (state.mode == DefensiveBehaviorMode.SelfDefenseOnly)
             {
                 state.RecordAggression(aggressor);
+                return;
+            }
+
+            if (state.mode == DefensiveBehaviorMode.FleeToSafeArea)
+            {
+                DefensiveEvacuationUtility.TryStartImmediateEvacuation(defender, state);
             }
         }
     }

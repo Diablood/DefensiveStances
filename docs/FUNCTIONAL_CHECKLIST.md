@@ -1,9 +1,9 @@
-# Functional checklist for 0.7.1-dev
+# Functional checklist for 0.7.2-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.7.1.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.7.2.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -36,6 +36,10 @@
 ## Flee to safe area
 
 - [ ] A pawn in danger moves toward a reachable cell inside the global safe area.
+- [ ] A pawn performing an ordinary automatic hauling or equipping job interrupts that job promptly when a nearby danger locally requires evacuation.
+- [ ] A pawn performing an ordinary automatic job immediately heads toward shelter when a hostile ranged shot is directly aimed at them but misses.
+- [ ] A pawn switched into **Flee to safe area** while a nearby danger is already active interrupts ordinary automatic work and heads toward shelter.
+- [ ] Drafted pawns and explicit player-forced jobs are still not interrupted by the immediate-evacuation path.
 - [ ] While moving toward shelter, the pawn activity report explicitly says that the pawn is fleeing to a safe area.
 - [ ] A pawn chooses a reachable shelter when another painted shelter is inaccessible.
 - [ ] The pawn's previous allowed area is restored after the grace period.

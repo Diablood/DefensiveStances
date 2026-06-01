@@ -127,6 +127,7 @@ namespace DefensiveStances.Components
         {
             if (!state.evacuationActive)
             {
+                DefensiveEvacuationUtility.TryStartEvacuationForLocalDanger(state);
                 return;
             }
 

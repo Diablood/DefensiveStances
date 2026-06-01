@@ -146,6 +146,7 @@ namespace DefensiveStances.UI
                     state.mode = DefensiveBehaviorMode.FleeToSafeArea;
                     DefensiveBehaviorUtility.ApplyClosestVanillaFallback(pawn, state.mode);
                     NotifyMissingSafeAreaOnSelection(pawn, state);
+                    DefensiveEvacuationUtility.TryStartEvacuationForLocalDanger(state);
                     break;
                 case DefensiveResponseSelection.SelfDefenseOnly:
                     state.mode = DefensiveBehaviorMode.SelfDefenseOnly;

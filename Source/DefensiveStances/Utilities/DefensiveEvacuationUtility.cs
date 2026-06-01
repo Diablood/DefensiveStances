@@ -46,6 +46,60 @@ namespace DefensiveStances.Utilities
             return true;
         }
 
+        internal static bool TryStartEvacuationForLocalDanger(DefensivePawnState state)
+        {
+            Pawn pawn = state?.pawn;
+            if (state?.evacuationActive != false || !CanInterruptForEvacuation(pawn, state))
+            {
+                return false;
+            }
+
+            if (!SelfDefenseUtility.ShouldStartFleeing(pawn))
+            {
+                return false;
+            }
+
+            return TryStartImmediateEvacuation(pawn, state);
+        }
+
+        internal static bool TryStartImmediateEvacuation(Pawn pawn, DefensivePawnState state)
+        {
+            if (!CanInterruptForEvacuation(pawn, state))
+            {
+                return false;
+            }
+
+            DefensiveStancesGameComponent component = DefensiveStancesGameComponent.Current;
+            Area safeArea = component?.GetSafeArea(pawn.Map);
+            Job evacuationJob;
+            if (TryCreateEvacuationJob(pawn, state, safeArea, out evacuationJob))
+            {
+                if (evacuationJob == null)
+                {
+                    MaintainSafeAreaContainment(state);
+                    return true;
+                }
+
+                if (IsMovingTowardSafeArea(pawn, safeArea))
+                {
+                    JobMaker.ReturnToPool(evacuationJob);
+                    return true;
+                }
+
+                pawn.jobs.StartJob(evacuationJob, JobCondition.InterruptForced);
+                LogContainmentRecovery(pawn, state, "interrupted an automatic job to flee immediately into a safe area.");
+                return true;
+            }
+
+            if (DefensiveStancesSettings.Current.allowVanillaFleeFallback
+                && pawn.CurJob?.def != JobDefOf.FleeAndCower)
+            {
+                pawn.jobs.CheckForJobOverride();
+            }
+
+            return false;
+        }
+
         internal static void MaintainSafeAreaContainment(DefensivePawnState state)
         {
             Pawn pawn = state?.pawn;
@@ -162,6 +216,18 @@ namespace DefensiveStances.Utilities
             {
                 DS_Log.Message(pawn.LabelShortCap + " " + message);
             }
+        }
+
+        private static bool CanInterruptForEvacuation(Pawn pawn, DefensivePawnState state)
+        {
+            return pawn?.playerSettings != null
+                && pawn.jobs != null
+                && pawn.Spawned
+                && !pawn.Downed
+                && !pawn.Drafted
+                && !pawn.jobs.startingNewJob
+                && !PawnUtility.PlayerForcedJobNowOrSoon(pawn)
+                && state?.mode == DefensiveBehaviorMode.FleeToSafeArea;
         }
 
         private static void RestorePreviousAreaIfNecessary(DefensivePawnState state)

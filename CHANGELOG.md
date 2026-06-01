@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.2-dev
+
+- Interrupt non-forced automatic jobs immediately when a pawn using **Flee to safe area** is directly targeted by a hostile ranged or melee attack.
+- Reuse the direct-attack hooks introduced for self-defense mode so a missed shot can trigger sheltering before the pawn finishes hauling or equipping an item.
+- Poll inactive **Flee to safe area** pawns at the configured containment interval and start evacuation when RimWorld's local flee condition becomes true, even while an ordinary automatic job is running.
+- Start the same local-danger check immediately when the player switches a pawn into **Flee to safe area** mode.
+- Preserve direct player control: drafted pawns and player-forced jobs are not interrupted.
+- Synchronize the mod metadata and assembly version to `0.7.2`.
+
 ## 0.7.1-dev
 
 - Keep an active evacuation running while RimWorld still reports any active hostile threat on the pawn's map.
