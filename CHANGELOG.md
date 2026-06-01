@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1-dev
+
+- Add `tools/validate-translations.ps1` to validate the mod-owned English and French keyed translation files.
+- Check XML parsing, duplicate keys, empty values, `TODO` placeholders and English/French key parity before compiling on Windows; run the same check from Bash when `pwsh` is available.
+- Add `tools/find-translation-report.ps1` to locate RimWorld's generated `TranslationReport.txt` for the remaining Core-or-mod attribution pass.
+- Document the translation-audit boundary: the repository validator covers Defensive Stances keys, while RimWorld's report also covers Core and any other loaded content.
+- Synchronize the mod metadata and assembly version to `0.4.1`.
+
 ## 0.4.0-dev
 
 - Trigger **Self-defense only** retaliation as soon as a hostile ranged projectile is launched directly at the pawn, even if the shot later misses or strikes cover.

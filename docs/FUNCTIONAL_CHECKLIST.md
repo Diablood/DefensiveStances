@@ -1,9 +1,9 @@
-# Functional checklist for 0.4.0-dev
+# Functional checklist for 0.4.1-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.4.0.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.4.1.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -71,7 +71,9 @@
 - [ ] Drafted pawns remain under player control.
 - [ ] Forced jobs are not replaced.
 
-## Deferred translation audit
+## Translation audit
 
-- [ ] Generate RimWorld's French translation report and attribute the warning observed during development.
-- [ ] Verify every `DS_*` keyed translation in English and French before a stable release.
+- [ ] Run `./tools/validate-translations.ps1` and confirm that all mod-owned keyed translations pass validation.
+- [ ] Confirm that `build.ps1` runs the same validator before compilation.
+- [ ] Generate RimWorld's French `TranslationReport.txt` and attribute the warning observed during development.
+- [ ] Use `./tools/find-translation-report.ps1` to locate the generated report before the stable release.

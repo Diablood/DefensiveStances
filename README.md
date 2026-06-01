@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.4.0 engineering scaffold contains:
+The current 0.4.1 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -30,6 +30,7 @@ The current 0.4.0 engineering scaffold contains:
 - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
 - a migration path from the 0.1.x configured allowed-area prototype;
 - English and French keyed translations;
+- a pre-build PowerShell validator that checks translation XML, duplicate keys, placeholders and English/French key parity;
 - a centralized `DS_Log` wrapper with a colored mod-name prefix for diagnostics;
 - startup diagnostics that include the loaded assembly version;
 - main-thread initialization for the hostility-response UI textures;
@@ -75,7 +76,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.4.0
+## First in-game test for 0.4.1
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -90,6 +91,22 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 
+## Translation validation
+
+The Windows build script validates the mod-owned keyed translations before compiling. The Bash build script runs the same validator when PowerShell Core (`pwsh`) is available:
+
+```powershell
+./tools/validate-translations.ps1
+```
+
+The validator checks that both XML files parse correctly, that no key is duplicated or left empty, and that French contains exactly the same `DS_*` keys as English. It does not replace RimWorld's own translation report, which also checks Core and other loaded content.
+
+After generating RimWorld's `TranslationReport.txt` from the developer tools, locate it with:
+
+```powershell
+./tools/find-translation-report.ps1
+```
+
 ## Repository layout
 
 ```text
@@ -100,6 +117,8 @@ About/                         RimWorld metadata
 Source/DefensiveStances/       C# project
 Source/DefensiveStances.sln    Visual Studio solution
 LoadFolders.xml                RimWorld version folder routing
+tools/                         translation validation and report helpers
+docs/                          design notes, audit notes and test checklist
 ```
 
 ## Known limitations
@@ -109,4 +128,4 @@ LoadFolders.xml                RimWorld version folder routing
 - Self-defense handles standard direct ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without a hostile instigator and attacks against nearby allies are not tracked yet.
 - A short grace period is used before restoring the previous allowed area after evacuation.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
-- A dedicated French translation audit remains planned before a stable release; the vanilla translation-report warning observed during testing still needs to be attributed precisely.
+- The mod-owned keyed translations pass the repository validator. RimWorld's separate French translation-report warning still needs to be attributed from a generated `TranslationReport.txt`; it may originate from Core rather than this mod.

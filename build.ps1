@@ -6,6 +6,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 $project = Join-Path $PSScriptRoot "Source\DefensiveStances\DefensiveStances.csproj"
+$translationValidator = Join-Path $PSScriptRoot "tools\validate-translations.ps1"
+
+& $translationValidator
 
 dotnet build $project `
     --configuration $Configuration `
