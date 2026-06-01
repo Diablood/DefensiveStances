@@ -50,4 +50,4 @@ Open **Options** → **Mod settings** → **Defensive Stances** to configure:
 
 ## Notes
 
-This is an alpha release. Combat Extended, multiplayer and large mod-list compatibility still need dedicated testing.
+This is the initial stable release candidate. Reports about Combat Extended, multiplayer and large mod-list compatibility remain welcome.

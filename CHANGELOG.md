@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-rc1
+
+- Prepare the first stable release candidate without changing gameplay behavior.
+- Synchronize RimWorld metadata and assembly versions to `1.0.0`.
+- Preserve the project-specific red-and-black demon icon in `About/ModIcon.png`.
+- Finalize the stable release checklist, Workshop description and release notes.
+- Keep the validated English/French translations, packaging scripts and runtime-only distribution layout unchanged.
+
 ## 0.9.0-dev
 
 - Prepare the repository for a first public alpha without changing gameplay behavior.

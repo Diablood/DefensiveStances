@@ -4,6 +4,8 @@
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
+Current release candidate: `1.0.0-rc1`. Gameplay is unchanged from the validated `0.9.0` public-alpha build.
+
 ## Features
 
 ### Additional hostility responses
@@ -162,6 +164,7 @@ The mod-owned keyed translations pass validation. The remaining French no-DLC wa
 - RimWorld `1.6` is the only supported version at this stage.
 - Harmony is required.
 - Combat Extended, multiplayer and large mod-list compatibility still need dedicated testing.
+- Preserve the project-specific `About/ModIcon.png` demon icon when preparing updates or release archives.
 - Prisoners and ordinary animals are not included in the global emergency evacuation.
 - Safe areas are one global layer per map. Named or prioritized shelter groups are not implemented yet.
 - Self-defense tracks direct standard ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without an identifiable hostile instigator and attacks against nearby allies are outside the current scope.
@@ -169,7 +172,7 @@ The mod-owned keyed translations pass validation. The remaining French no-DLC wa
 ## Repository layout
 
 ```text
-About/                         RimWorld metadata and preview images
+About/                         RimWorld metadata, preview image and custom demon icon
 1.6/Assemblies/                compiled output
 1.6/Languages/                 English and French keyed translations
 1.6/Patches/                   Architect → Zone injection

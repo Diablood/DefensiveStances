@@ -1,6 +1,6 @@
 # Defensive Stances release checklist
 
-Use this checklist before publishing an alpha, beta or stable release.
+Use this checklist before publishing a release candidate or stable release.
 
 ## Version metadata
 
@@ -15,7 +15,8 @@ Use this checklist before publishing an alpha, beta or stable release.
 - [ ] Confirm that English and French keys match exactly.
 - [ ] Parse every XML file successfully.
 - [ ] Confirm that `.editorconfig` formatting remains at four spaces where applicable.
-- [ ] Confirm that `About/Preview.png` and `About/ModIcon.png` render correctly.
+- [ ] Confirm that `About/Preview.png` renders correctly.
+- [ ] Confirm that `About/ModIcon.png` is the project-specific red-and-black demon icon and has not been replaced.
 
 ## Clean local build
 
@@ -70,8 +71,9 @@ Use `docs/FUNCTIONAL_CHECKLIST.md` for a full regression pass before a stable re
 ## Publish
 
 - [ ] Commit the validated source tree.
-- [ ] Create an annotated Git tag such as `v0.9.0-alpha`.
-- [ ] Push the commit and tag to GitHub.
-- [ ] Create a GitHub pre-release and attach `dist/DefensiveStances-<version>.zip`.
+- [ ] For the candidate, create an annotated Git tag such as `v1.0.0-rc1`.
+- [ ] After final validation, create the stable annotated tag `v1.0.0`.
+- [ ] Push the commit and intended tag to GitHub.
+- [ ] Attach `dist/DefensiveStances-<version>.zip` to the matching GitHub release. Use a pre-release for the RC and a normal release for `v1.0.0`.
 - [ ] Review `docs/WORKSHOP_DESCRIPTION.md` before a Steam Workshop upload.
 - [ ] Add Harmony as a required Workshop item when publishing on Steam.
