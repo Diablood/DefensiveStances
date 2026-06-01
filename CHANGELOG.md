@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1-dev
+
+- Register the safe-area configuration alert explicitly in RimWorld's `AlertsReadout` as a fallback when automatic alert discovery misses the custom alert class.
+- Repeat the registration check from `UIRoot_Play.Init` so the alert is still injected if the readout was constructed before Harmony patches were applied.
+- Show the existing no-safe-area warning immediately when a pawn is switched to **Flee to safe area** while no safe cells are painted.
+- Add `DS_Log.WarningOnce` and `DS_Log.ErrorOnce` helpers for non-spamming diagnostics.
+- Log safe-area alert initialization and activation to make future alert-registration problems visible in the RimWorld log.
+- Synchronize the mod metadata and assembly version to `0.3.1`.
+
 ## 0.3.0-dev
 
 - Add a persistent **No safe area configured** alert when a spawned free colonist uses **Flee to safe area** but their map has no painted safe cells.

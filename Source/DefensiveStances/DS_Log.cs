@@ -20,5 +20,15 @@ namespace DefensiveStances
         {
             Log.Error(Prefix + " " + message);
         }
+
+        public static void WarningOnce(string message, int key)
+        {
+            Log.WarningOnce(Prefix + " " + message, key);
+        }
+
+        public static void ErrorOnce(string message, int key)
+        {
+            Log.ErrorOnce(Prefix + " " + message, key);
+        }
     }
 }

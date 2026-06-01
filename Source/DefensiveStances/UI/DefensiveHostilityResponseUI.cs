@@ -144,11 +144,26 @@ namespace DefensiveStances.UI
                 case DefensiveResponseSelection.FleeToSafeArea:
                     state.mode = DefensiveBehaviorMode.FleeToSafeArea;
                     DefensiveBehaviorUtility.ApplyClosestVanillaFallback(pawn, state.mode);
+                    NotifyMissingSafeAreaOnSelection(pawn, state);
                     break;
                 case DefensiveResponseSelection.SelfDefenseOnly:
                     state.mode = DefensiveBehaviorMode.SelfDefenseOnly;
                     DefensiveBehaviorUtility.ApplyClosestVanillaFallback(pawn, state.mode);
                     break;
+            }
+        }
+
+        private static void NotifyMissingSafeAreaOnSelection(Pawn pawn, DefensivePawnState state)
+        {
+            if (!pawn.Spawned || pawn.Map == null)
+            {
+                return;
+            }
+
+            Area safeArea = DefensiveStancesGameComponent.Current?.GetSafeArea(pawn.Map);
+            if (safeArea == null || safeArea.TrueCount <= 0)
+            {
+                DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoSafeArea);
             }
         }
 
