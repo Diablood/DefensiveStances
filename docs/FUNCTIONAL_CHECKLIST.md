@@ -1,9 +1,9 @@
-# Functional checklist for 0.8.0-dev
+# Functional checklist for 0.8.1-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.8.0.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.8.1.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -24,6 +24,8 @@
 ## Dedicated global safe area
 
 - [ ] **Architect** → **Zone** contains **Expand safe area** and **Clear safe area**, without a view-only designator.
+- [ ] **Expand safe area** uses the dedicated cyan shield-and-grid icon.
+- [ ] **Clear safe area** uses the matching icon with a red diagonal removal ribbon.
 - [ ] The bottom-right controls contain a dedicated safe-area visibility toggle.
 - [ ] Enabling the toggle displays the shelter overlay without opening Architect or selecting a designator.
 - [ ] Disabling the toggle hides the shelter overlay when no safe-area editing tool is active.

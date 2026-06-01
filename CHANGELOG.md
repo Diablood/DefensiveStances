@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1-dev
+
+- Replace the vanilla home-area textures used by **Expand safe area** and **Clear safe area** with dedicated cyan shield-and-grid icons.
+- Keep both Architect tools visually related while adding a red diagonal removal ribbon to the clear action, matching RimWorld's vanilla remove-zone language.
+- Add the two transparent 64×64 UI textures under `1.6/Textures/UI/Designators/`.
+- Keep gameplay behavior unchanged while synchronizing the mod metadata and assembly version to `0.8.1`.
+
 ## 0.8.0-dev
 
 - Add a dedicated bottom-right siren toggle for map-wide emergency evacuation.

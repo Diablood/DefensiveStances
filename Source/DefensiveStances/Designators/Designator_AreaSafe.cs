@@ -62,7 +62,7 @@ namespace DefensiveStances.Designators
         {
             defaultLabel = "DS_DesignatorSafeAreaExpand_Label".Translate();
             defaultDesc = "DS_DesignatorSafeAreaExpand_Desc".Translate();
-            icon = ContentFinder<Texture2D>.Get("UI/Designators/HomeAreaOn");
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/SafeAreaExpand");
             soundDragSustain = SoundDefOf.Designate_DragAreaAdd;
             soundDragChanged = SoundDefOf.Designate_DragZone_Changed;
             soundSucceeded = SoundDefOf.Designate_ZoneAdd;
@@ -76,7 +76,7 @@ namespace DefensiveStances.Designators
         {
             defaultLabel = "DS_DesignatorSafeAreaClear_Label".Translate();
             defaultDesc = "DS_DesignatorSafeAreaClear_Desc".Translate();
-            icon = ContentFinder<Texture2D>.Get("UI/Designators/HomeAreaOff");
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/SafeAreaClear");
             soundDragSustain = SoundDefOf.Designate_DragAreaDelete;
             soundDragChanged = null;
             soundSucceeded = SoundDefOf.Designate_ZoneDelete;

@@ -14,13 +14,13 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.8.0 engineering scaffold contains:
+The current 0.8.1 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
 - two additional doctrines inside RimWorld's existing hostility-response dropdown;
 - a dedicated map-level safe-area layer, independent from ordinary allowed areas;
-- Architect tools to expand or clear safe-area cells;
+- Architect tools to expand or clear safe-area cells, with dedicated shield-based safe-area icons;
 - a bottom-right toggle that displays or hides the safe-area overlay without entering an editing tool;
 - a second bottom-right alarm toggle for persistent map-wide emergency evacuation, independent from individual pawn doctrines;
 - immediate emergency sheltering for every undrafted controllable pawn on the active map, with drafted pawns left under direct player control until they are released;
@@ -86,7 +86,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.8.0
+## First in-game test for 0.8.1
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -138,7 +138,7 @@ About/                         RimWorld metadata
 1.6/Assemblies/                compiled output
 1.6/Languages/                 keyed translations
 1.6/Patches/                   XML injection into Architect → Zone
-1.6/Textures/                  dedicated emergency-alarm UI texture
+1.6/Textures/                  dedicated emergency-alarm and safe-area designator textures
 Source/DefensiveStances/       C# project
 Source/DefensiveStances.sln    Visual Studio solution
 LoadFolders.xml                RimWorld version folder routing
@@ -148,7 +148,7 @@ docs/                          design notes, audit notes and test checklist
 
 ## Known limitations
 
-- The custom dropdown entries and the safe-area visibility toggle currently reuse vanilla icons; the emergency alarm uses a dedicated siren icon.
+- The custom dropdown entries and the safe-area visibility toggle currently reuse vanilla icons; the emergency alarm and safe-area editing tools use dedicated icons.
 - The map-level safe area is one global layer containing any number of disconnected shelters; named or prioritized shelter groups are not implemented yet.
 - Self-defense handles standard direct ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without a hostile instigator and attacks against nearby allies are not tracked yet.
 - The default grace period is 10 seconds before restoring the previous allowed area after all active hostile threats have cleared; it can be configured in the mod settings.
