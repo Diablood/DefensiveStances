@@ -1,9 +1,9 @@
-# Functional checklist for 0.3.2-dev
+# Functional checklist for 0.4.0-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.3.2.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.4.0.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -57,6 +57,9 @@
 
 - [ ] A pawn ignores nearby hostiles before being damaged.
 - [ ] A pawn retaliates against the direct hostile instigator after damage.
+- [ ] A pawn retaliates when a hostile ranged shot is directly aimed at them but misses.
+- [ ] A pawn retaliates when a hostile ranged shot aimed at them strikes cover instead.
+- [ ] A pawn retaliates when a hostile melee attack misses or is dodged.
 - [ ] An unarmed pawn retaliates in melee without repeatedly starting a static shooting job.
 - [ ] A pawn does not choose an arbitrary nearby enemy.
 - [ ] A pawn incapable of violence does not retaliate.
@@ -67,3 +70,8 @@
 - [ ] Vanilla hostility responses still behave exactly as before.
 - [ ] Drafted pawns remain under player control.
 - [ ] Forced jobs are not replaced.
+
+## Deferred translation audit
+
+- [ ] Generate RimWorld's French translation report and attribute the warning observed during development.
+- [ ] Verify every `DS_*` keyed translation in English and French before a stable release.

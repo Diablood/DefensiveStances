@@ -1,7 +1,5 @@
-using DefensiveStances.Components;
-using DefensiveStances.Domain;
+using DefensiveStances.Utilities;
 using HarmonyLib;
-using RimWorld;
 using Verse;
 
 namespace DefensiveStances.Patches
@@ -11,18 +9,7 @@ namespace DefensiveStances.Patches
     {
         private static void Prefix(Thing __instance, DamageInfo dinfo)
         {
-            Pawn pawn = __instance as Pawn;
-            Thing aggressor = dinfo.Instigator;
-            if (pawn == null || aggressor == null || aggressor == pawn || !GenHostility.HostileTo(aggressor, pawn))
-            {
-                return;
-            }
-
-            DefensivePawnState state = DefensiveStancesGameComponent.Current?.GetPawnState(pawn, false);
-            if (state?.mode == DefensiveBehaviorMode.SelfDefenseOnly)
-            {
-                state.RecordAggression(aggressor);
-            }
+            DefensiveAggressionUtility.RecordDirectAttack(dinfo.Instigator, __instance as Pawn);
         }
     }
 }

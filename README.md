@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.3.2 engineering scaffold contains:
+The current 0.4.0 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -24,7 +24,8 @@ The current 0.3.2 engineering scaffold contains:
 - support for several disconnected shelters on the same map;
 - temporary restriction to the global safe area during evacuation, with restoration after the danger has passed;
 - an explicit pawn activity report while a colonist is moving toward shelter;
-- direct aggressor recording when damage reaches a pawn in self-defense-only mode;
+- direct aggressor recording when a hostile ranged or melee attack is aimed at a pawn in self-defense-only mode, including missed shots and melee dodges;
+- hostile-damage recording as a fallback for other direct damage sources;
 - correct melee retaliation for unarmed pawns in self-defense-only mode;
 - an interception of `JobGiver_ConfigurableHostilityResponse.TryGiveJob` for the new doctrines;
 - a migration path from the 0.1.x configured allowed-area prototype;
@@ -74,7 +75,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.3.2
+## First in-game test for 0.4.0
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -84,6 +85,8 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 6. Choose **Self-defense only** for another colonist, let a hostile pawn damage them and verify that retaliation targets the aggressor rather than an arbitrary nearby enemy.
 7. Clear every safe cell while a colonist still uses **Flee to safe area** and verify that the **No safe area configured** alert appears.
 8. Trigger danger with an empty or unreachable safe layer and verify the warning message, the prefixed log entry and the vanilla flee fallback.
+9. Put a colonist in **Self-defense only**, fire directly at them with a deliberately inaccurate ranged attacker and verify that the colonist retaliates even when the shot misses.
+10. Let a melee attacker miss or be dodged and verify that the colonist still retaliates against that attacker.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 
@@ -103,6 +106,7 @@ LoadFolders.xml                RimWorld version folder routing
 
 - The custom dropdown entries currently reuse vanilla icons.
 - The map-level safe area is one global layer containing any number of disconnected shelters; named or prioritized shelter groups are not implemented yet.
-- Self-defense currently starts after a damage event with a hostile instigator. Missed shots are not tracked yet.
+- Self-defense handles standard direct ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without a hostile instigator and attacks against nearby allies are not tracked yet.
 - A short grace period is used before restoring the previous allowed area after evacuation.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
+- A dedicated French translation audit remains planned before a stable release; the vanilla translation-report warning observed during testing still needs to be attributed precisely.

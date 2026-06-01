@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0-dev
+
+- Trigger **Self-defense only** retaliation as soon as a hostile ranged projectile is launched directly at the pawn, even if the shot later misses or strikes cover.
+- Trigger **Self-defense only** retaliation when a hostile melee attack is attempted, including misses and dodges.
+- Centralize direct-aggressor recording in `DefensiveAggressionUtility` and keep `Thing.TakeDamage` as a fallback for other hostile damage sources.
+- Add the 0.4 design note and extend the validation checklist for direct attack attempts.
+- Record the French translation-report warning as a deferred audit item before a stable release.
+- Synchronize the mod metadata and assembly version to `0.4.0`.
+
 ## 0.3.2-dev
 
 - Add `[StaticConstructorOnStartup]` to `DefensiveHostilityResponseUI` so vanilla hostility-response textures are loaded on RimWorld's main thread.
