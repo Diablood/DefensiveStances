@@ -30,7 +30,7 @@ namespace DefensiveStances.Utilities
             }
 
             IntVec3 destination;
-            if (!TryFindReachableSafeCell(pawn, safeArea, out destination))
+            if (!DefensiveSafeAreaUtility.TryFindReachableSafeCell(pawn, safeArea, out destination))
             {
                 RestorePreviousAreaIfNecessary(state);
                 DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoReachableSafeCell);
@@ -76,29 +76,6 @@ namespace DefensiveStances.Utilities
 
             state.lastDangerTick = GenTicks.TicksGame;
             pawn.playerSettings.AreaRestrictionInPawnCurrentMap = safeArea;
-        }
-
-        private static bool TryFindReachableSafeCell(Pawn pawn, Area safeArea, out IntVec3 destination)
-        {
-            destination = IntVec3.Invalid;
-            int bestDistanceSquared = int.MaxValue;
-
-            foreach (IntVec3 cell in safeArea.ActiveCells)
-            {
-                if (!cell.Standable(pawn.Map) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.Deadly))
-                {
-                    continue;
-                }
-
-                int distanceSquared = pawn.Position.DistanceToSquared(cell);
-                if (distanceSquared < bestDistanceSquared)
-                {
-                    bestDistanceSquared = distanceSquared;
-                    destination = cell;
-                }
-            }
-
-            return destination.IsValid;
         }
     }
 }

@@ -82,4 +82,33 @@ namespace DefensiveStances.Designators
             tutorTag = "DS_SafeAreaClear";
         }
     }
+
+    public sealed class Designator_AreaSafeView : Designator_AreaSafe
+    {
+        public Designator_AreaSafeView() : base(DesignateMode.Add)
+        {
+            defaultLabel = "DS_DesignatorSafeAreaView_Label".Translate();
+            defaultDesc = "DS_DesignatorSafeAreaView_Desc".Translate();
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/HomeAreaOn");
+            useMouseIcon = false;
+            soundDragSustain = null;
+            soundDragChanged = null;
+            soundSucceeded = null;
+            tutorTag = "DS_SafeAreaView";
+        }
+
+        public override AcceptanceReport CanDesignateCell(IntVec3 c)
+        {
+            return false;
+        }
+
+        public override void DesignateSingleCell(IntVec3 c)
+        {
+        }
+
+        public override void SelectedUpdate()
+        {
+            DefensiveSafeAreaUtility.GetOrCreate(Map)?.MarkForDraw();
+        }
+    }
 }

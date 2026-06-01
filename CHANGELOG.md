@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0-dev
+
+- Add **View safe area** to **Architect** → **Zone** so the shelter overlay can be inspected without painting or clearing cells.
+- Add a persistent **Safe area unreachable** alert for colonists using **Flee to safe area** when painted shelter cells exist but none can be reached from their current position.
+- Keep the empty-layer and unreachable-layer alerts mutually exclusive so each configuration problem has one clear explanation.
+- Reuse a shared nearest-reachable-safe-cell lookup for runtime evacuation and proactive alert checks.
+- Record the completed French translation-report attribution: remaining no-DLC warnings belong to Core language data, not Defensive Stances.
+- Add the 0.5 design note and extend the validation checklist.
+- Synchronize the mod metadata and assembly version to `0.5.0`.
+
 ## 0.4.1-dev
 
 - Add `tools/validate-translations.ps1` to validate the mod-owned English and French keyed translation files.

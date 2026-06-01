@@ -1,4 +1,4 @@
-# Translation audit for 0.4.1-dev
+# Translation audit
 
 ## Scope
 
@@ -28,7 +28,7 @@ The Windows build script runs the same validation automatically before `dotnet b
 
 ## Current result
 
-The 0.4.1-dev translation files contain matching English and French `DS_*` keyed entries and pass the repository validator.
+The translation files contain matching English and French `DS_*` keyed entries and pass the repository validator.
 
 ## RimWorld translation-report warning
 
@@ -38,12 +38,14 @@ RimWorld's warning:
 Translation data for language French has 36 errors. Generate translation report for more info.
 ```
 
-cannot be attributed from `Player.log` alone. RimWorld's own report covers all loaded language data, including Core. The repository validator intentionally does not claim that every warning comes from Defensive Stances.
+was investigated with a native `TranslationReport.txt` generated in a no-DLC test configuration containing only Core, Harmony and Defensive Stances.
 
-After generating `TranslationReport.txt` from RimWorld's developer tools, locate it with:
+The report contains no `DS_*` key, no `DefensiveStances` entry and no mod-owned XML filename. The 36 def-injection errors and the four missing injected translations belong to Core French language data. They include targets such as `PsychicAmplifier`, `PsychicEntropyMax`, `Apparel_Cape`, `Humanlike.root.children...` and `ThreatReward_Raid_Joiner...`.
+
+Defensive Stances does not patch Core translations to silence those warnings. The repository validator remains responsible only for files owned by this mod.
+
+To locate a newly generated report during future compatibility passes, run:
 
 ```powershell
 ./tools/find-translation-report.ps1
 ```
-
-Review the generated report before the first stable release and classify each remaining error as Core-owned or Defensive-Stances-owned.

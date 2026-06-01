@@ -15,7 +15,7 @@ namespace DefensiveStances.Utilities
             if (alertsReadout == null)
             {
                 DS_Log.WarningOnce(
-                    "Cannot register the safe-area alert because the RimWorld alerts readout is unavailable.",
+                    "Cannot register the safe-area alerts because the RimWorld alerts readout is unavailable.",
                     74350101);
                 return;
             }
@@ -23,7 +23,7 @@ namespace DefensiveStances.Utilities
             if (AllAlertsField == null)
             {
                 DS_Log.ErrorOnce(
-                    "Cannot register the safe-area alert because RimWorld.AlertsReadout.AllAlerts was not found.",
+                    "Cannot register the safe-area alerts because RimWorld.AlertsReadout.AllAlerts was not found.",
                     74350102);
                 return;
             }
@@ -32,22 +32,35 @@ namespace DefensiveStances.Utilities
             if (alerts == null)
             {
                 DS_Log.ErrorOnce(
-                    "Cannot register the safe-area alert because RimWorld.AlertsReadout.AllAlerts is unavailable.",
+                    "Cannot register the safe-area alerts because RimWorld.AlertsReadout.AllAlerts is unavailable.",
                     74350103);
                 return;
             }
 
+            bool addedMissingAlert = false;
+            addedMissingAlert |= EnsureAlertRegistered<Alert_NoSafeAreaConfigured>(alerts);
+            addedMissingAlert |= EnsureAlertRegistered<Alert_NoReachableSafeArea>(alerts);
+
+            if (addedMissingAlert)
+            {
+                DS_Log.Warning(
+                    "One or more safe-area alerts were not discovered automatically by RimWorld and have been registered explicitly.");
+            }
+        }
+
+        private static bool EnsureAlertRegistered<TAlert>(List<Alert> alerts)
+            where TAlert : Alert, new()
+        {
             for (int index = 0; index < alerts.Count; index++)
             {
-                if (alerts[index] is Alert_NoSafeAreaConfigured)
+                if (alerts[index] is TAlert)
                 {
-                    return;
+                    return false;
                 }
             }
 
-            alerts.Add(new Alert_NoSafeAreaConfigured());
-            DS_Log.Warning(
-                "The safe-area alert was not discovered automatically by RimWorld and has been registered explicitly.");
+            alerts.Add(new TAlert());
+            return true;
         }
     }
 }

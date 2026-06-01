@@ -1,9 +1,9 @@
-# Functional checklist for 0.4.1-dev
+# Functional checklist for 0.5.0-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.4.1.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.5.0.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -22,8 +22,9 @@
 
 ## Dedicated global safe area
 
-- [ ] **Architect** → **Zone** contains **Expand safe area** and **Clear safe area**.
-- [ ] The safe-area overlay appears while either tool is active.
+- [ ] **Architect** → **Zone** contains **View safe area**, **Expand safe area** and **Clear safe area**.
+- [ ] **View safe area** displays the shelter overlay without painting or clearing cells.
+- [ ] The safe-area overlay appears while any of the three tools is active.
 - [ ] Safe cells can overlap a growing zone.
 - [ ] Safe cells can overlap a stockpile.
 - [ ] Safe cells can overlap an ordinary allowed area.
@@ -51,6 +52,10 @@
 - [ ] Clicking the alert jumps to one of the affected colonists.
 - [ ] The alert disappears after painting at least one safe cell on the affected map.
 - [ ] The alert does not appear when no colonist uses **Flee to safe area**.
+- [ ] **Safe area unreachable** appears when painted safe cells exist but none is reachable for a configured colonist.
+- [ ] Clicking **Safe area unreachable** jumps to one of the affected colonists.
+- [ ] **Safe area unreachable** disappears after opening a path or painting a reachable safe cell.
+- [ ] The empty-layer and unreachable-layer alerts do not report the same pawn at the same time.
 - [ ] Multiple maps evaluate their safe-area layers independently.
 
 ## Self-defense only
@@ -75,5 +80,5 @@
 
 - [ ] Run `./tools/validate-translations.ps1` and confirm that all mod-owned keyed translations pass validation.
 - [ ] Confirm that `build.ps1` runs the same validator before compilation.
-- [ ] Generate RimWorld's French `TranslationReport.txt` and attribute the warning observed during development.
+- [x] Generate RimWorld's French `TranslationReport.txt` and attribute the warning observed during development to Core language data in the no-DLC test configuration.
 - [ ] Use `./tools/find-translation-report.ps1` to locate the generated report before the stable release.
