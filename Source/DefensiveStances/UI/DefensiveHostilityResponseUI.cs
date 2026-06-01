@@ -8,6 +8,7 @@ using Verse;
 
 namespace DefensiveStances.UI
 {
+    [StaticConstructorOnStartup]
     internal static class DefensiveHostilityResponseUI
     {
         private enum DefensiveResponseSelection

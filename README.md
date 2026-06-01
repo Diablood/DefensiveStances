@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.3.1 engineering scaffold contains:
+The current 0.3.2 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -30,6 +30,8 @@ The current 0.3.1 engineering scaffold contains:
 - a migration path from the 0.1.x configured allowed-area prototype;
 - English and French keyed translations;
 - a centralized `DS_Log` wrapper with a colored mod-name prefix for diagnostics;
+- startup diagnostics that include the loaded assembly version;
+- main-thread initialization for the hostility-response UI textures;
 - a persistent alert when at least one colonist expects a safe area but none has been painted on their map;
 - throttled in-game warnings and prefixed log entries when no safe cell is configured or reachable;
 - safe fallback to vanilla fleeing without leaving a pawn restricted to an unusable safe-area layer.
@@ -72,7 +74,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.3.1
+## First in-game test for 0.3.2
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.

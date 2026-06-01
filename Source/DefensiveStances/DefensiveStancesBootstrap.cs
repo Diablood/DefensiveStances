@@ -11,7 +11,7 @@ namespace DefensiveStances
         static DefensiveStancesBootstrap()
         {
             new Harmony(HarmonyId).PatchAll();
-            DS_Log.Message("Harmony patches applied.");
+            DS_Log.Message($"Version {typeof(DefensiveStancesBootstrap).Assembly.GetName().Version} loaded. Harmony patches applied.");
         }
     }
 }

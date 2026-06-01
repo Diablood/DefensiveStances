@@ -1,8 +1,10 @@
-# Functional checklist for 0.3.1-dev
+# Functional checklist for 0.3.2-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
+- [ ] The startup log reports `Version 0.3.2.0 loaded. Harmony patches applied.`
+- [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
 - [ ] Pawn doctrines persist after save and reload.

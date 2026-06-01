@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2-dev
+
+- Add `[StaticConstructorOnStartup]` to `DefensiveHostilityResponseUI` so vanilla hostility-response textures are loaded on RimWorld's main thread.
+- Include the loaded assembly version in the Harmony bootstrap log to make future DLL-version mismatches immediately visible.
+- Synchronize the mod metadata and assembly version to `0.3.2`.
+
 ## 0.3.1-dev
 
 - Register the safe-area configuration alert explicitly in RimWorld's `AlertsReadout` as a fallback when automatic alert discovery misses the custom alert class.
