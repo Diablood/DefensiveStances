@@ -12,12 +12,16 @@ namespace DefensiveStances.Domain
         internal Thing lastAggressor;
         internal int lastAggressionTick = -1;
         internal bool evacuationActive;
+        internal bool localDangerEvacuationActive;
+        internal bool globalEmergencyEvacuationActive;
         internal Area previousAllowedArea;
         internal Area evacuationArea;
         internal int lastDangerTick = -1;
         internal EvacuationFailureReason lastEvacuationFailureReason = EvacuationFailureReason.None;
         internal int lastEvacuationFailureMessageTick = -1;
         internal int lastContainmentRecoveryLogTick = -1;
+
+        internal bool HasEvacuationReason => localDangerEvacuationActive || globalEmergencyEvacuationActive;
 
         public void ExposeData()
         {
@@ -26,10 +30,21 @@ namespace DefensiveStances.Domain
             Scribe_References.Look(ref lastAggressor, "lastAggressor");
             Scribe_Values.Look(ref lastAggressionTick, "lastAggressionTick", -1);
             Scribe_Values.Look(ref evacuationActive, "evacuationActive", false);
+            Scribe_Values.Look(ref localDangerEvacuationActive, "localDangerEvacuationActive", false);
+            Scribe_Values.Look(ref globalEmergencyEvacuationActive, "globalEmergencyEvacuationActive", false);
             Scribe_References.Look(ref previousAllowedArea, "previousAllowedArea");
             Scribe_References.Look(ref evacuationArea, "evacuationArea");
             Scribe_Values.Look(ref lastDangerTick, "lastDangerTick", -1);
             Scribe_Values.Look(ref lastContainmentRecoveryLogTick, "lastContainmentRecoveryLogTick", -1);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit
+                && evacuationActive
+                && !localDangerEvacuationActive
+                && !globalEmergencyEvacuationActive)
+            {
+                // Saves created before 0.8.0 only had local doctrine evacuations.
+                localDangerEvacuationActive = true;
+            }
         }
 
         internal void RecordAggression(Thing aggressor)
@@ -117,6 +132,8 @@ namespace DefensiveStances.Domain
         internal void ClearEvacuationTracking()
         {
             evacuationActive = false;
+            localDangerEvacuationActive = false;
+            globalEmergencyEvacuationActive = false;
             previousAllowedArea = null;
             evacuationArea = null;
             lastDangerTick = -1;

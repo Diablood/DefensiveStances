@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.8.0-dev
+
+- Add a dedicated bottom-right siren toggle for map-wide emergency evacuation.
+- Persist the global alarm state independently for each map through the existing saveable game component.
+- Immediately send every undrafted controllable pawn on the active map toward a reachable safe cell, regardless of their individual hostility-response doctrine.
+- Keep drafted pawns under direct player control; when a drafted pawn is released while the alarm remains active, trigger sheltering immediately.
+- Reject alarm activation when the map contains no painted safe cell, keep the toggle disabled and show a focused warning message.
+- Reuse clickable pawn-targeted warnings and persistent alerts for colonists who cannot reach any safe cell while the global alarm is active.
+- Keep the safe-area overlay visible while the emergency alarm is active and add a dedicated siren texture.
+- Preserve legacy doctrine-triggered evacuations and migrate pre-0.8 active evacuation tracking to the local-danger reason.
+- Synchronize the mod metadata and assembly version to `0.8.0`.
+
 ## 0.7.3-dev
 
 - Add the missing `DefensiveStances.Components` and `DefensiveStances.Settings` imports to `DefensiveEvacuationUtility`.
@@ -105,7 +117,7 @@
 
 ## 0.3.0-dev
 
-- Add a persistent **No safe area configured** alert when a spawned free colonist uses **Flee to safe area** but their map has no painted safe cells.
+- Add a persistent **No safe area configured** alert when a spawned controllable pawn uses **Flee to safe area** but their map has no painted safe cells.
 - Show a throttled in-game warning focused on the affected pawn when no safe cell is configured or reachable during an evacuation attempt.
 - Write the same evacuation failures through the colored `DS_Log.Warning` wrapper to simplify diagnostics.
 - Avoid restricting a pawn to an unusable safe-area layer: validate reachability before starting evacuation and restore the previous allowed area if an active evacuation loses every viable shelter.

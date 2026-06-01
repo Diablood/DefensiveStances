@@ -1,3 +1,4 @@
+using DefensiveStances.Components;
 using RimWorld;
 using Verse;
 
@@ -18,12 +19,13 @@ namespace DefensiveStances.Utilities
 
         internal static void DrawIfVisible()
         {
-            if (!visible)
+            Map map = Find.CurrentMap;
+            if (!visible && DefensiveStancesGameComponent.Current?.IsGlobalEmergencyEvacuationActive(map) != true)
             {
                 return;
             }
 
-            DefensiveSafeAreaUtility.Get(Find.CurrentMap)?.MarkForDraw();
+            DefensiveSafeAreaUtility.Get(map)?.MarkForDraw();
         }
     }
 }

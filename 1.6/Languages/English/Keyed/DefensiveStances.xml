@@ -13,9 +13,12 @@
     <DS_Message_NoSafeAreaConfigured>Cannot flee to a safe area: no safe cells have been painted.</DS_Message_NoSafeAreaConfigured>
     <DS_Message_NoReachableSafeCell>Cannot flee to a safe area: no painted safe cell is reachable.</DS_Message_NoReachableSafeCell>
     <DS_Alert_NoReachableSafeArea_Label>Safe area unreachable</DS_Alert_NoReachableSafeArea_Label>
-    <DS_Alert_NoReachableSafeArea_Explanation>At least one colonist is configured to flee to a safe area, but none of the painted safe cells can be reached from their current position.&#10;&#10;Check doors, walls, forbidden passages and the placement of the shelter cells.</DS_Alert_NoReachableSafeArea_Explanation>
+    <DS_Alert_NoReachableSafeArea_Explanation>At least one pawn needs to reach a safe area because of its doctrine or the global emergency alarm, but none of the painted safe cells can be reached from its current position.&#10;&#10;Check doors, walls, forbidden passages and the placement of the shelter cells.</DS_Alert_NoReachableSafeArea_Explanation>
     <DS_Alert_NoSafeArea_Label>No safe area configured</DS_Alert_NoSafeArea_Label>
-    <DS_Alert_NoSafeArea_Explanation>At least one colonist is configured to flee to a safe area, but no safe cells have been painted on their map.&#10;&#10;Use Architect → Zone → Expand safe area to paint one or more shelters.</DS_Alert_NoSafeArea_Explanation>
+    <DS_Alert_NoSafeArea_Explanation>At least one pawn expects a safe area because of its doctrine or an active global emergency alarm, but no safe cells have been painted on the map.&#10;&#10;Use Architect → Zone → Expand safe area to paint one or more shelters.</DS_Alert_NoSafeArea_Explanation>
+    <DS_GlobalEmergencyToggle_InactiveTooltip>Activate global emergency evacuation. All undrafted colonists on the current map immediately try to reach a safe area, regardless of their individual hostility response.</DS_GlobalEmergencyToggle_InactiveTooltip>
+    <DS_GlobalEmergencyToggle_ActiveTooltip>Global emergency evacuation is active. Click to lift the alarm and restore individual behavior settings.</DS_GlobalEmergencyToggle_ActiveTooltip>
+    <DS_Message_GlobalEmergencyNoSafeArea>Cannot activate global emergency evacuation: no safe cells are configured on this map.</DS_Message_GlobalEmergencyNoSafeArea>
     <DS_Settings_Category>Defensive Stances</DS_Settings_Category>
     <DS_Settings_Description>Configure how colonists using the additional defensive doctrines react to danger. The default values match the behavior used before settings were added.</DS_Settings_Description>
     <DS_Settings_RestoreGrace_Label>Restore the previous allowed area after danger clears: {0} s</DS_Settings_RestoreGrace_Label>

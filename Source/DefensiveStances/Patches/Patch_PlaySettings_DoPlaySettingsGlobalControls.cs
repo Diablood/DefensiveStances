@@ -13,6 +13,7 @@ namespace DefensiveStances.Patches
             if (!worldView)
             {
                 DefensiveSafeAreaOverlay.DrawToggle(row);
+                DefensiveGlobalEmergencyEvacuationUI.DrawToggle(row);
             }
         }
     }

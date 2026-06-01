@@ -11,7 +11,12 @@ namespace DefensiveStances.Utilities
     {
         private const int ContainmentRecoveryLogCooldownTicks = 600;
 
-        internal static bool TryCreateEvacuationJob(Pawn pawn, DefensivePawnState state, Area safeArea, out Job job)
+        internal static bool TryCreateEvacuationJob(
+            Pawn pawn,
+            DefensivePawnState state,
+            Area safeArea,
+            out Job job,
+            bool globalEmergency = false)
         {
             job = null;
             if (pawn?.playerSettings == null || state == null || safeArea == null || safeArea.Map != pawn.Map)
@@ -28,7 +33,7 @@ namespace DefensiveStances.Utilities
 
             if (safeArea[pawn.Position])
             {
-                StartOrRefreshEvacuation(pawn, state, safeArea);
+                StartOrRefreshEvacuation(pawn, state, safeArea, globalEmergency);
                 state.ClearEvacuationFailure();
                 return true;
             }
@@ -41,7 +46,7 @@ namespace DefensiveStances.Utilities
                 return false;
             }
 
-            StartOrRefreshEvacuation(pawn, state, safeArea);
+            StartOrRefreshEvacuation(pawn, state, safeArea, globalEmergency);
             state.ClearEvacuationFailure();
 
             job = CreateGotoSafeAreaJob(destination);
@@ -51,7 +56,7 @@ namespace DefensiveStances.Utilities
         internal static bool TryStartEvacuationForLocalDanger(DefensivePawnState state)
         {
             Pawn pawn = state?.pawn;
-            if (state?.evacuationActive != false || !CanInterruptForEvacuation(pawn, state))
+            if (state?.evacuationActive != false || !CanInterruptForEvacuation(pawn, state, globalEmergency: false))
             {
                 return false;
             }
@@ -66,40 +71,27 @@ namespace DefensiveStances.Utilities
 
         internal static bool TryStartImmediateEvacuation(Pawn pawn, DefensivePawnState state)
         {
-            if (!CanInterruptForEvacuation(pawn, state))
+            return TryStartImmediateEvacuation(pawn, state, globalEmergency: false);
+        }
+
+        internal static bool TryStartGlobalEmergencyEvacuation(Pawn pawn, DefensivePawnState state)
+        {
+            return TryStartImmediateEvacuation(pawn, state, globalEmergency: true);
+        }
+
+        internal static void ReleaseGlobalEmergencyEvacuation(DefensivePawnState state)
+        {
+            if (state == null)
             {
-                return false;
+                return;
             }
 
-            DefensiveStancesGameComponent component = DefensiveStancesGameComponent.Current;
-            Area safeArea = component?.GetSafeArea(pawn.Map);
-            Job evacuationJob;
-            if (TryCreateEvacuationJob(pawn, state, safeArea, out evacuationJob))
+            state.globalEmergencyEvacuationActive = false;
+            if (!state.localDangerEvacuationActive)
             {
-                if (evacuationJob == null)
-                {
-                    MaintainSafeAreaContainment(state);
-                    return true;
-                }
-
-                if (IsMovingTowardSafeArea(pawn, safeArea))
-                {
-                    JobMaker.ReturnToPool(evacuationJob);
-                    return true;
-                }
-
-                pawn.jobs.StartJob(evacuationJob, JobCondition.InterruptForced);
-                LogContainmentRecovery(pawn, state, "interrupted an automatic job to flee immediately into a safe area.");
-                return true;
+                StopEvacuationMovementIfNecessary(state.pawn);
+                RestorePreviousArea(state);
             }
-
-            if (DefensiveStancesSettings.Current.allowVanillaFleeFallback
-                && pawn.CurJob?.def != JobDefOf.FleeAndCower)
-            {
-                pawn.jobs.CheckForJobOverride();
-            }
-
-            return false;
         }
 
         internal static void MaintainSafeAreaContainment(DefensivePawnState state)
@@ -119,16 +111,22 @@ namespace DefensiveStances.Utilities
                 return;
             }
 
-            if (pawn.Drafted || PawnUtility.PlayerForcedJobNowOrSoon(pawn))
+            if (pawn.Drafted)
             {
-                // Direct player control wins temporarily. The safe-area restriction remains active,
-                // and containment resumes when the forced order or drafted state ends.
+                // Drafted pawns stay under direct player control. Global evacuation resumes as
+                // soon as they are undrafted while the map-level alarm remains enabled.
+                return;
+            }
+
+            if (!state.globalEmergencyEvacuationActive && PawnUtility.PlayerForcedJobNowOrSoon(pawn))
+            {
+                // Direct player control wins temporarily for doctrine-triggered evacuation only.
                 return;
             }
 
             if (safeArea[pawn.Position])
             {
-                InterruptAutomaticMovementLeavingSafeArea(pawn, state, safeArea);
+                InterruptMovementLeavingSafeArea(pawn, state, safeArea);
                 return;
             }
 
@@ -161,6 +159,50 @@ namespace DefensiveStances.Utilities
             state?.ClearEvacuationTracking();
         }
 
+        private static bool TryStartImmediateEvacuation(Pawn pawn, DefensivePawnState state, bool globalEmergency)
+        {
+            if (!CanInterruptForEvacuation(pawn, state, globalEmergency))
+            {
+                return false;
+            }
+
+            DefensiveStancesGameComponent component = DefensiveStancesGameComponent.Current;
+            Area safeArea = component?.GetSafeArea(pawn.Map);
+            Job evacuationJob;
+            if (TryCreateEvacuationJob(pawn, state, safeArea, out evacuationJob, globalEmergency))
+            {
+                if (evacuationJob == null)
+                {
+                    MaintainSafeAreaContainment(state);
+                    return true;
+                }
+
+                if (IsMovingTowardSafeArea(pawn, safeArea))
+                {
+                    JobMaker.ReturnToPool(evacuationJob);
+                    return true;
+                }
+
+                pawn.jobs.StartJob(evacuationJob, JobCondition.InterruptForced);
+                LogContainmentRecovery(
+                    pawn,
+                    state,
+                    globalEmergency
+                        ? "interrupted its current job to answer the global emergency evacuation alarm."
+                        : "interrupted an automatic job to flee immediately into a safe area.");
+                return true;
+            }
+
+            if (!globalEmergency
+                && DefensiveStancesSettings.Current.allowVanillaFleeFallback
+                && pawn.CurJob?.def != JobDefOf.FleeAndCower)
+            {
+                pawn.jobs.CheckForJobOverride();
+            }
+
+            return false;
+        }
+
         private static Job CreateGotoSafeAreaJob(IntVec3 destination)
         {
             Job job = JobMaker.MakeJob(JobDefOf.Goto, destination);
@@ -176,10 +218,10 @@ namespace DefensiveStances.Utilities
                 && IsSafeCell(safeArea, pawn.pather.Destination.Cell);
         }
 
-        private static void InterruptAutomaticMovementLeavingSafeArea(Pawn pawn, DefensivePawnState state, Area safeArea)
+        private static void InterruptMovementLeavingSafeArea(Pawn pawn, DefensivePawnState state, Area safeArea)
         {
             if (pawn.jobs?.curJob == null
-                || pawn.jobs.curJob.playerForced
+                || (!state.globalEmergencyEvacuationActive && pawn.jobs.curJob.playerForced)
                 || pawn.pather == null
                 || !pawn.pather.Moving
                 || IsSafeCell(safeArea, pawn.pather.Destination.Cell))
@@ -188,7 +230,7 @@ namespace DefensiveStances.Utilities
             }
 
             pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
-            LogContainmentRecovery(pawn, state, "interrupted an automatic job that would leave the active safe area.");
+            LogContainmentRecovery(pawn, state, "interrupted a job that would leave the active safe area.");
         }
 
         private static void StopEvacuationMovementIfNecessary(Pawn pawn)
@@ -220,7 +262,7 @@ namespace DefensiveStances.Utilities
             }
         }
 
-        private static bool CanInterruptForEvacuation(Pawn pawn, DefensivePawnState state)
+        private static bool CanInterruptForEvacuation(Pawn pawn, DefensivePawnState state, bool globalEmergency)
         {
             return pawn?.playerSettings != null
                 && pawn.jobs != null
@@ -228,8 +270,8 @@ namespace DefensiveStances.Utilities
                 && !pawn.Downed
                 && !pawn.Drafted
                 && !pawn.jobs.startingNewJob
-                && !PawnUtility.PlayerForcedJobNowOrSoon(pawn)
-                && state?.mode == DefensiveBehaviorMode.FleeToSafeArea;
+                && (globalEmergency || !PawnUtility.PlayerForcedJobNowOrSoon(pawn))
+                && (globalEmergency || state?.mode == DefensiveBehaviorMode.FleeToSafeArea);
         }
 
         private static void RestorePreviousAreaIfNecessary(DefensivePawnState state)
@@ -241,7 +283,7 @@ namespace DefensiveStances.Utilities
             }
         }
 
-        private static void StartOrRefreshEvacuation(Pawn pawn, DefensivePawnState state, Area safeArea)
+        private static void StartOrRefreshEvacuation(Pawn pawn, DefensivePawnState state, Area safeArea, bool globalEmergency)
         {
             if (!state.evacuationActive)
             {
@@ -250,7 +292,16 @@ namespace DefensiveStances.Utilities
                 state.evacuationActive = true;
             }
 
-            state.lastDangerTick = GenTicks.TicksGame;
+            if (globalEmergency)
+            {
+                state.globalEmergencyEvacuationActive = true;
+            }
+            else
+            {
+                state.localDangerEvacuationActive = true;
+                state.lastDangerTick = GenTicks.TicksGame;
+            }
+
             pawn.playerSettings.AreaRestrictionInPawnCurrentMap = safeArea;
         }
     }

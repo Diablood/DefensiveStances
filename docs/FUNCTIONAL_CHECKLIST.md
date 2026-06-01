@@ -1,14 +1,15 @@
-# Functional checklist for 0.7.3-dev
+# Functional checklist for 0.8.0-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 0.7.3.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 0.8.0.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
 - [ ] Pawn doctrines persist after save and reload.
 - [ ] Painted safe-area cells persist after save and reload.
+- [ ] A map-wide emergency alarm remains active after save and reload, and its pawns are sheltered again after loading.
 - [ ] A legacy configured allowed area is copied into the dedicated safe-area layer when first used.
 
 ## Existing hostility-response dropdown
@@ -63,9 +64,28 @@
 - [ ] Drafting temporarily wins over containment; after undrafting outside shelter, the pawn is redirected into the safe area.
 - [ ] Clearing every safe cell during an active evacuation immediately interrupts an in-progress shelter `Goto`, restores the pawn's previous allowed area and emits the existing throttled warning.
 
+## Global emergency evacuation
+
+- [ ] The bottom-right controls contain a dedicated siren toggle next to the safe-area visibility control.
+- [ ] Clicking the siren with no painted safe cell leaves the toggle disabled and displays a warning message.
+- [ ] Clicking the siren with at least one painted safe cell enables the global alarm for the current map.
+- [ ] Enabling the global alarm immediately interrupts ordinary and player-forced jobs for undrafted controllable pawns and sends them toward a reachable shelter.
+- [ ] Individual pawn doctrines are temporarily ignored while the global alarm is active.
+- [ ] Drafted pawns remain drafted and are not redirected by the global alarm.
+- [ ] Undrafting a pawn while the global alarm remains active immediately sends that pawn toward a reachable shelter.
+- [ ] A pawn that cannot reach any painted safe cell produces a clickable warning message targeting that pawn.
+- [ ] Reachable pawns still evacuate when another pawn is unreachable.
+- [ ] The safe-area overlay stays visible while the global alarm is active.
+- [ ] Clicking the siren again lifts the alarm and restores previous allowed areas for pawns sheltered only by the global alarm.
+- [ ] A pawn that still has an individual local-danger evacuation reason remains sheltered after the global alarm is lifted.
+- [ ] Each map keeps an independent alarm state.
+- [ ] Save and reload preserves the alarm state independently for each map.
+- [ ] Clearing every safe cell while the alarm is active keeps the alarm enabled, restores unusable restrictions and shows the existing safe-area warnings.
+- [ ] Painting a usable refuge again while the alarm remains active automatically resumes sheltering.
+
 ## Alerts
 
-- [ ] **No safe area configured** appears when at least one spawned free colonist uses **Flee to safe area** and their map contains no safe cells.
+- [ ] **No safe area configured** appears when at least one spawned controllable pawn uses **Flee to safe area** and their map contains no safe cells.
 - [ ] Clicking the alert jumps to one of the affected colonists.
 - [ ] The alert disappears after painting at least one safe cell on the affected map.
 - [ ] The alert does not appear when no colonist uses **Flee to safe area**.

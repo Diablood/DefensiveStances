@@ -14,7 +14,7 @@ Do not change the package ID after a public release because it identifies the mo
 
 ## Prototype scope
 
-The current 0.7.3 engineering scaffold contains:
+The current 0.8.0 engineering scaffold contains:
 
 - a custom `DefensiveBehaviorMode` enum without modifying RimWorld's vanilla enum;
 - a saveable `GameComponent` with per-pawn doctrine state;
@@ -22,10 +22,13 @@ The current 0.7.3 engineering scaffold contains:
 - a dedicated map-level safe-area layer, independent from ordinary allowed areas;
 - Architect tools to expand or clear safe-area cells;
 - a bottom-right toggle that displays or hides the safe-area overlay without entering an editing tool;
+- a second bottom-right alarm toggle for persistent map-wide emergency evacuation, independent from individual pawn doctrines;
+- immediate emergency sheltering for every undrafted controllable pawn on the active map, with drafted pawns left under direct player control until they are released;
+- save persistence for the global emergency alarm state on each map;
 - support for several disconnected shelters on the same map;
 - active containment inside the global safe area during evacuation, with restoration only after both local flee conditions and map-level hostile threats have remained absent for a short grace period;
 - automatic redirection back into shelter if a non-forced job carries an evacuated pawn outside the safe-area layer;
-- temporary precedence for drafted control and player-forced orders, followed by automatic containment recovery;
+- temporary precedence for drafted control in every evacuation, plus precedence for player-forced orders during doctrine-triggered sheltering;
 - an explicit pawn activity report while a colonist is moving toward shelter;
 - direct aggressor recording when a hostile ranged or melee attack is aimed at a pawn in self-defense-only mode, including missed shots and melee dodges;
 - hostile-damage recording as a fallback for other direct damage sources;
@@ -83,7 +86,7 @@ The resulting assembly is written directly to:
 
 Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory, enable Harmony before Core as requested by Harmony, then enable Defensive Stances after Harmony.
 
-## First in-game test for 0.7.3
+## First in-game test for 0.8.0
 
 1. Create or load a colony on RimWorld 1.6.
 2. Open **Architect** → **Zone**.
@@ -105,6 +108,10 @@ Place the entire `DefensiveStances` directory inside RimWorld's `Mods` directory
 18. Open **Options** → **Mod settings** → **Defensive Stances**, adjust the grace period and containment interval, then confirm that the changed behavior is visible in game.
 19. Disable transient safe-area warning messages and verify that persistent alerts and colored logs remain active.
 20. Disable vanilla fleeing fallback, trigger danger with an empty safe layer and verify that the pawn waits instead of starting the vanilla flee response.
+21. With a painted refuge, enable the bottom-right emergency alarm and verify that every undrafted controllable pawn immediately heads to shelter regardless of their individual doctrine.
+22. Draft one colonist before enabling the alarm, verify that the pawn stays drafted and ignores the automatic return, then undraft them and verify immediate sheltering.
+23. Attempt to enable the alarm with no safe cells painted and verify that the toggle remains off while a warning message appears.
+24. Keep the alarm active, save and reload the colony, then verify that the toggle state and shelter containment are restored.
 
 See `docs/FUNCTIONAL_CHECKLIST.md` for the validation matrix.
 
@@ -131,6 +138,7 @@ About/                         RimWorld metadata
 1.6/Assemblies/                compiled output
 1.6/Languages/                 keyed translations
 1.6/Patches/                   XML injection into Architect → Zone
+1.6/Textures/                  dedicated emergency-alarm UI texture
 Source/DefensiveStances/       C# project
 Source/DefensiveStances.sln    Visual Studio solution
 LoadFolders.xml                RimWorld version folder routing
@@ -140,10 +148,11 @@ docs/                          design notes, audit notes and test checklist
 
 ## Known limitations
 
-- The custom dropdown entries and the safe-area visibility toggle currently reuse vanilla icons.
+- The custom dropdown entries and the safe-area visibility toggle currently reuse vanilla icons; the emergency alarm uses a dedicated siren icon.
 - The map-level safe area is one global layer containing any number of disconnected shelters; named or prioritized shelter groups are not implemented yet.
 - Self-defense handles standard direct ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without a hostile instigator and attacks against nearby allies are not tracked yet.
 - The default grace period is 10 seconds before restoring the previous allowed area after all active hostile threats have cleared; it can be configured in the mod settings.
-- Automatic containment deliberately yields to drafted control and explicit player-forced orders, then resumes afterward.
+- Doctrine-triggered containment deliberately yields to drafted control and explicit player-forced orders, then resumes afterward. The map-wide emergency alarm only yields to drafted control.
+- The global alarm targets spawned player-controlled pawns that expose `playerSettings`; prisoners and ordinary animals are not included.
 - Combat Extended, multiplayer and large mod-list compatibility have not yet been tested.
 - The mod-owned keyed translations pass the repository validator. RimWorld's remaining French translation-report warnings were attributed to Core language data in the no-DLC test configuration.

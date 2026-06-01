@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DefensiveStances.Components;
 using DefensiveStances.Domain;
+using DefensiveStances.Utilities;
 using RimWorld;
 using Verse;
 
@@ -35,13 +36,17 @@ namespace DefensiveStances.Alerts
             foreach (Map map in Find.Maps)
             {
                 int firstMapCulpritIndex = culprits.Count;
-                List<Pawn> freeColonists = map.mapPawns.FreeColonistsSpawned;
+                bool globalEmergencyActive = component.IsGlobalEmergencyEvacuationActive(map);
+                IReadOnlyList<Pawn> spawnedPawns = map.mapPawns.AllPawnsSpawned;
 
-                for (int index = 0; index < freeColonists.Count; index++)
+                for (int index = 0; index < spawnedPawns.Count; index++)
                 {
-                    Pawn pawn = freeColonists[index];
+                    Pawn pawn = spawnedPawns[index];
                     DefensivePawnState state = component.GetPawnState(pawn, false);
-                    if (state?.mode == DefensiveBehaviorMode.FleeToSafeArea)
+                    bool usesSafeAreaDoctrine = DefensiveBehaviorUtility.CanConfigure(pawn)
+                        && state?.mode == DefensiveBehaviorMode.FleeToSafeArea;
+                    if ((globalEmergencyActive && DefensiveGlobalEmergencyEvacuationUtility.IsControllablePawn(pawn))
+                        || usesSafeAreaDoctrine)
                     {
                         culprits.Add(pawn);
                     }
@@ -64,7 +69,7 @@ namespace DefensiveStances.Alerts
                 if (!activationLogged)
                 {
                     activationLogged = true;
-                    DS_Log.Message("Safe-area configuration alert activated for " + culprits.Count + " colonist(s).");
+                    DS_Log.Message("Safe-area configuration alert activated for " + culprits.Count + " pawn(s).");
                 }
             }
             else

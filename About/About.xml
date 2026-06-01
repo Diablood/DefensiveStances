@@ -3,7 +3,7 @@
     <name>Defensive Stances</name>
     <author>Diablood</author>
     <packageId>diablood.defensivestances</packageId>
-    <modVersion IgnoreIfNoMatchingField="True">0.7.3</modVersion>
+    <modVersion IgnoreIfNoMatchingField="True">0.8.0</modVersion>
     <supportedVersions>
         <li>1.6</li>
     </supportedVersions>
@@ -18,5 +18,5 @@
     <loadAfter>
         <li>brrainz.harmony</li>
     </loadAfter>
-    <description>Adds additional defensive doctrines for colonists: flee to a dedicated global safe-area layer, or ignore hostiles until attacked and retaliate only against the direct aggressor. This is an early RimWorld 1.6 prototype.</description>
+    <description>Adds additional defensive doctrines for colonists: flee to a dedicated global safe-area layer, ignore hostiles until attacked and retaliate only against the direct aggressor, or trigger a persistent map-wide emergency evacuation alarm. This is an early RimWorld 1.6 prototype.</description>
 </ModMetaData>

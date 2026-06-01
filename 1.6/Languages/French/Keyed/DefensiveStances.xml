@@ -13,9 +13,12 @@
     <DS_Message_NoSafeAreaConfigured>Ne peut pas fuir vers une zone sûre : aucune cellule sûre n’a été peinte.</DS_Message_NoSafeAreaConfigured>
     <DS_Message_NoReachableSafeCell>Ne peut pas fuir vers une zone sûre : aucune cellule sûre peinte n’est accessible.</DS_Message_NoReachableSafeCell>
     <DS_Alert_NoReachableSafeArea_Label>Zone sûre inaccessible</DS_Alert_NoReachableSafeArea_Label>
-    <DS_Alert_NoReachableSafeArea_Explanation>Au moins un colon est configuré pour fuir vers une zone sûre, mais aucune cellule sûre peinte ne peut être atteinte depuis sa position actuelle.&#10;&#10;Vérifiez les portes, les murs, les passages interdits et l’emplacement des cellules de refuge.</DS_Alert_NoReachableSafeArea_Explanation>
+    <DS_Alert_NoReachableSafeArea_Explanation>Au moins un pawn doit rejoindre une zone sûre en raison de sa doctrine ou de l’alerte d’évacuation générale, mais aucune cellule sûre peinte ne peut être atteinte depuis sa position actuelle.&#10;&#10;Vérifiez les portes, les murs, les passages interdits et l’emplacement des cellules de refuge.</DS_Alert_NoReachableSafeArea_Explanation>
     <DS_Alert_NoSafeArea_Label>Aucune zone sûre configurée</DS_Alert_NoSafeArea_Label>
-    <DS_Alert_NoSafeArea_Explanation>Au moins un colon est configuré pour fuir vers une zone sûre, mais aucune cellule sûre n’a été peinte sur sa carte.&#10;&#10;Utilisez Architecte → Zone → Étendre la zone sûre pour peindre un ou plusieurs refuges.</DS_Alert_NoSafeArea_Explanation>
+    <DS_Alert_NoSafeArea_Explanation>Au moins un pawn attend une zone sûre en raison de sa doctrine ou d’une alerte d’évacuation générale active, mais aucune cellule sûre n’a été peinte sur la carte.&#10;&#10;Utilisez Architecte → Zone → Étendre la zone sûre pour peindre un ou plusieurs refuges.</DS_Alert_NoSafeArea_Explanation>
+    <DS_GlobalEmergencyToggle_InactiveTooltip>Activer l’évacuation générale d’urgence. Tous les colons non enrôlés de la carte tentent immédiatement de rejoindre une zone sûre, indépendamment de leur réaction individuelle aux ennemis.</DS_GlobalEmergencyToggle_InactiveTooltip>
+    <DS_GlobalEmergencyToggle_ActiveTooltip>L’évacuation générale d’urgence est active. Cliquez pour lever l’alerte et restaurer les comportements individuels.</DS_GlobalEmergencyToggle_ActiveTooltip>
+    <DS_Message_GlobalEmergencyNoSafeArea>Impossible d’activer l’évacuation générale : aucune cellule sûre n’est configurée sur cette carte.</DS_Message_GlobalEmergencyNoSafeArea>
     <DS_Settings_Category>Defensive Stances</DS_Settings_Category>
     <DS_Settings_Description>Configurez la réaction au danger des colons utilisant les doctrines défensives supplémentaires. Les valeurs par défaut correspondent au comportement appliqué avant l’ajout des réglages.</DS_Settings_Description>
     <DS_Settings_RestoreGrace_Label>Restaurer l’ancienne zone autorisée après la disparition du danger : {0} s</DS_Settings_RestoreGrace_Label>

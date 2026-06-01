@@ -120,7 +120,11 @@ namespace DefensiveStances.UI
 
             if (selection != DefensiveResponseSelection.FleeToSafeArea && state.evacuationActive)
             {
-                DefensiveEvacuationUtility.RestorePreviousArea(state);
+                state.localDangerEvacuationActive = false;
+                if (!state.globalEmergencyEvacuationActive)
+                {
+                    DefensiveEvacuationUtility.RestorePreviousArea(state);
+                }
             }
 
             if (selection != DefensiveResponseSelection.SelfDefenseOnly)

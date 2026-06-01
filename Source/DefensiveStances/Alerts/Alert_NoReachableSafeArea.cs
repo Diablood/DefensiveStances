@@ -42,18 +42,24 @@ namespace DefensiveStances.Alerts
                     continue;
                 }
 
-                List<Pawn> freeColonists = map.mapPawns.FreeColonistsSpawned;
-                for (int index = 0; index < freeColonists.Count; index++)
+                bool globalEmergencyActive = component.IsGlobalEmergencyEvacuationActive(map);
+                IReadOnlyList<Pawn> spawnedPawns = map.mapPawns.AllPawnsSpawned;
+                for (int index = 0; index < spawnedPawns.Count; index++)
                 {
-                    Pawn pawn = freeColonists[index];
+                    Pawn pawn = spawnedPawns[index];
                     DefensivePawnState state = component.GetPawnState(pawn, false);
-                    if (state?.mode != DefensiveBehaviorMode.FleeToSafeArea)
+                    bool shouldEvaluate = (DefensiveBehaviorUtility.CanConfigure(pawn)
+                            && state?.mode == DefensiveBehaviorMode.FleeToSafeArea)
+                        || (globalEmergencyActive
+                            && !pawn.Drafted
+                            && DefensiveGlobalEmergencyEvacuationUtility.IsControllablePawn(pawn));
+                    if (!shouldEvaluate)
                     {
                         continue;
                     }
 
                     IntVec3 destination;
-                    if (!DefensiveSafeAreaUtility.TryFindReachableSafeCell(pawn, safeArea, out destination))
+                    if (pawn.Downed || !DefensiveSafeAreaUtility.TryFindReachableSafeCell(pawn, safeArea, out destination))
                     {
                         culprits.Add(pawn);
                     }
@@ -65,7 +71,7 @@ namespace DefensiveStances.Alerts
                 if (!activationLogged)
                 {
                     activationLogged = true;
-                    DS_Log.Message("Safe-area reachability alert activated for " + culprits.Count + " colonist(s).");
+                    DS_Log.Message("Safe-area reachability alert activated for " + culprits.Count + " pawn(s).");
                 }
             }
             else
