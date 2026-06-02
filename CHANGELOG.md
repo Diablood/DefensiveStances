@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2-dev
+
+- Stop **Self-defense only** retaliation as soon as the recorded pawn aggressor is downed or dead.
+- Clear the remembered aggressor before creating another automatic attack job, preventing pawns from alternating between hauling and attacking an incapacitated enemy.
+- Require a new direct hostile attack before retaliation can resume if a previously downed aggressor later stands up.
+- Keep building and non-pawn aggressors supported while leaving evacuation behavior unchanged.
+
 ## 1.0.1-dev
 
 - Hide the dedicated safe-area overlay while RimWorld is displaying the world view.
