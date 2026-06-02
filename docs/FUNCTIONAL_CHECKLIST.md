@@ -1,9 +1,9 @@
-# Functional checklist for 1.0.1-dev
+# Functional checklist for 1.0.2-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 1.0.1.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 1.0.2.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -148,3 +148,8 @@
 - [ ] The distribution ZIP contains `About/`, `1.6/`, `LoadFolders.xml`, `LICENSE` and `README.md` under one top-level `DefensiveStances/` folder.
 - [ ] The distribution ZIP excludes `Source/`, `tools/`, `docs/`, `.git/`, PDB files and intermediate build folders.
 - [ ] Extracting the distribution ZIP into a temporary local `Mods` folder passes a final startup smoke test.
+
+## Self-defense downed-target regression
+
+- [ ] When the recorded aggressor is downed, the pawn stops retaliating automatically and resumes ordinary work without alternating attack jobs.
+- [ ] If the downed aggressor later stands up, no automatic retaliation resumes until a new direct attack occurs.

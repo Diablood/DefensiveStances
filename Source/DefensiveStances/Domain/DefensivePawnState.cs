@@ -68,6 +68,13 @@ namespace DefensiveStances.Domain
                 return false;
             }
 
+            Pawn aggressorPawn = aggressor as Pawn;
+            if (aggressorPawn != null && (aggressorPawn.Dead || aggressorPawn.Downed))
+            {
+                ClearAggression();
+                return false;
+            }
+
             if (GenTicks.TicksGame - lastAggressionTick > SelfDefenseWindowTicks)
             {
                 ClearAggression();
