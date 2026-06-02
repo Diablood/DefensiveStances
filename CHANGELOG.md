@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3-dev
+
+- Clear remembered **Self-defense only** aggression as soon as the player drafts the pawn.
+- Treat drafting as a manual takeover that closes the current self-defense incident.
+- Prevent an undrafted pawn from returning to combat against an enemy that stopped pursuing it unless a new direct attack occurs.
+- Keep global-emergency undrafting behavior unchanged.
+
 ## 1.0.2-dev
 
 - Stop **Self-defense only** retaliation as soon as the recorded pawn aggressor is downed or dead.

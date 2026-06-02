@@ -9,10 +9,14 @@ namespace DefensiveStances.Patches
     {
         private static void Postfix(Pawn_DraftController __instance)
         {
-            if (!__instance.Drafted)
+            DefensiveStancesGameComponent component = DefensiveStancesGameComponent.Current;
+            if (__instance.Drafted)
             {
-                DefensiveStancesGameComponent.Current?.NotifyPawnUndrafted(__instance.pawn);
+                component?.GetPawnState(__instance.pawn, false)?.ClearAggression();
+                return;
             }
+
+            component?.NotifyPawnUndrafted(__instance.pawn);
         }
     }
 }

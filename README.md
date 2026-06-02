@@ -4,7 +4,7 @@
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
-Current development hotfix: `1.0.2-dev`, based on the validated `1.0.0` stable release.
+Current development hotfix: `1.0.3-dev`, based on the validated `1.0.0` stable release.
 
 ## Features
 

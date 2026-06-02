@@ -1,9 +1,9 @@
-# Functional checklist for 1.0.2-dev
+# Functional checklist for 1.0.3-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 1.0.2.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 1.0.3.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -153,3 +153,11 @@
 
 - [ ] When the recorded aggressor is downed, the pawn stops retaliating automatically and resumes ordinary work without alternating attack jobs.
 - [ ] If the downed aggressor later stands up, no automatic retaliation resumes until a new direct attack occurs.
+
+## Self-defense drafted-disengagement regression
+
+- [ ] Put a pawn in **Self-defense only**, let an enemy attack it and confirm that the pawn retaliates.
+- [ ] Draft the pawn, move it away and wait until the enemy stops pursuing it.
+- [ ] Undraft the pawn: it resumes ordinary work and does not return to combat automatically.
+- [ ] If the same enemy directly attacks again, retaliation starts again.
+- [ ] Undrafting during a global emergency evacuation still sends the pawn to a reachable safe area.
