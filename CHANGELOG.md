@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4-dev
+
+- Suspended safe-area containment while a pawn is in a mental state.
+- Prevented pawns from repeatedly leaving and re-entering a shelter when a mental-state job conflicts with safe-area containment.
+- Pawns resume their normal defensive behavior after the mental state ends.
+- Pawns affected by a global emergency evacuation return to shelter after their mental state ends if the alarm is still active.
+
 ## 1.0.3-dev
 
 - Clear remembered **Self-defense only** aggression as soon as the player drafts the pawn.
