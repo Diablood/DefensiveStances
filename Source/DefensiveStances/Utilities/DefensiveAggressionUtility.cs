@@ -9,7 +9,11 @@ namespace DefensiveStances.Utilities
     {
         internal static void RecordDirectAttack(Thing aggressor, Pawn defender)
         {
-            if (defender == null || aggressor == null || aggressor == defender || !GenHostility.HostileTo(aggressor, defender))
+            if (defender == null
+                || aggressor == null
+                || aggressor == defender
+                || defender.Drafted
+                || !GenHostility.HostileTo(aggressor, defender))
             {
                 return;
             }
