@@ -103,6 +103,8 @@ namespace DefensiveStances.Utilities
                 return;
             }
 
+            RestoreSafeAreaRestrictionIfApplied(state);
+
             if (safeArea == null || safeArea.Map != pawn.Map || safeArea.TrueCount <= 0)
             {
                 StopEvacuationMovementIfNecessary(pawn);
@@ -150,12 +152,7 @@ namespace DefensiveStances.Utilities
 
         internal static void RestorePreviousArea(DefensivePawnState state)
         {
-            Pawn pawn = state?.pawn;
-            if (pawn?.playerSettings != null && state.evacuationActive)
-            {
-                pawn.playerSettings.AreaRestrictionInPawnCurrentMap = state.previousAllowedArea;
-            }
-
+            RestoreSafeAreaRestrictionIfApplied(state);
             state?.ClearEvacuationTracking();
         }
 
@@ -302,7 +299,21 @@ namespace DefensiveStances.Utilities
                 state.lastDangerTick = GenTicks.TicksGame;
             }
 
-            pawn.playerSettings.AreaRestrictionInPawnCurrentMap = safeArea;
+            RestoreSafeAreaRestrictionIfApplied(state);
+        }
+
+        private static void RestoreSafeAreaRestrictionIfApplied(DefensivePawnState state)
+        {
+            Pawn pawn = state?.pawn;
+            if (pawn?.playerSettings == null
+                || state?.evacuationActive != true
+                || state.evacuationArea == null
+                || pawn.playerSettings.AreaRestrictionInPawnCurrentMap != state.evacuationArea)
+            {
+                return;
+            }
+
+            pawn.playerSettings.AreaRestrictionInPawnCurrentMap = state.previousAllowedArea;
         }
     }
 }

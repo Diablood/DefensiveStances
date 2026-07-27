@@ -9,6 +9,12 @@ namespace DefensiveStances.Utilities
     {
         internal static Job TryCreateSelfDefenseJob(Pawn pawn, DefensivePawnState state)
         {
+            if (pawn.Drafted)
+            {
+                state.ClearAggression();
+                return null;
+            }
+
             if (pawn.WorkTagIsDisabled(WorkTags.Violent))
             {
                 return null;

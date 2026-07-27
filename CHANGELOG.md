@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.5-dev
+
+- Make safe-area containment virtual so it no longer replaces the pawn's vanilla allowed area with the safe-area overlay.
+- Allow right-click forced actions outside the safe area when the pawn's real allowed area permits them.
+- Keep automatic jobs contained inside shelters while danger or global evacuation remains active.
+- Ignore direct self-defense triggers while a pawn is drafted, preventing remembered attacks from restarting combat after manual withdrawal.
+- Restore legacy save states where a pawn was still temporarily restricted to the safe-area overlay.
+
 ## 1.0.4-dev
 
 - Suspended safe-area containment while a pawn is in a mental state.

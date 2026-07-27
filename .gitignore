@@ -21,3 +21,6 @@ Thumbs.db
 
 # Release packages
 dist/
+
+*.patch
+*.zip
