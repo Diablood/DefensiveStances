@@ -332,7 +332,7 @@ namespace DefensiveStances.Components
                 return;
             }
 
-            if (pawn.playerSettings.AreaRestrictionInPawnCurrentMap != state.evacuationArea)
+            if (pawn.playerSettings.AreaRestrictionInPawnCurrentMap != state.previousAllowedArea)
             {
                 if (!state.globalEmergencyEvacuationActive || pawn.Drafted)
                 {
@@ -341,7 +341,7 @@ namespace DefensiveStances.Components
                     return;
                 }
 
-                pawn.playerSettings.AreaRestrictionInPawnCurrentMap = state.evacuationArea;
+                state.previousAllowedArea = pawn.playerSettings.AreaRestrictionInPawnCurrentMap;
             }
 
             DefensiveEvacuationUtility.MaintainSafeAreaContainment(state);
