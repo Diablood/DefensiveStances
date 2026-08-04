@@ -17,6 +17,7 @@ Use this checklist before publishing a release candidate or stable release.
 - [ ] Confirm that `.editorconfig` formatting remains at four spaces where applicable.
 - [ ] Confirm that `About/Preview.png` renders correctly.
 - [ ] Confirm that `About/ModIcon.png` is the project-specific red-and-black demon icon and has not been replaced.
+- [ ] Confirm that `About/PublishedFileId.txt` is present before updating the existing Steam Workshop item.
 
 ## Clean local build
 
@@ -62,12 +63,23 @@ Use `docs/FUNCTIONAL_CHECKLIST.md` for a full regression pass before a stable re
 ./tools/package-release.ps1 -SkipBuild
 ```
 
+To also update a local runtime-only copy in RimWorld's `Mods` folder:
+
+```powershell
+./tools/package-release.ps1 -SkipBuild `
+    -CopyToMods `
+    -RimWorldModsDir "D:\SteamLibrary\steamapps\common\RimWorld\Mods"
+```
+
 - [ ] Confirm that `dist/DefensiveStances-<version>.zip` exists.
 - [ ] Open the ZIP and confirm that it contains one top-level `DefensiveStances/` folder.
 - [ ] Confirm that `1.6/Assemblies/DefensiveStances.dll` is present.
 - [ ] Confirm that `Source/`, `tools/`, `docs/`, `.git/` and build artifacts are absent.
 - [ ] Extract the ZIP into a temporary RimWorld `Mods` folder and perform one final startup smoke test.
 
+- [ ] When using `-CopyToMods`, confirm that `Mods/DefensiveStances/` contains only runtime files.
+- [ ] When using `-CopyToMods`, confirm that `Source/`, `tools/`, `docs/`, `.git/` and build artifacts are absent from the copied mod folder.
+- [ ] When using `-CopyToMods`, confirm that `About/PublishedFileId.txt` is copied with the runtime files.
 ## Publish
 
 - [ ] Commit the validated source tree.

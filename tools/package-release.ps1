@@ -2,7 +2,9 @@ param(
     [string]$RimWorldManagedDir = "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed",
     [ValidateSet("Debug", "Release")]
     [string]$Configuration = "Release",
-    [switch]$SkipBuild
+    [switch]$SkipBuild,
+    [switch]$CopyToMods,
+    [string]$RimWorldModsDir = "D:\SteamLibrary\steamapps\common\RimWorld\Mods"
 )
 
 $ErrorActionPreference = "Stop"
@@ -62,6 +64,32 @@ if (Test-Path $archivePath) {
 }
 
 Compress-Archive -Path $packageRoot -DestinationPath $archivePath -CompressionLevel Optimal
-Remove-Item $stagePath -Recurse -Force
-
 Write-Host "Release package created: $archivePath"
+
+if ($CopyToMods) {
+    if ([string]::IsNullOrWhiteSpace($RimWorldModsDir)) {
+        throw "RimWorldModsDir is required when using -CopyToMods."
+    }
+
+    New-Item $RimWorldModsDir -ItemType Directory -Force | Out-Null
+
+    $targetModPath = Join-Path $RimWorldModsDir "DefensiveStances"
+    $resolvedRoot = (Resolve-Path $root).Path.TrimEnd("\")
+    $resolvedTarget = $targetModPath
+    if (Test-Path $targetModPath) {
+        $resolvedTarget = (Resolve-Path $targetModPath).Path.TrimEnd("\")
+    }
+
+    if ($resolvedTarget -ieq $resolvedRoot) {
+        throw "Refusing to overwrite the source repository checkout: $targetModPath"
+    }
+
+    if (Test-Path $targetModPath) {
+        Remove-Item $targetModPath -Recurse -Force
+    }
+
+    Copy-Item $packageRoot $RimWorldModsDir -Recurse -Force
+    Write-Host "Runtime mod files copied to: $targetModPath"
+}
+
+Remove-Item $stagePath -Recurse -Force

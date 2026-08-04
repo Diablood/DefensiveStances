@@ -1,4 +1,4 @@
-# Functional checklist for 1.0.3-dev
+# Functional checklist for 1.0.6-dev
 
 ## Load and save
 
@@ -88,6 +88,7 @@
 - [ ] Save and reload preserves the alarm state independently for each map.
 - [ ] Clearing every safe cell while the alarm is active keeps the alarm enabled, restores unusable restrictions and shows the existing safe-area warnings.
 - [ ] Painting a usable refuge again while the alarm remains active automatically resumes sheltering.
+- [ ] A pawn assigned to a vanilla allowed area that excludes the safe area stays sheltered during the alarm and recovers the previous vanilla area when the alarm is disabled.
 
 ## Alerts
 
@@ -161,3 +162,12 @@
 - [ ] Undraft the pawn: it resumes ordinary work and does not return to combat automatically.
 - [ ] If the same enemy directly attacks again, retaliation starts again.
 - [ ] Undrafting during a global emergency evacuation still sends the pawn to a reachable safe area.
+
+## Safe-area assigned-zone regression
+
+- [ ] Assign a pawn to a vanilla allowed area that excludes the configured safe area.
+- [ ] Enable the global emergency alarm: the pawn reaches the safe area and does not loop back toward the vanilla allowed area.
+- [ ] Add work, recreation or rest opportunities inside the safe area while the alarm is active: the pawn can use them instead of standing idle indefinitely.
+- [ ] Disable the global emergency alarm: the pawn's previous vanilla allowed area is restored.
+- [ ] Change a pawn's vanilla allowed area while the global emergency alarm is active: the new vanilla area is remembered and restored when the alarm ends.
+- [ ] Verify that local **Flee to safe area** still allows player-forced jobs according to the pawn's real vanilla allowed area.

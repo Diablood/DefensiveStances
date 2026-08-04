@@ -4,7 +4,7 @@
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
-Current development hotfix: `1.0.5-dev`, based on the validated `1.0.0` stable release.
+Current development hotfix: `1.0.6-dev`, based on the validated `1.0.0` stable release.
 
 ## Features
 
@@ -112,6 +112,15 @@ To package an assembly that was already compiled:
 
 ```powershell
 ./tools/package-release.ps1 -SkipBuild
+```
+
+To also copy the runtime-only mod folder into RimWorld's local `Mods` directory after creating the release ZIP:
+
+```powershell
+./tools/package-release.ps1 `
+    -SkipBuild `
+    -CopyToMods `
+    -RimWorldModsDir "D:\SteamLibrary\steamapps\common\RimWorld\Mods"
 ```
 
 The resulting archive is written to:
