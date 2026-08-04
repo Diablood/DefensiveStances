@@ -10,6 +10,7 @@ namespace DefensiveStances.Utilities
     internal static class DefensiveEvacuationUtility
     {
         private const int ContainmentRecoveryLogCooldownTicks = 600;
+        private const int ShelterHoldJobTicks = 2500;
 
         internal static bool TryCreateEvacuationJob(
             Pawn pawn,
@@ -103,14 +104,21 @@ namespace DefensiveStances.Utilities
                 return;
             }
 
-            RestoreSafeAreaRestrictionIfApplied(state);
-
             if (safeArea == null || safeArea.Map != pawn.Map || safeArea.TrueCount <= 0)
             {
                 StopEvacuationMovementIfNecessary(pawn);
                 RestorePreviousArea(state);
                 DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoSafeArea);
                 return;
+            }
+
+            if (state.globalEmergencyEvacuationActive)
+            {
+                ApplyGlobalEmergencySafeAreaRestrictionIfNecessary(state, safeArea);
+            }
+            else
+            {
+                RestoreSafeAreaRestrictionIfApplied(state);
             }
 
             if (pawn.Drafted)
@@ -128,7 +136,15 @@ namespace DefensiveStances.Utilities
 
             if (safeArea[pawn.Position])
             {
-                InterruptMovementLeavingSafeArea(pawn, state, safeArea);
+                if (state.globalEmergencyEvacuationActive)
+                {
+                    InterruptMovementLeavingSafeArea(pawn, state, safeArea);
+                }
+                else
+                {
+                    MaintainVirtualSafeAreaContainment(pawn, state, safeArea);
+                }
+
                 return;
             }
 
@@ -208,11 +224,56 @@ namespace DefensiveStances.Utilities
             return job;
         }
 
+        private static Job CreateShelterHoldJob()
+        {
+            Job job = JobMaker.MakeJob(JobDefOf.Wait_MaintainPosture);
+            job.reportStringOverride = "DS_Job_FleeToSafeArea_Report".Translate();
+            job.expiryInterval = ShelterHoldJobTicks;
+            return job;
+        }
+
         private static bool IsMovingTowardSafeArea(Pawn pawn, Area safeArea)
         {
             return pawn.pather != null
                 && pawn.pather.Moving
                 && IsSafeCell(safeArea, pawn.pather.Destination.Cell);
+        }
+
+        private static void MaintainVirtualSafeAreaContainment(Pawn pawn, DefensivePawnState state, Area safeArea)
+        {
+            Job currentJob = pawn.jobs?.curJob;
+            if (IsShelterHoldJob(currentJob))
+            {
+                if (PreviousAllowedAreaAllowsCell(state, pawn.Position))
+                {
+                    pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
+
+                return;
+            }
+
+            if (currentJob == null)
+            {
+                if (!PreviousAllowedAreaAllowsCell(state, pawn.Position))
+                {
+                    StartShelterHoldJob(pawn, state);
+                }
+
+                return;
+            }
+
+            if (currentJob.playerForced || JobStaysInsideSafeArea(pawn, currentJob, safeArea))
+            {
+                return;
+            }
+
+            pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+            LogContainmentRecovery(pawn, state, "interrupted a job that would leave the active safe area.");
+
+            if (!PreviousAllowedAreaAllowsCell(state, pawn.Position))
+            {
+                StartShelterHoldJob(pawn, state);
+            }
         }
 
         private static void InterruptMovementLeavingSafeArea(Pawn pawn, DefensivePawnState state, Area safeArea)
@@ -235,13 +296,83 @@ namespace DefensiveStances.Utilities
             Job currentJob = pawn.jobs?.curJob;
             if (currentJob == null
                 || currentJob.playerForced
-                || currentJob.def != JobDefOf.Goto
-                || currentJob.reportStringOverride != "DS_Job_FleeToSafeArea_Report".Translate())
+                || !IsDefensiveEvacuationJob(currentJob))
             {
                 return;
             }
 
             pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+        }
+
+        private static bool IsDefensiveEvacuationJob(Job job)
+        {
+            return job != null
+                && (job.def == JobDefOf.Goto || job.def == JobDefOf.Wait_MaintainPosture)
+                && job.reportStringOverride == "DS_Job_FleeToSafeArea_Report".Translate();
+        }
+
+        private static bool IsShelterHoldJob(Job job)
+        {
+            return job != null
+                && job.def == JobDefOf.Wait_MaintainPosture
+                && job.reportStringOverride == "DS_Job_FleeToSafeArea_Report".Translate();
+        }
+
+        private static void StartShelterHoldJob(Pawn pawn, DefensivePawnState state)
+        {
+            pawn.jobs.StartJob(CreateShelterHoldJob(), JobCondition.InterruptForced);
+            LogContainmentRecovery(pawn, state, "is holding position inside the active safe area.");
+        }
+
+        private static bool JobStaysInsideSafeArea(Pawn pawn, Job job, Area safeArea)
+        {
+            if (job == null)
+            {
+                return true;
+            }
+
+            if (pawn.pather != null
+                && pawn.pather.Moving
+                && !IsSafeCell(safeArea, pawn.pather.Destination.Cell))
+            {
+                return false;
+            }
+
+            return TargetStaysInsideSafeArea(job.targetA, safeArea)
+                && TargetStaysInsideSafeArea(job.targetB, safeArea)
+                && TargetStaysInsideSafeArea(job.targetC, safeArea);
+        }
+
+        private static bool TargetStaysInsideSafeArea(LocalTargetInfo target, Area safeArea)
+        {
+            if (!target.IsValid)
+            {
+                return true;
+            }
+
+            if (target.HasThing)
+            {
+                Thing thing = target.Thing;
+                return thing != null
+                    && thing.Spawned
+                    && thing.Map == safeArea.Map
+                    && IsSafeCell(safeArea, thing.Position);
+            }
+
+            return IsSafeCell(safeArea, target.Cell);
+        }
+
+        private static bool PreviousAllowedAreaAllowsCell(DefensivePawnState state, IntVec3 cell)
+        {
+            Area previousAllowedArea = state?.previousAllowedArea;
+            if (previousAllowedArea == null)
+            {
+                return true;
+            }
+
+            return cell.IsValid
+                && cell.InBounds(previousAllowedArea.Map)
+                && previousAllowedArea[cell];
         }
 
         private static bool IsSafeCell(Area safeArea, IntVec3 cell)
@@ -292,14 +423,39 @@ namespace DefensiveStances.Utilities
             if (globalEmergency)
             {
                 state.globalEmergencyEvacuationActive = true;
+                ApplyGlobalEmergencySafeAreaRestrictionIfNecessary(state, safeArea);
             }
             else
             {
                 state.localDangerEvacuationActive = true;
                 state.lastDangerTick = GenTicks.TicksGame;
+                RestoreSafeAreaRestrictionIfApplied(state);
+            }
+        }
+
+        private static void ApplyGlobalEmergencySafeAreaRestrictionIfNecessary(DefensivePawnState state, Area safeArea)
+        {
+            Pawn pawn = state?.pawn;
+            if (pawn?.playerSettings == null
+                || state?.evacuationActive != true
+                || safeArea == null
+                || safeArea.Map != pawn.Map)
+            {
+                return;
             }
 
-            RestoreSafeAreaRestrictionIfApplied(state);
+            Area currentAllowedArea = pawn.playerSettings.AreaRestrictionInPawnCurrentMap;
+            if (currentAllowedArea == safeArea)
+            {
+                return;
+            }
+
+            if (currentAllowedArea != state.previousAllowedArea)
+            {
+                state.previousAllowedArea = currentAllowedArea;
+            }
+
+            pawn.playerSettings.AreaRestrictionInPawnCurrentMap = safeArea;
         }
 
         private static void RestoreSafeAreaRestrictionIfApplied(DefensivePawnState state)

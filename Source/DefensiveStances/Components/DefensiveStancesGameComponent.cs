@@ -335,11 +335,14 @@ namespace DefensiveStances.Components
             Area currentAllowedArea = pawn.playerSettings.AreaRestrictionInPawnCurrentMap;
             if (currentAllowedArea == state.evacuationArea)
             {
-                pawn.playerSettings.AreaRestrictionInPawnCurrentMap = state.previousAllowedArea;
-                currentAllowedArea = state.previousAllowedArea;
+                if (!state.globalEmergencyEvacuationActive)
+                {
+                    // Migration guard for saves or temporary states where the safe overlay was
+                    // accidentally applied as the pawn's real vanilla allowed area.
+                    pawn.playerSettings.AreaRestrictionInPawnCurrentMap = state.previousAllowedArea;
+                }
             }
-
-            if (currentAllowedArea != state.previousAllowedArea)
+            else if (currentAllowedArea != state.previousAllowedArea)
             {
                 if (!state.globalEmergencyEvacuationActive || pawn.Drafted)
                 {
@@ -348,6 +351,8 @@ namespace DefensiveStances.Components
                     return;
                 }
 
+                // During the global alarm, remember manual vanilla-area changes but keep the
+                // temporary shelter restriction active until the alarm is released.
                 state.previousAllowedArea = currentAllowedArea;
             }
 
