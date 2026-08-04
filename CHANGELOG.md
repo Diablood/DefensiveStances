@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.6-dev
+
+- Fix safe-area containment when a pawn's vanilla assigned area excludes the configured safe area.
+- Keep local **Flee to safe area** containment virtual so player-forced actions still follow the pawn's real vanilla allowed area.
+- During global emergency evacuation, temporarily apply the safe area as the pawn's real allowed area to avoid assigned-area loops, then restore the previous vanilla area when the alarm ends.
+- Preserve manual vanilla allowed-area changes made during a global emergency alarm for restoration after the alarm is released.
+- Add a packaging option to copy the runtime-only mod folder into RimWorld's local `Mods` directory while still creating the release ZIP in `dist`.
+
 ## 1.0.5-dev
 
 - Make safe-area containment virtual so it no longer replaces the pawn's vanilla allowed area with the safe-area overlay.
