@@ -1,4 +1,4 @@
-# Functional checklist for 1.0.6-dev
+# Functional checklist for 1.0.7-dev
 
 ## Load and save
 

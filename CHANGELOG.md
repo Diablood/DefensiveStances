@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7-dev
+
+- Allow local **Flee to safe area** containment to temporarily permit vanilla firefighting jobs outside the safe area.
+- Limit the exception to `BeatFire` jobs whose target remains inside the pawn's real vanilla allowed area.
+- Keep ordinary automatic jobs outside the safe area blocked while local evacuation remains active.
+- Keep global emergency evacuation strict: pawns do not leave the safe area automatically to fight fires while the siren is active.
+
 ## 1.0.6-dev
 
 - Fix safe-area containment when a pawn's vanilla assigned area excludes the configured safe area.
