@@ -134,6 +134,15 @@ namespace DefensiveStances.Utilities
                 return;
             }
 
+            if (IsAllowedUrgentJobOutsideSafeArea(state, pawn.jobs.curJob))
+            {
+                // Firefighting is a short, urgent vanilla job. During local doctrine containment,
+                // allow it when the target remains inside the pawn's real vanilla allowed area.
+                // Global emergency evacuation stays strict because it temporarily assigns the
+                // safe area as the real allowed area.
+                return;
+            }
+
             if (safeArea[pawn.Position])
             {
                 if (state.globalEmergencyEvacuationActive)
@@ -262,7 +271,9 @@ namespace DefensiveStances.Utilities
                 return;
             }
 
-            if (currentJob.playerForced || JobStaysInsideSafeArea(pawn, currentJob, safeArea))
+            if (currentJob.playerForced
+                || JobStaysInsideSafeArea(pawn, currentJob, safeArea)
+                || IsAllowedUrgentJobOutsideSafeArea(state, currentJob))
             {
                 return;
             }
@@ -360,6 +371,57 @@ namespace DefensiveStances.Utilities
             }
 
             return IsSafeCell(safeArea, target.Cell);
+        }
+
+        private static bool IsAllowedUrgentJobOutsideSafeArea(DefensivePawnState state, Job job)
+        {
+            if (state?.globalEmergencyEvacuationActive == true || job?.def == null)
+            {
+                return false;
+            }
+
+            if (job.def.defName != "BeatFire")
+            {
+                return false;
+            }
+
+            return TargetIsInsidePreviousAllowedArea(state, job.targetA)
+                || TargetIsInsidePreviousAllowedArea(state, job.targetB)
+                || TargetIsInsidePreviousAllowedArea(state, job.targetC);
+        }
+
+        private static bool TargetIsInsidePreviousAllowedArea(DefensivePawnState state, LocalTargetInfo target)
+        {
+            if (!target.IsValid)
+            {
+                return false;
+            }
+
+            Area previousAllowedArea = state?.previousAllowedArea;
+            if (previousAllowedArea == null)
+            {
+                return true;
+            }
+
+            IntVec3 cell;
+            if (target.HasThing)
+            {
+                Thing thing = target.Thing;
+                if (thing == null || !thing.Spawned || thing.Map != previousAllowedArea.Map)
+                {
+                    return false;
+                }
+
+                cell = thing.Position;
+            }
+            else
+            {
+                cell = target.Cell;
+            }
+
+            return cell.IsValid
+                && cell.InBounds(previousAllowedArea.Map)
+                && previousAllowedArea[cell];
         }
 
         private static bool PreviousAllowedAreaAllowsCell(DefensivePawnState state, IntVec3 cell)
