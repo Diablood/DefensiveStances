@@ -32,12 +32,24 @@ namespace DefensiveStances.Utilities
                 return null;
             }
 
-            if (verb.IsMeleeAttack || pawn.CanReachImmediate(aggressor, PathEndMode.Touch))
+            bool aggressorInsideAllowedArea = IsInsideVanillaAllowedArea(pawn, aggressor);
+
+            if (verb.IsMeleeAttack)
+            {
+                if (!aggressorInsideAllowedArea)
+                {
+                    return null;
+                }
+
+                return JobMaker.MakeJob(JobDefOf.AttackMelee, aggressor);
+            }
+
+            if (pawn.CanReachImmediate(aggressor, PathEndMode.Touch) && aggressorInsideAllowedArea)
             {
                 return JobMaker.MakeJob(JobDefOf.AttackMelee, aggressor);
             }
 
-            if (verb.ApparelPreventsShooting())
+            if (verb.ApparelPreventsShooting() || !verb.CanHitTarget(aggressor))
             {
                 return null;
             }
@@ -47,6 +59,22 @@ namespace DefensiveStances.Utilities
             job.expiryInterval = 600;
             job.endIfCantShootTargetFromCurPos = true;
             return job;
+        }
+
+        private static bool IsInsideVanillaAllowedArea(Pawn pawn, Thing target)
+        {
+            Area allowedArea = pawn?.playerSettings?.AreaRestrictionInPawnCurrentMap;
+            if (allowedArea == null)
+            {
+                return true;
+            }
+
+            return target != null
+                && target.Spawned
+                && target.Map == pawn.Map
+                && target.Position.IsValid
+                && target.Position.InBounds(pawn.Map)
+                && allowedArea[target.Position];
         }
     }
 }

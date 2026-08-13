@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.8-dev
+
+- Make **Self-defense only** respect a pawn's vanilla allowed-area restriction during automatic retaliation.
+- Prevent melee retaliation from pursuing an aggressor located outside the pawn's assigned vanilla allowed area.
+- Allow ranged retaliation against an aggressor outside the allowed area only when the pawn can shoot from its current position, without moving to obtain range or line of sight.
+- Preserve the previous unrestricted behavior for pawns with no vanilla allowed-area restriction.
+- Keep drafted pawns under direct player control and preserve the existing direct-aggressor retaliation window.
 ## 1.0.7-dev
 
 - Allow local **Flee to safe area** containment to temporarily permit vanilla firefighting jobs outside the safe area.
