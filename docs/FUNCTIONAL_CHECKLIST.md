@@ -1,9 +1,9 @@
-# Functional checklist for 1.0.7-dev
+# Functional checklist for 1.0.8-dev
 
 ## Load and save
 
 - [ ] The mod loads after Harmony with no red errors.
-- [ ] The startup log reports `Version 1.0.3.0 loaded. Harmony patches applied.`
+- [ ] The startup log reports `Version 1.0.8.0 loaded. Harmony patches applied.`
 - [ ] The RimWorld log no longer warns that `DefensiveHostilityResponseUI` needs `StaticConstructorOnStartup`.
 - [ ] A new game can be created.
 - [ ] An existing 0.1.x save can be loaded with the mod enabled.
@@ -171,3 +171,12 @@
 - [ ] Disable the global emergency alarm: the pawn's previous vanilla allowed area is restored.
 - [ ] Change a pawn's vanilla allowed area while the global emergency alarm is active: the new vanilla area is remembered and restored when the alarm ends.
 - [ ] Verify that local **Flee to safe area** still allows player-forced jobs according to the pawn's real vanilla allowed area.
+## Self-defense allowed-area regression
+
+- [ ] Assign a **Self-defense only** pawn to a vanilla allowed area and place a hostile ranged attacker outside that area.
+- [ ] With a melee-only or unarmed defender, let the outside attacker directly attack the pawn: the defender records the aggression but does not leave the vanilla allowed area to pursue in melee.
+- [ ] Move the aggressor inside the pawn's vanilla allowed area while the self-defense incident is still recent: melee retaliation can start normally.
+- [ ] Give the defender a ranged weapon and place the aggressor outside the vanilla allowed area but inside weapon range and line of sight: the defender may retaliate from its current position without crossing the area boundary.
+- [ ] Put the ranged aggressor outside weapon range or behind cover that prevents shooting from the current position: the defender does not move outside the allowed area to obtain a firing position.
+- [ ] Remove the pawn's vanilla allowed-area restriction: self-defense retaliation keeps the previously validated unrestricted behavior.
+- [ ] Drafting the pawn still takes manual control and clears automatic self-defense aggression as previously validated.

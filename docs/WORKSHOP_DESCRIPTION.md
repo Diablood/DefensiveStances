@@ -12,7 +12,7 @@ When danger reaches that pawn, ordinary automatic work is interrupted and the pa
 
 ### Self-defense only
 
-The pawn ignores nearby hostiles until directly attacked, then retaliates against the aggressor. Direct ranged misses, shots intercepted by cover and missed or dodged melee attacks count as attacks.
+The pawn ignores nearby hostiles until directly attacked, then retaliates against the aggressor. Direct ranged misses, shots intercepted by cover and missed or dodged melee attacks count as attacks. Automatic melee retaliation respects the pawn's vanilla allowed area; ranged retaliation can fire at an aggressor outside that area only when the pawn can shoot from its current position.
 
 ## Dedicated safe areas
 

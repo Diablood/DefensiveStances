@@ -4,7 +4,7 @@
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
-Current development hotfix: `1.0.7-dev`, based on the validated `1.0.0` stable release.
+Current development hotfix: `1.0.8-dev`, based on the validated `1.0.0` stable release.
 
 ## Features
 
@@ -13,7 +13,7 @@ Current development hotfix: `1.0.7-dev`, based on the validated `1.0.0` stable r
 The existing RimWorld hostility-response dropdown receives two new choices:
 
 - **Flee to safe area**: a pawn locally exposed to danger interrupts ordinary automatic work, reaches a dedicated safe-area cell and stays sheltered while hostile threats remain active on the map.
-- **Self-defense only**: a pawn ignores nearby enemies until directly attacked, then retaliates against the aggressor. Direct ranged misses, shots absorbed by cover and missed or dodged melee attacks are recognized.
+- **Self-defense only**: a pawn ignores nearby enemies until directly attacked, then retaliates against the aggressor. Direct ranged misses, shots absorbed by cover and missed or dodged melee attacks are recognized. Automatic melee retaliation respects the pawn's vanilla allowed area; ranged retaliation may target an aggressor outside that area only when the pawn can shoot from its current position.
 
 Vanilla **Ignore**, **Attack** and **Flee** remain unchanged.
 
@@ -176,7 +176,7 @@ The mod-owned keyed translations pass validation. The remaining French no-DLC wa
 - Preserve the project-specific `About/ModIcon.png` demon icon when preparing updates or release archives.
 - Prisoners and ordinary animals are not included in the global emergency evacuation.
 - Safe areas are one global layer per map. Named or prioritized shelter groups are not implemented yet.
-- Self-defense tracks direct standard ranged and melee attacks. Near misses aimed at another pawn, indirect area attacks without an identifiable hostile instigator and attacks against nearby allies are outside the current scope.
+- Self-defense tracks direct standard ranged and melee attacks. Automatic retaliation does not make a pawn leave its vanilla allowed area to pursue a target in melee; ranged retaliation can fire at a target outside that area only from the pawn's current position. Near misses aimed at another pawn, indirect area attacks without an identifiable hostile instigator and attacks against nearby allies are outside the current scope.
 
 ## Repository layout
 
