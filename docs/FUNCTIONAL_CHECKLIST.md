@@ -152,6 +152,7 @@
 
 ## Downed pawn shelter regression
 
+- [x] User validated in-game on version 1.0.9: an unconscious pawn outside the safe area triggers a warning; extending the safe area to include the pawn stops the warning.
 - [ ] With an unconscious pawn in a bed inside the safe area, enable the global alarm and wait through several warning intervals: no evacuation failure message or unreachable-safe-area alert appears for that pawn, and bed rest is preserved.
 - [ ] With a downed pawn outside the safe area, enable the alarm: the failure message and persistent alert still identify that pawn.
 - [ ] Rescue that pawn into a bed inside the safe area while the alarm remains active: the alert clears and repeated failure messages stop.

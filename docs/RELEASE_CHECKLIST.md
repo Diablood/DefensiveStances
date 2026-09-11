@@ -2,6 +2,12 @@
 
 Use this checklist before publishing a release candidate or stable release.
 
+## Test handoff workflow
+
+For every fix or addition, prepare the next version, build it, and create the ZIP in `dist/` before handing it over for testing. By default, create the ZIP only; when requested, also copy the runtime files into the game's `Mods` folder using `-CopyToMods`.
+
+The user performs the in-game tests of the fix or addition after packaging (and installation). Report the package as ready for testing, and wait for the user's results before considering gameplay validated or proceeding to publication. If the user has already built and installed the current version manually, proceed directly to this testing handoff without repeating those steps.
+
 ## Version metadata
 
 - [ ] For each new hotfix after a tagged version, advance to the next version/tag and create a separate changelog section; never append it to the previous tagged release.
@@ -35,29 +41,6 @@ Remove-Item ./1.6/Assemblies/DefensiveStances.dll -Force -ErrorAction SilentlyCo
 - [ ] Confirm that the DLL exists in `1.6/Assemblies/`.
 - [ ] Confirm that the assembly file version matches `About.xml`.
 
-## In-game smoke test
-
-Use a minimal active mod list:
-
-```text
-Harmony
-Core
-Defensive Stances
-```
-
-- [ ] Start RimWorld without a red error related to Defensive Stances.
-- [ ] Confirm the colored startup log contains the intended DLL version.
-- [ ] Confirm that the hostility-response dropdown contains the two added doctrines.
-- [ ] Paint and clear safe-area cells using the dedicated icons.
-- [ ] Toggle safe-area visibility.
-- [ ] Test doctrine-triggered sheltering with a nearby hostile pawn.
-- [ ] Test self-defense after a direct missed ranged shot.
-- [ ] Activate and deactivate the global siren.
-- [ ] Save and reload while the global alarm is active.
-- [ ] Confirm that a drafted pawn remains under direct control during the global alarm.
-
-Use `docs/FUNCTIONAL_CHECKLIST.md` for a full regression pass before a stable release.
-
 ## Build the distribution ZIP
 
 ```powershell
@@ -81,6 +64,32 @@ To also update a local runtime-only copy in RimWorld's `Mods` folder:
 - [ ] When using `-CopyToMods`, confirm that `Mods/DefensiveStances/` contains only runtime files.
 - [ ] When using `-CopyToMods`, confirm that `Source/`, `tools/`, `docs/`, `.git/` and build artifacts are absent from the copied mod folder.
 - [ ] When using `-CopyToMods`, confirm that `About/PublishedFileId.txt` is copied with the runtime files.
+
+## In-game smoke test
+
+This phase is performed by the user after the test package is prepared and installed. First reproduce the reported bug or exercise the new feature, then check the relevant regressions below and in `docs/FUNCTIONAL_CHECKLIST.md`.
+
+Use a minimal active mod list:
+
+```text
+Harmony
+Core
+Defensive Stances
+```
+
+- [ ] Start RimWorld without a red error related to Defensive Stances.
+- [ ] Confirm the colored startup log contains the intended DLL version.
+- [ ] Confirm that the hostility-response dropdown contains the two added doctrines.
+- [ ] Paint and clear safe-area cells using the dedicated icons.
+- [ ] Toggle safe-area visibility.
+- [ ] Test doctrine-triggered sheltering with a nearby hostile pawn.
+- [ ] Test self-defense after a direct missed ranged shot.
+- [ ] Activate and deactivate the global siren.
+- [ ] Save and reload while the global alarm is active.
+- [ ] Confirm that a drafted pawn remains under direct control during the global alarm.
+
+Use `docs/FUNCTIONAL_CHECKLIST.md` for a full regression pass before a stable release.
+
 ## Publish
 
 - [ ] Commit the validated source tree.
