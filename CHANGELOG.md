@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9-dev
+
+- Fix repeated evacuation warnings and the unreachable-safe-area alert for downed pawns already inside the safe area, including unconscious pawns in bed.
+
 ## 1.0.8-dev
 
 - Make **Self-defense only** respect a pawn's vanilla allowed-area restriction during automatic retaliation.

@@ -150,6 +150,14 @@
 - [ ] The distribution ZIP excludes `Source/`, `tools/`, `docs/`, `.git/`, PDB files and intermediate build folders.
 - [ ] Extracting the distribution ZIP into a temporary local `Mods` folder passes a final startup smoke test.
 
+## Downed pawn shelter regression
+
+- [ ] With an unconscious pawn in a bed inside the safe area, enable the global alarm and wait through several warning intervals: no evacuation failure message or unreachable-safe-area alert appears for that pawn, and bed rest is preserved.
+- [ ] With a downed pawn outside the safe area, enable the alarm: the failure message and persistent alert still identify that pawn.
+- [ ] Rescue that pawn into a bed inside the safe area while the alarm remains active: the alert clears and repeated failure messages stop.
+- [ ] Remove the downed pawn's cell from the safe area while the alarm is active: warnings resume; add it back and they stop.
+- [ ] Once the pawn recovers outside shelter with the alarm still active, normal evacuation resumes.
+
 ## Self-defense downed-target regression
 
 - [ ] When the recorded aggressor is downed, the pawn stops retaliating automatically and resumes ordinary work without alternating attack jobs.

@@ -226,7 +226,16 @@ namespace DefensiveStances.Components
                 DefensivePawnState state = GetPawnState(pawn);
                 if (pawn.Downed)
                 {
-                    DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoReachableSafeCell);
+                    Area safeArea = GetSafeArea(map);
+                    if (safeArea != null && safeArea[pawn.Position])
+                    {
+                        // A sheltered pawn does not need to walk, even when unconscious in bed.
+                        state.ClearEvacuationFailure();
+                    }
+                    else
+                    {
+                        DefensiveEvacuationFeedback.NotifyFailure(pawn, state, EvacuationFailureReason.NoReachableSafeCell);
+                    }
                     continue;
                 }
 

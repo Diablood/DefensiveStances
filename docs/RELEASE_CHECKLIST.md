@@ -4,6 +4,7 @@ Use this checklist before publishing a release candidate or stable release.
 
 ## Version metadata
 
+- [ ] For each new hotfix after a tagged version, advance to the next version/tag and create a separate changelog section; never append it to the previous tagged release.
 - [ ] Update `About/About.xml` → `modVersion`.
 - [ ] Update `Source/DefensiveStances/Properties/AssemblyInfo.cs` → `AssemblyVersion` and `AssemblyFileVersion`.
 - [ ] Add an entry to `CHANGELOG.md`.

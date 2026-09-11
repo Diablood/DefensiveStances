@@ -53,7 +53,8 @@ namespace DefensiveStances.Alerts
                         || (globalEmergencyActive
                             && !pawn.Drafted
                             && DefensiveGlobalEmergencyEvacuationUtility.IsControllablePawn(pawn));
-                    if (!shouldEvaluate)
+                    // Being inside shelter takes precedence over the ability to move there.
+                    if (!shouldEvaluate || safeArea[pawn.Position])
                     {
                         continue;
                     }
