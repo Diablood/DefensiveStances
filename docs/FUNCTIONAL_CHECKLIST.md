@@ -150,6 +150,14 @@
 - [ ] The distribution ZIP excludes `Source/`, `tools/`, `docs/`, `.git/`, PDB files and intermediate build folders.
 - [ ] Extracting the distribution ZIP into a temporary local `Mods` folder passes a final startup smoke test.
 
+## RimWorld 1.7 unstable compatibility
+
+Preparation for 1.0.10: XML parsing, version-to-content mappings and translations pass validation. Build succeeded without warnings or errors using cached RimWorld 1.6 reference assemblies from `C:\Users\diabl\.nuget\packages\krafs.rimworld.ref\1.6.4871\ref\net472`. Created `dist/DefensiveStances-1.0.10.zip` and installed runtime files in `D:\SteamLibrary\steamapps\common\RimWorld\Mods\DefensiveStances`. ZIP contents match the installed files; mod version 1.0.10, DLL version 1.0.10.0, both game-version mappings and Workshop ID 3736956609 were verified. User confirmed the rebuilt 1.0.10 package passed in-game testing on RimWorld 1.7 unstable on 2026-10-14. No Workshop upload was performed by the agent.
+
+- [x] User reports that the existing mod works in-game on RimWorld 1.7 unstable.
+- [x] User confirmed the installed 1.0.10 package passes in-game testing on RimWorld 1.7 unstable.
+- [ ] Confirm startup and the same features on RimWorld 1.6 with the shared runtime assembly.
+
 ## Downed pawn shelter regression
 
 - [x] User validated in-game on version 1.0.9: an unconscious pawn outside the safe area triggers a warning; extending the safe area to include the pawn stops the warning.

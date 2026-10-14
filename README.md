@@ -1,10 +1,10 @@
 # Defensive Stances
 
-**Defensive Stances** is a RimWorld 1.6 mod that adds defensive behavior options for player-controlled pawns without replacing the vanilla hostility responses.
+**Defensive Stances** is a RimWorld 1.6 and 1.7 (unstable) mod that adds defensive behavior options for player-controlled pawns without replacing the vanilla hostility responses.
 
 Repository: `https://github.com/Diablood/DefensiveStances`
 
-Current development hotfix: `1.0.9-dev`, based on the validated `1.0.0` stable release.
+Current development hotfix: `1.0.10-dev`, based on the validated `1.0.0` stable release.
 
 ## Features
 
@@ -56,7 +56,7 @@ The default settings reproduce the behavior validated during development.
 
 ## Requirements
 
-- RimWorld `1.6`
+- RimWorld `1.6` or `1.7` (unstable)
 - Harmony (`brrainz.harmony`)
 - .NET SDK capable of targeting .NET Framework `4.7.2` for local compilation
 
@@ -170,7 +170,7 @@ The mod-owned keyed translations pass validation. The remaining French no-DLC wa
 
 ## Compatibility notes
 
-- RimWorld `1.6` is the only supported version at this stage.
+- RimWorld `1.6` and `1.7` (unstable) are supported. Compatibility with 1.7 was reported in-game by the user; both versions load the shared `1.6/` content through `LoadFolders.xml`.
 - Harmony is required.
 - Combat Extended, multiplayer and large mod-list compatibility still need dedicated testing.
 - Preserve the project-specific `About/ModIcon.png` demon icon when preparing updates or release archives.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.10-dev
+
+- Declare compatibility with RimWorld 1.7 unstable following user-reported in-game compatibility, while retaining RimWorld 1.6 support.
+- Load the existing shared runtime content from `1.6/` on both game versions.
+
 ## 1.0.9-dev
 
 - Fix repeated evacuation warnings and the unreachable-safe-area alert for downed pawns already inside the safe area, including unconscious pawns in bed.

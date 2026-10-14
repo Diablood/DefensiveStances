@@ -40,7 +40,7 @@ Open **Options** → **Mod settings** → **Defensive Stances** to configure:
 
 ## Requirements
 
-- RimWorld 1.6
+- RimWorld 1.6 or 1.7 (unstable)
 - Harmony
 
 ## Languages
